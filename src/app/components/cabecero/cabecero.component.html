@@ -3,10 +3,23 @@
         <a mat-button routerLink="/">
             Control Clientes
         </a>
-        <div class="buttonMenu">
+        <div class="buttonMenu" (click)="sidenav.toggle()">
             <button mat-icon-button>
-                <mat-icon>menu</mat-icon>
+                <mat-icon >menu</mat-icon>
             </button>
         </div>
     </mat-toolbar>
+    <mat-sidenav-container class="sidenavContainer">
+        <mat-sidenav #sidenav position="end">
+            <mat-nav-list class="navList">
+                <a mat-list-item>Home</a>
+                <a mat-list-item>Home</a>
+                <a mat-list-item>Home</a>
+                <a mat-list-item>Home</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

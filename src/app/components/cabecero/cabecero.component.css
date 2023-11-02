@@ -17,3 +17,27 @@
 .toolbar .buttonMenu {
     color: white;
 }
+
+.sidebar {
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #555;
+}
+
+
+/*--------------SIDENAV------------*/
+
+.sidenavContainer {
+    display: flex;
+    height: 90vh;
+}
+
+.sidenavContainer mat-sidenav {
+    width: 200px;
+    background-color: #1b1b1b;
+}
+
+.mat-list-item a.mat-list-item {
+    color: red !important;
+}
