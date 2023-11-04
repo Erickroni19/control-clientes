@@ -11,7 +11,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 export class CabeceroComponent implements OnInit{
 
-  // @ViewChild('sidenav') sidenav!: MatSidenav;
+  //Variables
+  checkDropDown: boolean = false;
+  acumClick: number = 0;
 
   constructor() {}
   
@@ -19,9 +21,19 @@ export class CabeceroComponent implements OnInit{
     // Código que se ejecutará cuando se inicialice el componente
   }
 
-  // toggleSidenav() {
-  //   console.log('correcto');
-  //   this.sidenav.toggle();
-  // }
+  controlDropDown(event: Event) {
+    console.log(this.acumClick);
+    
+    if(event.type == 'click' && this.acumClick === 0) {
+      this.checkDropDown = true
+      this.acumClick = 1;
+
+    }else if(event.type == 'click' && this.acumClick == 1){
+
+      this.checkDropDown = false
+      this.acumClick = 0;
+    }
+    
+  }
 
 }

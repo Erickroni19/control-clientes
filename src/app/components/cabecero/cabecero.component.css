@@ -2,7 +2,7 @@
     color: white;
 }
 
-.toolbar {
+.toolbar mat-toolbar-row {
     background-color: #243757;
     display: flex;
     justify-content: space-between;
@@ -41,4 +41,17 @@
 .mdc-list-item--with-leading-icon .mdc-list-item__start {
     margin-left: 40px;
     margin-right: 6px;
+}
+
+
+/*------Menu Button--------*/
+
+.menu-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-button #arrow-down {
+    order: 2;
 }
