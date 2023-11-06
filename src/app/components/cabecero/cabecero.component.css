@@ -16,6 +16,7 @@
 
 .toolbar .buttonMenu {
     color: white;
+    width: 320px;
 }
 
 
@@ -31,7 +32,13 @@
     background-color: #243757;
 }
 
-.sidenavContainer mat-sidenav .navList a {
+.containerButtonsHome {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* .sidenavContainer mat-sidenav .navList a {
     --mdc-list-list-item-leading-icon-color: rgb(255 255 255 / 63%);
     --mdc-list-list-item-label-text-color: rgb(255 255 255 / 87%);
     display: flex;
@@ -41,7 +48,7 @@
 .mdc-list-item--with-leading-icon .mdc-list-item__start {
     margin-left: 40px;
     margin-right: 6px;
-}
+} */
 
 
 /*------Menu Button--------*/

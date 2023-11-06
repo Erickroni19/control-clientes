@@ -12,8 +12,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class CabeceroComponent implements OnInit{
 
   //Variables
-  checkDropDown: boolean = false;
   acumClick: number = 0;
+  checkDropDown: boolean = false;
+  menuButtonCheck: boolean = false;
 
   constructor() {}
   

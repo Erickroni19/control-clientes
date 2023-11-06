@@ -5,13 +5,34 @@
                 Control Clientes
             </a>
             <div class="buttonMenu">
-                <button mat-icon-button (click)="controlDropDown($event)">
+                <button mat-icon-button (click)="controlDropDown($event)" *ngIf="menuButtonCheck">
                     <mat-icon>menu</mat-icon>
                 </button>
+
+                <div class="containerButtonsHome">
+                    <a mat-button routerLink="/">
+                        <mat-icon matListItemIcon>home</mat-icon>
+                        Inicio
+                    </a>
+                    <a mat-button [matMenuTriggerFor]="menu" class="menu-button">
+                        <mat-icon matListItemIcon>account_circle</mat-icon>
+                        Bienvenido
+                        <mat-icon id="arrow-down">arrow_drop_down</mat-icon>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon matListItemIcon>settings</mat-icon>
+                            Configuración
+                        </button>
+                    </mat-menu>
+                </div>
             </div>
+
+
+
         </mat-toolbar-row>
 
-        <mat-toolbar-row *ngIf="checkDropDown">
+        <mat-toolbar-row *ngIf="checkDropDown && menuButtonCheck">
             <a mat-button routerLink="/">
                 <mat-icon matListItemIcon>home</mat-icon>
                 Inicio
