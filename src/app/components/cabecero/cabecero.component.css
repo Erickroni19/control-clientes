@@ -20,38 +20,20 @@
 }
 
 
-/*--------------SIDENAV------------*/
+/*-------Menu Button--------*/
 
-.sidenavContainer {
-    display: flex;
-    height: 90vh;
+.buttonMenu mat-icon-button {
+    flex: end;
 }
 
-.sidenavContainer mat-sidenav {
-    width: 200px;
-    background-color: #243757;
+.ocultar {
+    display: none !important;
 }
 
 .containerButtonsHome {
     display: flex;
     justify-content: space-between;
 }
-
-
-/* .sidenavContainer mat-sidenav .navList a {
-    --mdc-list-list-item-leading-icon-color: rgb(255 255 255 / 63%);
-    --mdc-list-list-item-label-text-color: rgb(255 255 255 / 87%);
-    display: flex;
-    justify-content: flex-end;
-}
-
-.mdc-list-item--with-leading-icon .mdc-list-item__start {
-    margin-left: 40px;
-    margin-right: 6px;
-} */
-
-
-/*------Menu Button--------*/
 
 .menu-button {
     display: flex;
@@ -61,4 +43,12 @@
 
 .menu-button #arrow-down {
     order: 2;
+}
+
+@media (max-width: 699px) {
+    .toolbar .buttonMenu {
+        color: white;
+        width: 50px;
+        font-size: 12px;
+    }
 }

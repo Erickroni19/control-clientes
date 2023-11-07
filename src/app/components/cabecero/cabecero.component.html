@@ -9,7 +9,7 @@
                     <mat-icon>menu</mat-icon>
                 </button>
 
-                <div class="containerButtonsHome">
+                <div class="containerButtonsHome" [ngClass]="{'ocultar': menuButtonCheck }">
                     <a mat-button routerLink="/">
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
