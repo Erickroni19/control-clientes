@@ -1,0 +1,24 @@
+#main-footer {
+    position: sticky;
+    bottom: 0;
+}
+
+.container-footer {
+    height: 180px;
+    background-color: #3a5f6f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-footer .text-footer {
+    font-size: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-footer mat-icon {
+    font-size: 24px;
+}
