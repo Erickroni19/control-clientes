@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+// import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from 'src/environments/environment';
-// import {AngularFireModule} from '@angular/fire';
+import {AngularFireModule} from '@angular/fire/compat';
+// import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,8 +46,11 @@ import {MatMenuModule} from '@angular/material/menu';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
