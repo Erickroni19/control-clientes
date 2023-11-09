@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 // import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
-// import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +49,7 @@ import {MatMenuModule} from '@angular/material/menu';
     FormsModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'control-clientes'),
     AngularFirestoreModule,
     MatIconModule,
     MatButtonModule,
