@@ -29,6 +29,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
+import { ClienteServices } from './services/clientes.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDividerModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [ClienteServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
