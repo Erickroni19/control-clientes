@@ -1,0 +1,20 @@
+.container-client {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.container-client .container-BT {
+    height: 100%;
+    margin-top: 2%;
+    margin-left: 20%;
+}
+
+.container-BT>button {
+    background-color: #2a5e9e;
+    color: white;
+}
+
+.container-BT .mat-elevation-z8 {
+    margin-top: 20px;
+}
