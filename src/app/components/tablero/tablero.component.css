@@ -20,3 +20,17 @@
     font-weight: bold;
     margin-right: 5px;
 }
+
+@media (max-width: 699px) {
+    .container-header {
+        height: 10vh;
+        display: flex;
+        align-items: center;
+    }
+    .container-header .text-client {
+        font-size: 25px;
+        font-weight: bold;
+        color: #243757;
+        margin-left: 3%;
+    }
+}
