@@ -12,10 +12,11 @@ import { ClienteServices } from 'src/app/services/clientes.service';
 })
 export class ClientesComponent implements OnInit{
   dataSource!: MatTableDataSource<Cliente>;
-  displayedColumns: string[] = ['apellido', 'email', 'id', 'nombre', 'saldo'];
+  displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar'];
 
   //Variables
   clientes!: Cliente[];
+  clientesCopy !: Cliente[];
   booleanCheck: boolean = false;
 
 
@@ -29,9 +30,21 @@ export class ClientesComponent implements OnInit{
       this.clientesService.getClientes().subscribe(clientesDb => {
           this.clientes = clientesDb;
 
+          //Copia el array
+          this.clientesCopy = JSON.parse(JSON.stringify(clientesDb));
+          let newId = 0;
+
+          console.log(this.clientes, this.clientesCopy);
+          //Se asigna un nuevo id
+          this.clientesCopy.forEach( cliente => {
+            cliente.id = `${++newId}`; 
+          })
+          
+          
+
           //Asignamos la data al datasource
-          this.dataSource = new MatTableDataSource(this.clientes)
-          console.log(this.dataSource.data, this.clientes);
+          this.dataSource = new MatTableDataSource(this.clientesCopy)
+          // console.log(this.dataSource.data, this.clientes);
           this.booleanCheck = true;  
       })
   }
