@@ -29,6 +29,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClienteServices } from './services/clientes.service';
 
 @NgModule({
@@ -58,7 +60,9 @@ import { ClienteServices } from './services/clientes.service';
     MatListModule,
     MatExpansionModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [ClienteServices],
   bootstrap: [AppComponent]

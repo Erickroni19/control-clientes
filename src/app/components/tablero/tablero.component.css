@@ -2,19 +2,35 @@
     background-color: #c2b79b;
     height: 10vh;
     display: flex;
-    justify-content: center;
+    /* justify-content: flex-start; */
     align-items: center;
 }
 
 .container-header .text-client {
-    font-size: 40px;
+    font-size: 25px;
     font-weight: bold;
     color: #243757;
+    margin-left: 20%;
 }
 
 .text-client mat-icon {
-    font-size: 30px;
-    width: 40px;
-    height: 30px;
+    font-size: 25px;
+    /* width: 40px; */
+    /* height: 30px; */
     font-weight: bold;
+    margin-right: 5px;
+}
+
+@media (max-width: 699px) {
+    .container-header {
+        height: 10vh;
+        display: flex;
+        align-items: center;
+    }
+    .container-header .text-client {
+        font-size: 25px;
+        font-weight: bold;
+        color: #243757;
+        margin-left: 3%;
+    }
 }
