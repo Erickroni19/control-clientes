@@ -1,20 +1,77 @@
-.container-client {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.container-client .container-BT {
-    height: 100%;
-    margin-top: 2%;
-    margin-left: 20%;
-}
-
-.container-BT>button {
-    background-color: #2a5e9e;
-    color: white;
-}
-
-.container-BT .mat-elevation-z8 {
-    margin-top: 20px;
-}
+    .container-client {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .container-client .container-BT {
+        height: 100%;
+        margin-top: 2%;
+        margin-left: 20%;
+    }
+    
+    .container-BT>button {
+        background-color: #2a5e9e;
+        color: white;
+    }
+    
+    .container-BT .table-cards {
+        display: flex;
+        margin-top: 20px;
+    }
+    
+    .table-cards .mat-elevation-z8 {
+        margin-right: 20px;
+    }
+    
+    .container-cards mat-card {
+        display: flex;
+        align-items: center;
+        width: 200px;
+        height: 150px;
+        font-size: 20px;
+    }
+    
+    .container-cards .card-saldo {
+        margin-bottom: 5px;
+        background-color: #c93b3b;
+        color: white;
+    }
+    
+    .card-saldo mat-card-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        font-size: 150%;
+    }
+    /*Card total-clientes*/
+    
+    .container-cards .card-totalClientes {
+        background-color: rgb(63, 112, 40);
+        color: white;
+    }
+    
+    .card-totalClientes mat-card-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 38px;
+        height: 100px;
+        width: 100px;
+    }
+    
+    .card-totalClientes mat-card-content>mat-icon {
+        height: 60px;
+        width: 60px;
+        font-size: 60px;
+        margin-right: 5px;
+    }
+    
+    .card-totalClientes mat-card-content>mat-icon {
+        height: 60px;
+        width: 60px;
+        font-size: 55px;
+        margin-right: 5px;
+    }

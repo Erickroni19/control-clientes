@@ -18,6 +18,7 @@ export class ClientesComponent implements OnInit{
   clientes!: Cliente[];
   clientesCopy !: Cliente[];
   booleanCheck: boolean = false;
+  saldoTotalVar: number = 0;
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,13 +41,34 @@ export class ClientesComponent implements OnInit{
             cliente.id = `${++newId}`; 
           })
           
-          
-
           //Asignamos la data al datasource
           this.dataSource = new MatTableDataSource(this.clientesCopy)
           // console.log(this.dataSource.data, this.clientes);
           this.booleanCheck = true;  
+
+          //Saldo total
+          this.saldoTotalVar = this.saldoTotal(this.clientes);
+          console.log(this.saldoTotalVar);
       })
+        
+      
+  }
+
+  /**Funciones - Metodos */
+
+  /**Obtiene el Valor del saldo total */
+  saldoTotal(clientes: Cliente[]){
+    
+    let saldoTotal: number = 0;
+    
+    clientes.forEach( cliente => {
+      if(cliente && cliente.saldo !== undefined){
+        saldoTotal += cliente.saldo;
+      }else {
+        return;
+      }
+    })
+    return saldoTotal;
   }
 
 }
