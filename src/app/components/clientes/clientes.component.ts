@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
 
@@ -24,7 +25,8 @@ export class ClientesComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clientesService: ClienteServices) {
+  constructor(private clientesService: ClienteServices,
+              private router: Router) {
   }
 
   ngOnInit(){
@@ -69,6 +71,11 @@ export class ClientesComponent implements OnInit{
       }
     })
     return saldoTotal;
+  }
+
+  /**Obtien la ruta de editar */
+  rutaEditar(){
+    this.router.navigate(['cliente/editar/{{clientes.id}}'])
   }
 
 }
