@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="container-login">
+    <div class="login">
+        <h1>Bienvenido</h1>
+        <div class="form">
+            <!-- <span>Email*</span> -->
+            <div class="email">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="email@example.com" required>
+                    <!-- @if (email.invalid) {
+                    <mat-error>{{getErrorMessage()}}</mat-error>
+                  } -->
+                </mat-form-field>
+            </div>
+            <!-- <span>Password*</span> -->
+            <div class="contraseña">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password*</mat-label>
+                    <input matInput>
+                    <button mat-icon-button matSuffix>
+                    <mat-icon></mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <a href="">¿Olvido su contraseña?</a>
+            <div class="button-ingresar">
+                <button mat-raised-button color="primary">Ingresar</button>
+            </div>
+            <div class="registrarse">
+                <span>¿Aun no tienes cuenta? -</span>
+                <a href="/registrarse"> Registrarme</a>
+            </div>
+        </div>
+    </div>
+</div>

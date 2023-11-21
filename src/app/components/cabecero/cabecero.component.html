@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" *ngIf="true">
     <mat-toolbar class="toolbar">
         <mat-toolbar-row id="rowOne">
             <a mat-button routerLink="/">
@@ -14,7 +14,7 @@
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
                     </a>
-                    <a mat-button [matMenuTriggerFor]="menu" class="menu-button">
+                    <a mat-button [matMenuTriggerFor]="menu" class="menu-button" routerLink="/login">
                         <mat-icon matListItemIcon>account_circle</mat-icon>
                         Bienvenido
                         <mat-icon id="arrow-down">arrow_drop_down</mat-icon>

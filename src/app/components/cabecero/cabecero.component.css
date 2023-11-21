@@ -3,7 +3,8 @@
 }
 
 .toolbar mat-toolbar-row {
-    background-color: #243757;
+    background: linear-gradient(150deg, #0a366d, #2c578d);
+    ;
     display: flex;
     justify-content: space-between;
 }
