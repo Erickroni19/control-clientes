@@ -30,6 +30,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClienteServices } from './services/clientes.service';
 
@@ -62,7 +63,8 @@ import { ClienteServices } from './services/clientes.service';
     MatDividerModule,
     MatMenuModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   providers: [ClienteServices],
   bootstrap: [AppComponent]
