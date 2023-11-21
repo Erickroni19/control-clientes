@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
@@ -35,6 +35,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClienteServices } from './services/clientes.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,6 @@ import {MatInputModule} from '@angular/material/input';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     MatToolbarModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'control-clientes'),
@@ -68,9 +68,11 @@ import {MatInputModule} from '@angular/material/input';
     MatPaginatorModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [ClienteServices],
+  providers: [ClienteServices, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

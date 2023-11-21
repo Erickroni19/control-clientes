@@ -21,7 +21,6 @@ export class ClientesComponent implements OnInit{
   booleanCheck: boolean = false;
   saldoTotalVar: number = 0;
 
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -29,8 +28,11 @@ export class ClientesComponent implements OnInit{
               private router: Router) {
   }
 
+
+  
   ngOnInit(){
-      this.clientesService.getClientes().subscribe(clientesDb => {
+  
+    this.clientesService.getClientes().subscribe(clientesDb => {
           this.clientes = clientesDb;
 
           //Copia el array
@@ -51,9 +53,7 @@ export class ClientesComponent implements OnInit{
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
           console.log(this.saldoTotalVar);
-      })
-        
-      
+    })   
   }
 
   /**Funciones - Metodos */
@@ -77,5 +77,4 @@ export class ClientesComponent implements OnInit{
   rutaEditar(){
     this.router.navigate(['cliente/editar/{{clientes.id}}'])
   }
-
 }

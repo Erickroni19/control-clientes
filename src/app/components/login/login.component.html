@@ -1,22 +1,21 @@
 <div class="container-login">
     <div class="login">
         <h1>Bienvenido</h1>
-        <div class="form">
+        <form class="form" [formGroup]="loginForm " (ngSubmit)="onSubmit()">
             <!-- <span>Email*</span> -->
             <div class="email">
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="email@example.com" required>
-                    <!-- @if (email.invalid) {
-                    <mat-error>{{getErrorMessage()}}</mat-error>
-                  } -->
+                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')" required>
+                    <mat-error *ngIf="(this.loginForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
                 </mat-form-field>
             </div>
             <!-- <span>Password*</span> -->
             <div class="contraseña">
                 <mat-form-field appearance="fill">
-                    <mat-label>Password*</mat-label>
-                    <input matInput>
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" (input)="inputField('password')" type="password" required>
+                    <mat-error *ngIf="(this.loginForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
                     <button mat-icon-button matSuffix>
                     <mat-icon></mat-icon>
                     </button>
@@ -24,12 +23,12 @@
             </div>
             <a href="">¿Olvido su contraseña?</a>
             <div class="button-ingresar">
-                <button mat-raised-button color="primary">Ingresar</button>
+                <button mat-raised-button color="primary" disable="validateForm()">Ingresar</button>
             </div>
             <div class="registrarse">
                 <span>¿Aun no tienes cuenta? -</span>
                 <a href="/registrarse"> Registrarme</a>
             </div>
-        </div>
+        </form>
     </div>
 </div>

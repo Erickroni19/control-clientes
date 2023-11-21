@@ -1,5 +1,7 @@
 import { Component, HostListener} from '@angular/core';
 import { OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 
 
@@ -16,13 +18,29 @@ export class CabeceroComponent implements OnInit{
   acumClick: number = 0;
   checkDropDown: boolean = false;
   menuButtonCheck: boolean = false;
+  isLoggedIn: boolean = false;
+  loggedInUser!: string;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2,
+              private loginService: LoginService,
+              private router: Router
+  ) {
     this.screenWidth = window.innerWidth;
   }
   
   ngOnInit() {
-    // Código que se ejecutará cuando se inicialice el componente
+
+    /**Verificamos que el usuario este autenticado */
+    this.loginService.getAuth().subscribe( auth => {
+      if(auth){
+        this.isLoggedIn = true;
+
+        if(auth.email !== null) this.loggedInUser = auth.email;
+      }else{
+        this.isLoggedIn = false;
+        this.router.navigate(['/login'])
+      }
+    })
   }
 
   //Captura la medida de la pantalla
@@ -47,7 +65,15 @@ export class CabeceroComponent implements OnInit{
       this.checkDropDown = false
       this.acumClick = 0;
     }
-    
+  }
+
+  /**Cierra a la sesión de la app */
+  logout(){
+
+    this.loginService.logout();
+
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 
