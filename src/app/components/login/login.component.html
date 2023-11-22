@@ -1,7 +1,7 @@
 <div class="container-login">
     <div class="login">
         <h1>Bienvenido</h1>
-        <form class="form" [formGroup]="loginForm " (ngSubmit)="onSubmit()">
+        <form class="form" [formGroup]="loginForm " (ngSubmit)="dataSubmit()">
             <!-- <span>Email*</span> -->
             <div class="email">
                 <mat-form-field appearance="fill">
@@ -23,7 +23,7 @@
             </div>
             <a href="">¿Olvido su contraseña?</a>
             <div class="button-ingresar">
-                <button mat-raised-button color="primary" disable="validateForm()">Ingresar</button>
+                <button mat-raised-button color="primary" [disabled]="validarFormulario()">Ingresar</button>
             </div>
             <div class="registrarse">
                 <span>¿Aun no tienes cuenta? -</span>

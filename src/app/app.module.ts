@@ -35,6 +35,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClienteServices } from './services/clientes.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoginService } from './services/login.service';
 
 @NgModule({
@@ -70,7 +71,8 @@ import { LoginService } from './services/login.service';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [ClienteServices, LoginService],
   bootstrap: [AppComponent]

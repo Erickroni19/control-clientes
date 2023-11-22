@@ -1,4 +1,5 @@
-<div class="container-client">
+<mat-spinner *ngIf="spinnerCheck"></mat-spinner>
+<div class="container-client" *ngIf="!spinnerCheck">
     <div class="container-BT">
         <button mat-raised-button>
             <mat-icon>add</mat-icon>

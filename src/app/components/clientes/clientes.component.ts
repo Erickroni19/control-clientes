@@ -19,6 +19,7 @@ export class ClientesComponent implements OnInit{
   clientes!: Cliente[];
   clientesCopy !: Cliente[];
   booleanCheck: boolean = false;
+  spinnerCheck: boolean = true;
   saldoTotalVar: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,6 +34,7 @@ export class ClientesComponent implements OnInit{
   ngOnInit(){
   
     this.clientesService.getClientes().subscribe(clientesDb => {
+          // this.spinnerCheck = true;
           this.clientes = clientesDb;
 
           //Copia el array
@@ -53,6 +55,7 @@ export class ClientesComponent implements OnInit{
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
           console.log(this.saldoTotalVar);
+          this.spinnerCheck = false;
     })   
   }
 

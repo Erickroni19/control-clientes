@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
-  validarEmail: boolean = false;
+  disableButton: boolean = false;
 
   constructor(private clientesService: ClienteServices,
     private loginService: LoginService,
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit{
 }
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: [['', Validators.required, Validators.email]],
-      password: [['', Validators.required, Validators.minLength(10)]]
+      email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
+      password: ['', [Validators.required, Validators.minLength(10)]]
     });
 
     /**Si el usuario esta logeado redirecciona a la ventana de inicio */
@@ -33,16 +33,8 @@ export class LoginComponent implements OnInit{
     })
   }
 
-   /**Obtiene valores ingresados por el usuario */
-  //  login(){
-    
-  //   console.log(
-  //     this.loginForm.get('email')?.value
-  //   );
-    
-  //  }
-
-   onSubmit() {
+  /**Obtiene la información ingresada por el usuario y la envia a back*/
+  dataSubmit() {
     // Obtener los valores del formulario
     const emailValue = this.inputField('email');
     const passwordValue = this.inputField('password');
@@ -68,24 +60,50 @@ export class LoginComponent implements OnInit{
 
   /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
+    console.log(this.disableButton);
+    this.disableButton = false;
+    
     if(this.loginForm.get(`${fieldInput}`)?.hasError('required')){
-      this.validarEmail = true;
-      
+
+      this.disableButton = true;
       return 'Campo requerido'
       
     }
-      return this.loginForm.get('email')?.hasError('email') ? 'El email no es valido' : '';
+
+    if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')){
+      this.disableButton = true;
+      return 'El email no es valido'
+    }
+
+    if(fieldInput ==='password' && this.validarPassword()){
+      this.disableButton = true;
+      return 'La contraseña debe tener min 10 caracteres'
+    }
+
+    return '';
+    
       
   }
 
-  /**Valida que el formulario este correctamente gestionado
-   * antes de enviarlo
-   */
-  validateForm(fieldName: string){
-    if(!this.loginForm.get(`${fieldName}`)?.hasError('required')){
-      this.validarEmail = false;
-    } 
-    return this.validarEmail
+  /**Validar contraseña */
+  validarPassword(){
+    const password = this.inputField('password');
+
+    if(password.length < 10){
+      return true;
+    }
+
+    return false
+  }
+
+  /**Validamos Que el formulario no sea invalido */
+  validarFormulario(){
+
+    if(this.loginForm.valid) this.disableButton = false;
+    else this.disableButton = true;
+
+    return this.disableButton;
+    
   }
 
 
