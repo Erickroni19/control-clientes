@@ -7,36 +7,37 @@
         </button>
         <div class="table-cards">
             <div class="mat-elevation-z8">
+                <h1 class="title-cliente">Listado De Clientes</h1>
                 <table mat-table [dataSource]="dataSource" matSort>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Apellido </th>
                         <td mat-cell *matCellDef="let row"> {{row.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Email </th>
                         <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> ID </th>
                         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
                     </ng-container>
 
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Nombre </th>
                         <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="saldo">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Saldo </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Saldo </th>
                         <td mat-cell *matCellDef="let row"> {{row.saldo}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="editar">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Editar </th>
                         <td mat-cell *matCellDef="let row">
                             <button mat-icon-button (click)="rutaEditar()">
                                 <mat-icon>edit</mat-icon>

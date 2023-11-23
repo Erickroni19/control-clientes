@@ -1,13 +1,14 @@
     .container-client {
         display: flex;
         align-items: center;
+        justify-content: center;
         height: 100%;
     }
     
     .container-client .container-BT {
         height: 100%;
         margin-top: 2%;
-        margin-left: 20%;
+        /* margin-left: 30%; */
     }
     
     .container-BT>button {
@@ -81,4 +82,17 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+    
+    .title-cliente {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        /* background-color: #b8cce4; */
+        margin: 0 15px 0;
+    }
+    
+     ::ng-deep .mat-mdc-table .header-table {
+        background-color: #b8cce4 !important;
     }
