@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   disableButton: boolean = false;
+  hide = true;
 
   constructor(private clientesService: ClienteServices,
     private loginService: LoginService,

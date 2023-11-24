@@ -36,7 +36,9 @@ import { ClienteServices } from './services/clientes.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
 import { LoginService } from './services/login.service';
+import { DialogAgregarClientComponent } from './components/dialog-agregar-client/dialog-agregar-client.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { LoginService } from './services/login.service';
     ConfiguracionComponent,
     NoEncontradoComponent,
     PiePaginaComponent,
+    DialogAgregarClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import { LoginService } from './services/login.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule

@@ -1,7 +1,7 @@
 <div class="container-login">
     <div class="login">
         <h1>Bienvenido</h1>
-        <form class="form" [formGroup]="loginForm " (ngSubmit)="dataSubmit()">
+        <form class="form" [formGroup]="loginForm ">
             <!-- <span>Email*</span> -->
             <div class="email">
                 <mat-form-field appearance="fill">
@@ -15,15 +15,15 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" (input)="inputField('password')" type="password" required>
-                    <mat-error *ngIf="(this.loginForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
-                    <button mat-icon-button matSuffix>
-                    <mat-icon></mat-icon>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
+                    <mat-error *ngIf="(this.loginForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
                 </mat-form-field>
             </div>
             <a href="">¿Olvido su contraseña?</a>
             <div class="button-ingresar">
-                <button mat-raised-button color="primary" [disabled]="validarFormulario()">Ingresar</button>
+                <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">Ingresar</button>
             </div>
             <div class="registrarse">
                 <span>¿Aun no tienes cuenta? -</span>

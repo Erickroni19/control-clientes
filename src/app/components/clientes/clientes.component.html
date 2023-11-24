@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="spinnerCheck"></mat-spinner>
 <div class="container-client" *ngIf="!spinnerCheck">
     <div class="container-BT">
-        <button mat-raised-button>
+        <button mat-raised-button (click)="openDialog()">
             <mat-icon>add</mat-icon>
             Agregar Cliente
         </button>

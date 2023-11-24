@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
+import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-clientes',
@@ -26,11 +28,10 @@ export class ClientesComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private clientesService: ClienteServices,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
-
-  
   ngOnInit(){
   
     this.clientesService.getClientes().subscribe(clientesDb => {
@@ -60,6 +61,21 @@ export class ClientesComponent implements OnInit{
   }
 
   /**Funciones - Metodos */
+
+  /**Abre el dialog */
+  openDialog(){
+
+    const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
+      width: '600px',
+      height: '265px',
+      // data:{}
+  });
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialogo cerrado', result);
+  })
+
+}
 
   /**Obtiene el Valor del saldo total */
   saldoTotal(clientes: Cliente[]){

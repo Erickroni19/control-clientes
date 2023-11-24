@@ -1,0 +1,74 @@
+.container-dialog {
+    margin: 5px 20px 20px;
+    align-items: center;
+}
+
+.container-dialog .tittle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(5, 79, 129);
+    border-radius: 50px;
+    color: white;
+    width: 300px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/*-------------------Formulario--------------------*/
+
+.container-dialog .name-input {
+    display: flex;
+    align-items: center;
+}
+
+.container-dialog .name-input #nombre {
+    margin: 0 10px 0;
+    width: 50%;
+}
+
+.container-dialog .name-input #apellidos {
+    width: 50%;
+    /* margin: 0 10px 0; */
+}
+
+.container-dialog .email-saldo {
+    display: flex;
+    align-items: center;
+}
+
+.container-dialog .email-saldo #email {
+    margin: 0 10px 0;
+    width: 60%;
+}
+
+.container-dialog .email-saldo #saldo {
+    width: 40%;
+}
+
+
+/*-------------------Botones--------------------*/
+
+.container-dialog .buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container-dialog .buttons button:first-child {
+    background-color: #459250;
+    margin: 0 7px 0;
+}
+
+.container-dialog .buttons button:first-child:hover {
+    background-color: #367440;
+}
+
+.container-dialog .buttons button:nth-child(2):hover {
+    background-color: #cc2b2b;
+}
