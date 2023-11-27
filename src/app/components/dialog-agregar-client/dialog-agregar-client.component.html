@@ -2,32 +2,32 @@
     <div class="tittle">
         <h1>Agregar Cliente</h1>
     </div>
-    <form action="">
+    <form [formGroup]="addClientForm">
         <div class="name-input">
             <mat-form-field appearance="outline" id="nombre">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre">
+                <input matInput placeholder="Nombre" formControlName="nombre">
             </mat-form-field>
             <mat-form-field appearance="outline" id="apellidos">
                 <mat-label>Apellidos</mat-label>
-                <input matInput placeholder="Apellidos">
+                <input matInput placeholder="Apellidos" formControlName="apellidos">
             </mat-form-field>
         </div>
         <div class="email-saldo">
             <mat-form-field appearance="outline" id="email">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="email@example.com" type="email" formControlName="email">
+                <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')">
             </mat-form-field>
             <mat-form-field appearance="outline" id="saldo">
                 <mat-label>Saldo</mat-label>
-                <input matInput type="number" class="example-right-align" placeholder="0">
+                <input matInput type="number" class="example-right-align" placeholder="0" formControlName="saldo">
                 <span matTextPrefix>$&nbsp;</span>
                 <span matTextSuffix>.00</span>
             </mat-form-field>
         </div>
     </form>
     <div class="buttons">
-        <button mat-raised-button color="primary">Guardar</button>
-        <button mat-raised-button color="warn">Cerrar</button>
+        <button mat-raised-button color="primary" [ngStyle]="{'background-color': validarFormulario() ? 'lightgray' : '#2f6136'}" [disabled]="validarFormulario()" (click)="saveData()">Guardar</button>
+        <button mat-raised-button color="warn" (click)="dialogClose()">Cerrar</button>
     </div>
 </div>

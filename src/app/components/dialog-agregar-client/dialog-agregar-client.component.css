@@ -61,12 +61,7 @@ h1 {
 }
 
 .container-dialog .buttons button:first-child {
-    background-color: #459250;
     margin: 0 7px 0;
-}
-
-.container-dialog .buttons button:first-child:hover {
-    background-color: #367440;
 }
 
 .container-dialog .buttons button:nth-child(2):hover {

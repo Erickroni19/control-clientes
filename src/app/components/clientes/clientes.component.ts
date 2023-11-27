@@ -29,11 +29,12 @@ export class ClientesComponent implements OnInit{
 
   constructor(private clientesService: ClienteServices,
               private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              ) {
   }
 
   ngOnInit(){
-  
+
     this.clientesService.getClientes().subscribe(clientesDb => {
           // this.spinnerCheck = true;
           this.clientes = clientesDb;
@@ -68,14 +69,17 @@ export class ClientesComponent implements OnInit{
     const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
       width: '600px',
       height: '265px',
+      disableClose: true,
+      enterAnimationDuration: '600ms',
+      exitAnimationDuration: '500ms',
       // data:{}
-  });
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialogo cerrado', result);
-  })
+        console.log('Dialogo cerrado', result);
+    });
 
-}
+  }
 
   /**Obtiene el Valor del saldo total */
   saldoTotal(clientes: Cliente[]){
@@ -96,4 +100,5 @@ export class ClientesComponent implements OnInit{
   rutaEditar(){
     this.router.navigate(['cliente/editar/{{clientes.id}}'])
   }
+
 }
