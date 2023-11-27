@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit{
 
   /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
-    console.log(this.disableButton);
+    // console.log(this.disableButton);
     this.disableButton = false;
     
     if(this.loginForm.get(`${fieldInput}`)?.hasError('required')){
@@ -82,8 +82,6 @@ export class LoginComponent implements OnInit{
     }
 
     return '';
-    
-      
   }
 
   /**Validar contraseña */

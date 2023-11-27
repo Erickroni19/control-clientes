@@ -9,9 +9,9 @@ import { map } from 'rxjs/operators';
 })
 export class ClienteServices {
   clientesColeccion: AngularFirestoreCollection<Cliente>;
-  clienteDoc!: AngularFirestoreDocument<Cliente>;
+  clienteDoc!: AngularFirestoreDocument<Cliente | null>;
   clientes!: Observable<Cliente[]>;
-  cliente!: Observable<Cliente>;
+  cliente!: Observable<Cliente | null>;
   
   constructor(private firebaseDb: AngularFirestore) {
     //Se hace la petición a la firebase para que retorne los nombres en orden ascendente 
@@ -31,5 +31,28 @@ export class ClienteServices {
         })
       )
       return this.clientes
-  }   
+  } 
+  
+  /**---Agrega un nuevo cliente a la base de datos--- */
+  agregarCliente(cliente: Cliente){
+    this.clientesColeccion.add(cliente);
+  }
+
+  /**---Obtenemos el cliente que deseamos mediante id */
+  getCliente(id:string){
+    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(`clientes/${id}`);
+
+    this.cliente = this.clienteDoc.snapshotChanges().pipe(
+      map( accion => {
+        if(accion.payload.exists === false){
+          return null;
+        }else{
+          const datos = accion.payload.data() as Cliente;
+          datos.id = accion.payload.id;
+          return datos;
+        }
+      })
+      );
+      return this.cliente;
+  }
 }

@@ -31,7 +31,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { ClienteServices } from './services/clientes.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -39,6 +38,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoginService } from './services/login.service';
 import { DialogAgregarClientComponent } from './components/dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -62,6 +62,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'control-clientes'),
     AngularFirestoreModule,
     MatIconModule,
+    MatPaginatorModule,
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
@@ -69,7 +70,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDividerModule,
     MatMenuModule,
     MatTableModule,
-    MatPaginatorModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

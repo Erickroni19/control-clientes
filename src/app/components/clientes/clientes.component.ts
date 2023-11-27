@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,8 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements OnInit{
-  dataSource!: MatTableDataSource<Cliente>;
+export class ClientesComponent implements OnInit, AfterViewInit{
+  dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
   displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar'];
 
   //Variables
@@ -22,10 +22,13 @@ export class ClientesComponent implements OnInit{
   clientesCopy !: Cliente[];
   booleanCheck: boolean = false;
   spinnerCheck: boolean = true;
+  paginatorPrueba: boolean = false;
   saldoTotalVar: number = 0;
+  pageSize = 5;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
+    this.dataSource.paginator = value;
+  }
 
   constructor(private clientesService: ClienteServices,
               private router: Router,
@@ -51,6 +54,10 @@ export class ClientesComponent implements OnInit{
           
           //Asignamos la data al datasource
           this.dataSource = new MatTableDataSource(this.clientesCopy)
+          
+          this.dataSource.paginator = this.paginator;
+          console.log(this.paginator);
+          
           // console.log(this.dataSource.data, this.clientes);
           this.booleanCheck = true;  
 
@@ -59,6 +66,14 @@ export class ClientesComponent implements OnInit{
           console.log(this.saldoTotalVar);
           this.spinnerCheck = false;
     })   
+  }
+
+  ngAfterViewInit() {
+
+    // setTimeout(() => {
+    //   console.log(this.paginator.firstPage);
+    // }, 1000);
+    
   }
 
   /**Funciones - Metodos */
@@ -76,7 +91,9 @@ export class ClientesComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        console.log('Dialogo cerrado', result);
+      if(result){
+        this.clientesService.agregarCliente(result);
+      }
     });
 
   }

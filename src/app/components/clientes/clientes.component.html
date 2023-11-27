@@ -47,12 +47,8 @@
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                    <!-- <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                    </tr> -->
                 </table>
-                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="this.dataSource.data.length"></mat-paginator>
             </div>
             <div class="container-cards">
                 <mat-card class="card-saldo">
@@ -71,7 +67,7 @@
                     <mat-card-content>
                         <mat-icon>groups</mat-icon>
                         <div>
-                            {{clientes.length + 1}}
+                            {{clientes.length}}
                         </div>
                     </mat-card-content>
                 </mat-card>
