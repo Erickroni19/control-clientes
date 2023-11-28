@@ -26,6 +26,9 @@ export class DialogAgregarClientComponent implements OnInit{
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       saldo: ['', Validators.required]
     })
+
+    console.log(this.data);
+    
   }
 
   /**Cierra el dialog */

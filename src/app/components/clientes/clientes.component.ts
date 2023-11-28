@@ -79,15 +79,24 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Funciones - Metodos */
 
   /**Abre el dialog */
-  openDialog(){
+  openDialog(id: String, element: any){
 
+    console.log(element);
+    
+    
     const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
       width: '600px',
       height: '265px',
       disableClose: true,
       enterAnimationDuration: '600ms',
       exitAnimationDuration: '500ms',
-      // data:{}
+      data:{
+        nombre: 'Erick',
+        apellido: 'Romero',
+        email: 'email@sjsh.co',
+        saldo: 0,
+        id: id
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -96,6 +105,20 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       }
     });
 
+  }
+
+  /**Obtener la información del cliente */
+  getClient(id: string){
+    this.clientesService.getCliente(id).subscribe( cliente => {
+      console.log(cliente);
+    })
+  }
+
+  /**Ver detalles de la fila */
+  verDetalles(element: any) {
+    // element contiene toda la información de la fila
+    console.log('Detalles de la fila:', element);
+    // Realiza las operaciones que necesites con la información de la fila
   }
 
   /**Obtiene el Valor del saldo total */

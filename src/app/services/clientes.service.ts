@@ -40,7 +40,7 @@ export class ClienteServices {
 
   /**---Obtenemos el cliente que deseamos mediante id */
   getCliente(id:string){
-    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(`clientes/${id}`);
+    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(id);
 
     this.cliente = this.clienteDoc.snapshotChanges().pipe(
       map( accion => {

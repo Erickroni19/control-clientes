@@ -1,1 +1,54 @@
-<p>editar-cliente works!</p>
+<header id="main-header">
+    <div class="container-header">
+        <div class="text-client">
+            <mat-icon>person</mat-icon>
+            <span>Editar Cliente</span>
+        </div>
+    </div>
+</header>
+<div class="container-edit">
+    <div class="buttons">
+        <button mat-button>
+            <mat-icon>arrow_back</mat-icon>
+            <span>Regresar</span>
+        </button>
+        <button mat-raised-button>
+            <mat-icon>done</mat-icon>
+            <span>Guardar Cliente</span>
+        </button>
+        <button mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar Cliente</span>
+        </button>
+    </div>
+    <div class="form">
+        <form [formGroup]="editClientForm">
+            <div class="name-input">
+                <mat-form-field appearance="outline" id="nombre">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre" formControlName="nombre">
+                    <!-- <mat-error *ngIf="(this.addClientForm.get('nombre')?.invalid)">{{getErrorMessage('nombre')}}</mat-error> -->
+                </mat-form-field>
+                <mat-form-field appearance="outline" id="apellidos">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput placeholder="Apellidos" formControlName="apellido">
+                    <!-- <mat-error *ngIf="(this.addClientForm.get('apellido')?.invalid)">{{getErrorMessage('apellido')}}</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="email-saldo">
+                <mat-form-field appearance="outline" id="email">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')">
+                    <!-- <mat-error *ngIf="(this.addClientForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error> -->
+                </mat-form-field>
+                <mat-form-field appearance="outline" id="saldo">
+                    <mat-label>Saldo</mat-label>
+                    <input matInput type="number" class="example-right-align" placeholder="0" formControlName="saldo">
+                    <span matTextPrefix>$&nbsp;</span>
+                    <span matTextSuffix>.00</span>
+                    <!-- <mat-error *ngIf="(this.addClientForm.get('saldo')?.invalid)">{{getErrorMessage('saldo')}}</mat-error> -->
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+</div>

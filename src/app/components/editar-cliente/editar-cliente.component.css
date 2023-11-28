@@ -1,0 +1,47 @@
+.container-header {
+    background-color: #c2b79b;
+    height: 10vh;
+    display: flex;
+    /* justify-content: flex-start; */
+    align-items: center;
+}
+
+.container-header .text-client {
+    font-size: 25px;
+    font-weight: bold;
+    color: #243757;
+    margin-left: 20%;
+}
+
+.text-client mat-icon {
+    font-size: 30px;
+    width: 26px;
+    height: 25px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+/**---Container Principal, botones, form*/
+
+.container-edit {
+    margin: 10px 50px 50px;
+}
+
+.container-edit .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+}
+
+.container-edit .buttons button:nth-child(2) {
+    background-color: #428f4c;
+    color: white;
+}
+
+
+/* .container-edit .buttons button:nth-child(3) {
+    background-color: #2f6136;
+    color: white;
+} */
