@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   templateUrl: './dialog-agregar-client.component.html',
   styleUrls: ['./dialog-agregar-client.component.css']
 })
-export class DialogAgregarClientComponent implements OnInit{
+export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
 
   addClientForm!: FormGroup;
   disableButton: boolean = true;
@@ -25,15 +25,31 @@ export class DialogAgregarClientComponent implements OnInit{
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       saldo: ['', Validators.required]
-    })
-
-    console.log(this.data);
+    }) 
     
+    // console.log(this.data.editData);
+    if(this.data.idEjecucion === 'editClient'){
+      this.setInputData(this.data.editData)
+    }
+  }
+
+  ngAfterViewInit() {
+          
   }
 
   /**Cierra el dialog */
   dialogClose(){
     this.dialogRef.close();
+  }
+
+  /**Agrega los datos a los inputs cuando se va a editar */
+  setInputData(editData: any){
+    this.addClientForm.setValue({
+      nombre: editData.nombre,
+      apellido: editData.apellido,
+      email: editData.email,
+      saldo: editData.saldo
+    })
   }
 
   /**Guardar data cliente */

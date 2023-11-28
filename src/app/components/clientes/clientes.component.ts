@@ -20,9 +20,12 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   //Variables
   clientes!: Cliente[];
   clientesCopy !: Cliente[];
+  editData!: any;
+  idObject: any = {};
   booleanCheck: boolean = false;
   spinnerCheck: boolean = true;
   paginatorPrueba: boolean = false;
+  dialogOpen: boolean = false;
   saldoTotalVar: number = 0;
   pageSize = 5;
 
@@ -47,16 +50,23 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           let newId = 0;
 
           console.log(this.clientes, this.clientesCopy);
-          //Se asigna un nuevo id
+          /*Se asigna un nuevo id y se crea objeto
+          * para almacenar el nuevo id correspondiente a cada id
+          * original*/
           this.clientesCopy.forEach( cliente => {
-            cliente.id = `${++newId}`; 
+            let oldId = cliente.id;
+
+            cliente.id = `${++newId}`;
+
+            
+            this.idObject[cliente.id] = oldId;
           })
           
           //Asignamos la data al datasource
           this.dataSource = new MatTableDataSource(this.clientesCopy)
           
           this.dataSource.paginator = this.paginator;
-          console.log(this.paginator);
+          // console.log(this.paginator);
           
           // console.log(this.dataSource.data, this.clientes);
           this.booleanCheck = true;  
@@ -79,11 +89,13 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Funciones - Metodos */
 
   /**Abre el dialog */
-  openDialog(id: String, element: any){
+  openDialog(idEjecucion: string){
 
-    console.log(element);
-    
-    
+    //Evitar doble ejecucion
+    if(this.dialogOpen) {
+      return
+    }
+
     const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
       width: '600px',
       height: '265px',
@@ -91,34 +103,42 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       enterAnimationDuration: '600ms',
       exitAnimationDuration: '500ms',
       data:{
-        nombre: 'Erick',
-        apellido: 'Romero',
-        email: 'email@sjsh.co',
-        saldo: 0,
-        id: id
+        editData: this.editData || '',
+        idEjecucion: idEjecucion,
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if(result && idEjecucion === 'addClient'){
         this.clientesService.agregarCliente(result);
+
+      }else if(result && idEjecucion === 'editClient'){
+        const update = this.clientesService.modificarCliente(this.editData);
+        console.log('edit', update);  
       }
+      
+      this.dialogOpen = false;
     });
 
+    this.dialogOpen = true;
+    
   }
 
-  /**Obtener la información del cliente */
-  getClient(id: string){
-    this.clientesService.getCliente(id).subscribe( cliente => {
-      console.log(cliente);
+  /**Obtiene la información del cliente */
+  getDataClient(element: any, idEjecucion: string){
+    const idOriginal = this.getIdClient(element);
+    
+    this.clientesService.getCliente(idOriginal).subscribe( cliente => {
+      this.editData = cliente;
+      // console.log(this.editData);
+
+      this.openDialog(idEjecucion);
     })
   }
 
-  /**Ver detalles de la fila */
-  verDetalles(element: any) {
-    // element contiene toda la información de la fila
-    console.log('Detalles de la fila:', element);
-    // Realiza las operaciones que necesites con la información de la fila
+  /**Obtiene el id original del cliente*/
+  getIdClient(element: any) { 
+    return this.idObject[element.id]
   }
 
   /**Obtiene el Valor del saldo total */

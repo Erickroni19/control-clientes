@@ -38,9 +38,9 @@ export class ClienteServices {
     this.clientesColeccion.add(cliente);
   }
 
-  /**---Obtenemos el cliente que deseamos mediante id */
+  /**---Obtenemos el cliente que deseamos mediante id--- */
   getCliente(id:string){
-    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(id);
+    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(`clientes/${id}`);
 
     this.cliente = this.clienteDoc.snapshotChanges().pipe(
       map( accion => {
@@ -55,4 +55,18 @@ export class ClienteServices {
       );
       return this.cliente;
   }
+
+  /**---Modificamos la información del cliente--- */
+  modificarCliente(cliente: Cliente){
+     this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
+
+     this.clienteDoc.update(cliente);
+  }
+
+  /**---Elimina la información del cliente--- */
+  eliminarCliente(cliente: Cliente){
+    this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
+
+    this.clienteDoc.delete();
+ }
 }
