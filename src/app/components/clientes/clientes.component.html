@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="spinnerCheck"></mat-spinner>
 <div class="container-client" *ngIf="!spinnerCheck">
     <div class="container-BT">
-        <button mat-raised-button (click)="openDialog('addClient')">
+        <button mat-raised-button (click)="openDialog('Agregar', '')">
             <mat-icon>add</mat-icon>
             Agregar Cliente
         </button>
@@ -39,8 +39,17 @@
                     <ng-container matColumnDef="editar">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Editar </th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-icon-button (click)="getDataClient(row, 'editClient')">
+                            <button mat-icon-button (click)="openDialog('Editar', row)">
                                 <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Eliminar </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button (click)="getOrDeleteDataClient(row, 'delete')">
+                                <mat-icon>delete</mat-icon>
                             </button>
                         </td>
                     </ng-container>

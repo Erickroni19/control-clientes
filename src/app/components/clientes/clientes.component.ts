@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ClientesComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
-  displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar'];
+  displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar', 'eliminar'];
 
   //Variables
   clientes!: Cliente[];
@@ -49,7 +49,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           this.clientesCopy = JSON.parse(JSON.stringify(clientesDb));
           let newId = 0;
 
-          console.log(this.clientes, this.clientesCopy);
+          // console.log(this.clientes, this.clientesCopy);
           /*Se asigna un nuevo id y se crea objeto
           * para almacenar el nuevo id correspondiente a cada id
           * original*/
@@ -89,50 +89,71 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Funciones - Metodos */
 
   /**Abre el dialog */
-  openDialog(idEjecucion: string){
+  openDialog(idEjecucion: string, element: any){
 
+    console.log(this.dialogOpen);
+    
     //Evitar doble ejecucion
     if(this.dialogOpen) {
-      return
+      return;
     }
 
-    const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
-      width: '600px',
-      height: '265px',
-      disableClose: true,
-      enterAnimationDuration: '600ms',
-      exitAnimationDuration: '500ms',
-      data:{
-        editData: this.editData || '',
-        idEjecucion: idEjecucion,
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result && idEjecucion === 'addClient'){
-        this.clientesService.agregarCliente(result);
-
-      }else if(result && idEjecucion === 'editClient'){
-        const update = this.clientesService.modificarCliente(this.editData);
-        console.log('edit', update);  
-      }
+    //Editar cliente
+    if(idEjecucion === 'Editar'){
       
-      this.dialogOpen = false;
-    });
+      this.getOrDeleteDataClient(element, idEjecucion);
+      
+    }
 
-    this.dialogOpen = true;
     
+    setTimeout(() => {      
+      const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
+        width: '600px',
+        height: '265px',
+        disableClose: true,
+        enterAnimationDuration: '600ms',
+        exitAnimationDuration: '500ms',
+        data:{
+          editData: this.editData || '',
+          idEjecucion: idEjecucion,
+        }
+      });
+  
+      this.dialogOpen = true
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result && idEjecucion === 'Agregar'){
+          this.clientesService.agregarCliente(result); 
+  
+        }else if(result && idEjecucion === 'Editar'){
+          
+          this.clientesService.modificarCliente(result, this.editData.id);
+  
+          console.log('edit', result);  
+        }
+        this.dialogOpen = false; 
+      });  
+    }, 20);
   }
 
   /**Obtiene la información del cliente */
-  getDataClient(element: any, idEjecucion: string){
+  getOrDeleteDataClient(element: any, idEjecucion: string){
+    console.log('Get or delete');
+    // this.dialogOpen = false;
+    
     const idOriginal = this.getIdClient(element);
     
     this.clientesService.getCliente(idOriginal).subscribe( cliente => {
       this.editData = cliente;
-      // console.log(this.editData);
+      
+      //Abre dialog de editar
+      // if(idEjecucion === 'editClient' && !this.dialogOpen){
+      //   this.openDialog(idEjecucion);
 
-      this.openDialog(idEjecucion);
+      // }/**Elimina la informacion del cliente */
+      if(idEjecucion === 'delete'){
+        this.clientesService.eliminarCliente(this.editData);
+      }
     })
   }
 

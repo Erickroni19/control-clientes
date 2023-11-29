@@ -57,16 +57,18 @@ export class ClienteServices {
   }
 
   /**---Modificamos la información del cliente--- */
-  modificarCliente(cliente: Cliente){
-     this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
+  modificarCliente(cliente: Cliente, id: string){
+     this.clienteDoc = this.firebaseDb.doc(`clientes/${id}`);
 
      this.clienteDoc.update(cliente);
   }
 
   /**---Elimina la información del cliente--- */
   eliminarCliente(cliente: Cliente){
-    this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
-
-    this.clienteDoc.delete();
+    if(cliente){
+      this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
+  
+      this.clienteDoc.delete();
+    }
  }
 }

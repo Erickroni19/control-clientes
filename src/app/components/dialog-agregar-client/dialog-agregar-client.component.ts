@@ -27,14 +27,17 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
       saldo: ['', Validators.required]
     }) 
     
-    // console.log(this.data.editData);
-    if(this.data.idEjecucion === 'editClient'){
-      this.setInputData(this.data.editData)
-    }
   }
 
   ngAfterViewInit() {
-          
+
+    setTimeout(() => {
+      console.log(this.data.editData);
+      if(this.data.idEjecucion === 'Editar'){
+       this.setInputData(this.data.editData)
+      }
+    }, 10);
+    
   }
 
   /**Cierra el dialog */
@@ -44,18 +47,21 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
 
   /**Agrega los datos a los inputs cuando se va a editar */
   setInputData(editData: any){
-    this.addClientForm.setValue({
-      nombre: editData.nombre,
-      apellido: editData.apellido,
-      email: editData.email,
-      saldo: editData.saldo
-    })
+    if(editData){
+      this.addClientForm.setValue({
+        nombre: editData.nombre,
+        apellido: editData.apellido,
+        email: editData.email,
+        saldo: editData.saldo
+      })
+    }
   }
 
   /**Guardar data cliente */
   saveData(){
     /**Se pasa la información para abrirlo con el afterClose */
     this.dialogRef.close(this.addClientForm.value); 
+    // this.dialogRef.close(); 
   }
 
   /**Captura los datos ingresados por el usuario*/

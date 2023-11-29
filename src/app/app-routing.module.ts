@@ -5,14 +5,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
-import { EditarClienteComponent } from './components/editar-cliente/editar-cliente.component';
 
 const routes: Routes = [
   {path: '', component: TableroComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'configuracion', component: ConfiguracionComponent},
-  {path: 'cliente/editar/:id', component: EditarClienteComponent},
   {path: '**', component: NoEncontradoComponent}
 ];
 
