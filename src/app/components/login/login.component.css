@@ -57,7 +57,7 @@
 
 .login a {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     /* margin-top: 5px; */
     margin-bottom: 20px;
 }

@@ -38,6 +38,7 @@ import { LoginService } from './services/login.service';
 import { DialogAgregarClientComponent } from './components/dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatProgressSpinnerModule,
     MatDialogModule,
   ],
-  providers: [ClienteServices, LoginService],
-  bootstrap: [AppComponent]
+  providers: [ClienteServices, LoginService, AuthGuard],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

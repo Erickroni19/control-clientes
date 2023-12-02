@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   disableButton: boolean = false;
   hide = true;
+  loginError: boolean = false;
 
   constructor(private clientesService: ClienteServices,
     private loginService: LoginService,
@@ -40,13 +41,17 @@ export class LoginComponent implements OnInit{
     const emailValue = this.inputField('email');
     const passwordValue = this.inputField('password');
 
-    console.log(`Email: ${emailValue}, Contraseña: ${passwordValue}`);
     this.loginService.login(emailValue, passwordValue)
-    .then( resp =>{
-      this.router.navigate(['/']);
+    .then( resp => {
+      if(resp){
+        this.router.navigate(['/']);
+      }
     })
     .catch(error => {
-      console.log(error);
+      //Mostrar Mensaje De Error
+      if(error){
+        this.loginError = true;
+      }
     });
   }
 

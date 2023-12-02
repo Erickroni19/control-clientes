@@ -5,11 +5,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: TableroComponent},
+  {path: '', component: TableroComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'registro', component: RegistroComponent},
+  {path: 'registro', component: RegistroComponent, canActivate: [AuthGuard]},
   {path: 'configuracion', component: ConfiguracionComponent},
   {path: '**', component: NoEncontradoComponent}
 ];
