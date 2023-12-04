@@ -25,7 +25,7 @@
             <div class="button-ingresar">
                 <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">Ingresar</button>
             </div>
-            <div class="registrarse">
+            <div class="registrarse" *ngIf="permitirRegistro">
                 <span>¿Aun no tienes cuenta? -</span>
                 <a href="/registro"> Registrarme</a>
             </div>

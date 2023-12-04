@@ -2,7 +2,9 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { error } from 'jquery';
+import { Configuracion } from 'src/app/interfaces/configuracion';
 import { ClienteServices } from 'src/app/services/clientes.service';
+import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -16,13 +18,24 @@ export class LoginComponent implements OnInit{
   disableButton: boolean = false;
   hide = true;
   loginError: boolean = false;
+  permitirRegistro: boolean = false;
  
 
   constructor(private loginService: LoginService,
+              private configuracionService: ConfiguracionService,
               private fb: FormBuilder,
               private router: Router) {}
 
   ngOnInit() {
+    this.configuracionService.getConfiguracion().subscribe(       
+      (configuracion: Configuracion) => {
+
+        if(configuracion && configuracion.permitirRegistro !== undefined){
+          this.permitirRegistro = configuracion.permitirRegistro;
+        }
+
+      }
+    )
     //Inicia el formulario
     this.crearFormulario();
 
@@ -32,6 +45,7 @@ export class LoginComponent implements OnInit{
       if(auth) this.router.navigate(['/'])
 
     })
+
   }
 
   /**Obtiene la información ingresada por el usuario y la envia a back*/
