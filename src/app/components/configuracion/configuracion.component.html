@@ -18,16 +18,16 @@
     </button>
 </section>
 
-<section class="permitir-registro">
+<div class="permitir-registro">
     <mat-card class="card-container">
         <h1>Editar Configuración</h1>
         <mat-card-content>
             <h2>Permitir Registro De Usuario</h2>
-            <section class="example-section">
-                <mat-checkbox class="example-margin" [(ngModel)]="permitirRegistro " [checked]="permitirRegistro">
+            <section>
+                <mat-checkbox [(ngModel)]="permitirRegistro " [checked]="permitirRegistro">
                     {{permitirRegistro? "Si" : "No"}}
                 </mat-checkbox>
             </section>
         </mat-card-content>
     </mat-card>
-</section>
+</div>

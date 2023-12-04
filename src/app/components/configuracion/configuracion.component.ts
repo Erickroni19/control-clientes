@@ -11,6 +11,7 @@ import { ConfiguracionService } from 'src/app/services/configuracion.service';
 export class ConfiguracionComponent implements OnInit{
 
   permitirRegistro: boolean = false;
+  color = "#243757"
 
   constructor(private configuracionService: ConfiguracionService,
               private router: Router){}

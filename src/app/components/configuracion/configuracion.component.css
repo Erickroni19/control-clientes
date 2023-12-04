@@ -22,7 +22,7 @@
 }
 
 .buttons {
-    margin: 10px 100px 100px;
+    margin: 20px 20% 20px;
 }
 
 .buttons button:nth-child(2) {
@@ -32,15 +32,31 @@
 }
 
 .permitir-registro {
-    margin: 10px 100px 100px;
+    margin: 10px 20% 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.permitir-registro .card-container {
+    background-color: aliceblue;
 }
 
 .permitir-registro .card-container>h1 {
-    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: #0a366d;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .permitir-registro .card-container>mat-card-content {
     margin-left: 20px;
+}
+
+::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+    border-color: #0d4a96 !important;
+    background-color: #0a366d !important;
 }
 
 
