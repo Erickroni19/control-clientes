@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 import { ClienteServices } from 'src/app/services/clientes.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -15,17 +16,15 @@ export class LoginComponent implements OnInit{
   disableButton: boolean = false;
   hide = true;
   loginError: boolean = false;
+ 
 
-  constructor(private clientesService: ClienteServices,
-    private loginService: LoginService,
-    private fb: FormBuilder,
-    private router: Router) {
-}
+  constructor(private loginService: LoginService,
+              private fb: FormBuilder,
+              private router: Router) {}
+
   ngOnInit() {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
-      password: ['', [Validators.required, Validators.minLength(10)]]
-    });
+    //Inicia el formulario
+    this.crearFormulario();
 
     /**Si el usuario esta logeado redirecciona a la ventana de inicio */
     this.loginService.getAuth().subscribe( auth => {
@@ -38,9 +37,9 @@ export class LoginComponent implements OnInit{
   /**Obtiene la información ingresada por el usuario y la envia a back*/
   dataSubmit() {
     // Obtener los valores del formulario
-    const emailValue = this.inputField('email');
-    const passwordValue = this.inputField('password');
-
+    let emailValue = this.inputField('email');
+    let passwordValue = this.inputField('password');
+    
     this.loginService.login(emailValue, passwordValue)
     .then( resp => {
       if(resp){
@@ -53,6 +52,7 @@ export class LoginComponent implements OnInit{
         this.loginError = true;
       }
     });
+   
   }
 
   /**Captura los datos ingresados por el usuario*/
@@ -109,6 +109,14 @@ export class LoginComponent implements OnInit{
     return this.disableButton;
     
   }
+
+  private crearFormulario(){
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
+      password: ['', [Validators.required, Validators.minLength(10)]]
+    });
+  }
+
 
 
 }

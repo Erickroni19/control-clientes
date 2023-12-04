@@ -1,1 +1,29 @@
-<p>registro works!</p>
+<div class="container-login">
+    <div class="login">
+        <h1>Registrate</h1>
+        <form class="form" [formGroup]="registerForm">
+            <!-- <span>Email*</span> -->
+            <div class="email">
+                <!-- <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')" required>
+                    <mat-error *ngIf="(this.loginForm.get('email')?.invalid && loginForm.touched)">{{getErrorMessage('email')}}</mat-error>
+                </mat-form-field> -->
+            </div>
+            <!-- <span>Password*</span> -->
+            <div class="contraseña">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <!-- <input matInput formControlName="password" (input)="inputField('password')" type="password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button> -->
+                    <!-- <mat-error *ngIf="(this.loginForm.get('password')?.invalid && loginForm.touched)">{{getErrorMessage('password')}}</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="button-ingresar">
+                <!-- <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">{{titleButton}}</button> -->
+            </div>
+        </form>
+    </div>
+</div>
