@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from '@angular/fire/compat/firestore';
 // import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
@@ -38,7 +38,9 @@ import { LoginService } from './services/login.service';
 import { DialogAgregarClientComponent } from './components/dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
+import { ConfiguracionService } from './services/configuracion.service';
 
 @NgModule({
   declarations: [
@@ -76,8 +78,15 @@ import { AuthGuard } from './guard/auth.guard';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
-  providers: [ClienteServices, LoginService, AuthGuard],
+  providers: [
+    ClienteServices, 
+    LoginService, 
+    AuthGuard, 
+    ConfiguracionService,
+    {provide: FIRESTORE_SETTINGS, useValue:{}}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

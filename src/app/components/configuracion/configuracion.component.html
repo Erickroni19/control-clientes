@@ -1,1 +1,33 @@
-<p>configuracion works!</p>
+<header id="main-header">
+    <div class="container-header">
+        <div class="text-client">
+            <mat-icon>settings</mat-icon>
+            <span>Configuración</span>
+        </div>
+    </div>
+</header>
+
+<section class="buttons">
+    <a mat-button routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+        Regresar Al Inicio
+    </a>
+    <button mat-flat-button (click)="saveConfiguration()">
+        <mat-icon>done</mat-icon>
+        Guardar Cambios
+    </button>
+</section>
+
+<section class="permitir-registro">
+    <mat-card class="card-container">
+        <h1>Editar Configuración</h1>
+        <mat-card-content>
+            <h2>Permitir Registro De Usuario</h2>
+            <section class="example-section">
+                <mat-checkbox class="example-margin" [(ngModel)]="permitirRegistro " [checked]="permitirRegistro">
+                    {{permitirRegistro? "Si" : "No"}}
+                </mat-checkbox>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</section>
