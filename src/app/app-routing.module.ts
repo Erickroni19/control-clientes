@@ -10,7 +10,7 @@ import { AuthGuard } from './guard/auth.guard';
 const routes: Routes = [
   {path: '', component: TableroComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'registro', component: RegistroComponent},
+  {path: 'registrarse', component: RegistroComponent},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
   {path: '**', component: NoEncontradoComponent}
 ];

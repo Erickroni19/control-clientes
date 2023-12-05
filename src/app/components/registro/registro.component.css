@@ -53,6 +53,7 @@
     font-size: 17px;
     width: 90%;
     border-radius: 19px;
+    margin-bottom: 25px;
 }
 
 .login a {
@@ -72,4 +73,12 @@
 
 .login .registrarse a {
     margin-top: 15px;
+}
+
+.login .errorMessage {
+    color: red;
+    background-color: rgba(252, 163, 163, 0.308);
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }

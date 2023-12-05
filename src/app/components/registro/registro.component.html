@@ -4,25 +4,28 @@
         <form class="form" [formGroup]="registerForm">
             <!-- <span>Email*</span> -->
             <div class="email">
-                <!-- <mat-form-field appearance="fill">
+                <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')" required>
-                    <mat-error *ngIf="(this.loginForm.get('email')?.invalid && loginForm.touched)">{{getErrorMessage('email')}}</mat-error>
-                </mat-form-field> -->
+                    <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
+                    <!-- <mat-error *ngIf="(this.loginForm.get('email')?.invalid && loginForm.touched)">{{getErrorMessage('email')}}</mat-error> -->
+                </mat-form-field>
             </div>
             <!-- <span>Password*</span> -->
             <div class="contraseña">
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <!-- <input matInput formControlName="password" (input)="inputField('password')" type="password" required>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <input matInput formControlName="password" type="password" required>
+                    <!-- <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button> -->
-                    <!-- <mat-error *ngIf="(this.loginForm.get('password')?.invalid && loginForm.touched)">{{getErrorMessage('password')}}</mat-error> -->
+                    <mat-error *ngIf="(this.registerForm.get('password')?.invalid && registerForm.touched)">{{getErrorMessage('password')}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="button-ingresar">
-                <!-- <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">{{titleButton}}</button> -->
+                <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">Registrarse</button>
+            </div>
+            <div class="errorMessage" *ngIf="registerError">
+                {{errorMessage}}
             </div>
         </form>
     </div>

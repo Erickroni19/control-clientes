@@ -41,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
 import { ConfiguracionService } from './services/configuracion.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ConfiguracionService } from './services/configuracion.service';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [
     ClienteServices, 

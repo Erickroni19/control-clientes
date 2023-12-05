@@ -131,6 +131,11 @@ export class LoginComponent implements OnInit{
     });
   }
 
+  // Para navegar a la página de registro
+  navigateToRegistro() {
+    this.router.navigate(['/registrarse']);
+  } 
+
 
 
 }
