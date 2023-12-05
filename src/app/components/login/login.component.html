@@ -1,6 +1,9 @@
 <div class="container-login">
     <div class="login">
         <h1>Bienvenido</h1>
+        <div class="errorMessage" *ngIf="loginError">
+            {{errorMessage}}
+        </div>
         <form class="form" [formGroup]="loginForm ">
             <!-- <span>Email*</span> -->
             <div class="email">

@@ -54,6 +54,9 @@
     width: 90%;
     border-radius: 19px;
     margin-bottom: 15px;
+    background-color: #0f4d99;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
 .login a {
@@ -74,4 +77,15 @@
 .login .registrarse a {
     margin-top: 15px;
     color: #1a1ace;
+}
+
+.login .errorMessage {
+    display: flex;
+    justify-content: center;
+    color: red;
+    background-color: rgba(252, 163, 163, 0.308);
+    padding: 5px;
+    border-radius: 5px;
+    /* margin-bottom: 20px; */
+    margin: 0 20px 0;
 }

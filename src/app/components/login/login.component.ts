@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { error } from 'jquery';
 import { Configuracion } from 'src/app/interfaces/configuracion';
+import { ErrorType } from 'src/app/interfaces/error-type';
 import { ClienteServices } from 'src/app/services/clientes.service';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -19,6 +20,13 @@ export class LoginComponent implements OnInit{
   hide = true;
   loginError: boolean = false;
   permitirRegistro: boolean = false;
+  errorMessage = "";
+
+  
+  //Traducción de los errores
+  errorTranslations: ErrorType= {
+    'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
+};
  
 
   constructor(private loginService: LoginService,
@@ -63,7 +71,11 @@ export class LoginComponent implements OnInit{
     .catch(error => {
       //Mostrar Mensaje De Error
       if(error){
+        this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
         this.loginError = true;
+        setTimeout(() => {
+          this.loginError = false;
+        },3500)
       }
     });
    

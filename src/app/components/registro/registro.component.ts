@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorType } from 'src/app/interfaces/error-type';
 
 @Component({
   selector: 'app-registro',
@@ -17,6 +18,11 @@ export class RegistroComponent implements OnInit{
   registerError: boolean = false;
   errorMessage = "";
 
+  //Traducción de los errores
+  errorTranslations: ErrorType= {
+      'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
+  };
+  
   constructor(private loginService: LoginService,
               private fb: FormBuilder,
               private router: Router,
@@ -51,22 +57,20 @@ export class RegistroComponent implements OnInit{
     this.loginService.register(emailValue, passwordValue)
     .then( resp => {
       if(resp){
-        this.router.navigate(['/login']);
+        this.snackBarMessages('Registro Exitoso');
+        this.router.navigate(['/']);
       }
     })
     .catch(error => {
-    
+
       if(error){
         this.registerError = true;
-        this.errorMessage = error.message;
+        this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
         setTimeout(() => {
           this.registerError = false;
-        },3000)
+        },3500)
 
-      }
-
-
-      
+      } 
     });
   }
 
@@ -123,6 +127,16 @@ export class RegistroComponent implements OnInit{
 
     return this.disableButton;
     
+  }
+
+  /**Snacbar: para mostrar mensajes de error ó estados de notificaciones */
+  snackBarMessages(mensaje: string){
+    this.snackBar.open(mensaje, 'cerrar', {
+      duration: 3000, // Duración en milisegundos
+      verticalPosition: 'bottom', // Posición vertical
+      horizontalPosition: 'center', // Posición horizontal
+      panelClass: 'green-snackbar', // Clase de estilo personalizada
+    });
   }
   
 }

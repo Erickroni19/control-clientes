@@ -1,4 +1,4 @@
-.container-login {
+.container-register {
     margin: 0px;
     padding: 0px;
     background: linear-gradient(150deg, #0a366d, #2c578d);
@@ -6,7 +6,7 @@
     height: 100%;
 }
 
-.login {
+.registro {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,7 +19,7 @@
     /* box-shadow: 5px 5px 5px rgba(99, 145, 243, 0.644); */
 }
 
-.login h1 {
+.registro h1 {
     margin-top: 20px;
     text-align: center;
     padding: 0 0 20px 0;
@@ -28,42 +28,44 @@
     font-weight: bolder;
 }
 
-.login .form {
+.registro .form {
     padding: 0 40px;
     box-sizing: border-box;
     margin-top: 20px;
 }
 
-.login .email mat-form-field {
-    position: relative;
+.registro .email mat-form-field {
     width: 300px;
 }
 
-.login .contraseña mat-form-field {
+.registro .contraseña mat-form-field {
     width: 300px;
 }
 
-.login .button-ingresar {
+.registro .button-registrar {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login .button-ingresar button {
+.registro .button-registrar button {
     font-size: 17px;
     width: 90%;
     border-radius: 19px;
     margin-bottom: 25px;
+    background-color: #0f4d99;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
-.login a {
+.registro a {
     display: flex;
     justify-content: flex-start;
     /* margin-top: 5px; */
     margin-bottom: 20px;
 }
 
-.login .registrarse {
+.registro .registrarse {
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -71,14 +73,29 @@
     margin-bottom: 15px;
 }
 
-.login .registrarse a {
+.registro .registrarse a {
     margin-top: 15px;
 }
 
-.login .errorMessage {
+.registro .errorMessage {
+    display: flex;
+    justify-content: center;
     color: red;
     background-color: rgba(252, 163, 163, 0.308);
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+
+/*----Clases SnackBar----*/
+
+.green-snackbar {
+    background-color: #007932 !important;
+    color: #ffffff !important;
+}
+
+.red-snackbar {
+    background-color: #790000;
+    color: #ffffff;
 }
