@@ -4,4 +4,5 @@ export interface Cliente{
     apellido?: string;
     email?: string;
     saldo?: number;
+    [key: string]: string | number | undefined;
 }

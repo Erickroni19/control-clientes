@@ -25,6 +25,15 @@
         margin-right: 20px;
     }
     
+    .edit-icon {
+        color: #cfcf0f;
+    }
+    
+    .delete-icon {
+        color: #cf0d0d;
+    }
+    /*------------------------------------*/
+    
     .container-cards mat-card {
         display: flex;
         align-items: center;
@@ -112,9 +121,3 @@
      ::ng-deep .header-table .filter-input .mat-form-field-placeholder {
         color: #FF0000;
     }
-    /* ::ng-deep .header-table .filter-input .mdc-filled-text-field-input-text-placeholder-color {
-        background-color: black;
-    } */
-    /* .filter-input {
-        background-color: #b8cce4;
-    } */

@@ -29,6 +29,9 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   saldoTotalVar: number = 0;
   pageSize = 5;
 
+  /**Filtro */
+  filtro: Cliente = {};
+
   @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
     this.dataSource.paginator = value;
   }
@@ -160,6 +163,22 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Obtiene el id original del cliente*/
   getIdClient(element: any) { 
     return this.idObject[element.id]
+  }
+
+  /**Filtra los datos de la lista */
+  filterData(){
+
+    const filterValue = this.filtro;
+
+    //Aplica filtro a la lista original
+    const filteredList = this.clientesCopy.filter( client => {
+      return Object.keys(filterValue).every(key => {
+        return !filterValue[key] || String(client[key]).toLowerCase().includes(String(filterValue[key]).toLowerCase())
+      })
+    })
+
+    //Acyualiza la data
+    this.dataSource.data = filteredList;
   }
 
   /**Obtiene el Valor del saldo total */
