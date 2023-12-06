@@ -11,12 +11,20 @@
                 <table mat-table [dataSource]="dataSource" matSort>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                            <mat-form-field class="filter-input">
+                                <input matInput placeholder="Apellido">
+                            </mat-form-field>
+                        </th>
                         <td mat-cell *matCellDef="let row"> {{row.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Email </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                            <mat-form-field class="filter-input">
+                                <input matInput placeholder="Email">
+                            </mat-form-field>
+                        </th>
                         <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                     </ng-container>
 
@@ -27,12 +35,20 @@
 
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Nombre </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                            <mat-form-field class="filter-input">
+                                <input matInput placeholder="Nombre">
+                            </mat-form-field>
+                        </th>
                         <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="saldo">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> Saldo </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                            <mat-form-field class="filter-input">
+                                <input matInput placeholder="Saldo">
+                            </mat-form-field>
+                        </th>
                         <td mat-cell *matCellDef="let row"> {{row.saldo}} </td>
                     </ng-container>
 

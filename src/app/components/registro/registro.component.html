@@ -1,4 +1,10 @@
 <div class="container-register">
+    <div class="button-back">
+        <a mat-button routerLink="/">
+            <mat-icon>arrow_back</mat-icon>
+            Regresar Al Login
+        </a>
+    </div>
     <div class="registro">
         <h1>Registrate</h1>
         <form class="form" [formGroup]="registerForm">
@@ -7,7 +13,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
-                    <!-- <mat-error *ngIf="(this.loginForm.get('email')?.invalid && loginForm.touched)">{{getErrorMessage('email')}}</mat-error> -->
+                    <mat-error *ngIf="(this.registerForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
                 </mat-form-field>
             </div>
             <!-- <span>Password*</span> -->
@@ -18,7 +24,7 @@
                     <!-- <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button> -->
-                    <mat-error *ngIf="(this.registerForm.get('password')?.invalid && registerForm.touched)">{{getErrorMessage('password')}}</mat-error>
+                    <mat-error *ngIf="(this.registerForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="button-registrar">

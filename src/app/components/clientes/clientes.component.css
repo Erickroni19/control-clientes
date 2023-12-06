@@ -95,4 +95,26 @@
     
      ::ng-deep .mat-mdc-table .header-table {
         background-color: #b8cce4 !important;
+        font-size: 16px;
     }
+    
+    .header-table .filter-input {
+        width: 150px;
+        height: 70px;
+        margin: 20px 0 0;
+    }
+    
+     ::ng-deep .header-table .filter-input .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: #b8cce4;
+        --mdc-filled-text-field-input-text-placeholder-color: black;
+    }
+    
+     ::ng-deep .header-table .filter-input .mat-form-field-placeholder {
+        color: #FF0000;
+    }
+    /* ::ng-deep .header-table .filter-input .mdc-filled-text-field-input-text-placeholder-color {
+        background-color: black;
+    } */
+    /* .filter-input {
+        background-color: #b8cce4;
+    } */

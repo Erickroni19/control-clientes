@@ -99,3 +99,11 @@
     background-color: #790000;
     color: #ffffff;
 }
+
+
+/*------------------------------------------*/
+
+.button-back a {
+    color: white;
+    margin: 5% 10% 0;
+}
