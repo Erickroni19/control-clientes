@@ -7,6 +7,7 @@ import { Cliente } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
 import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-clientes',
@@ -26,6 +27,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   spinnerCheck: boolean = true;
   paginatorPrueba: boolean = false;
   dialogOpen: boolean = false;
+  confirmDialogOpen: boolean = false;
   saldoTotalVar: number = 0;
   pageSize = 5;
 
@@ -45,6 +47,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   ngOnInit(){
 
     this.clientesService.getClientes().subscribe(clientesDb => {
+      console.log(clientesDb);
+      
           // this.spinnerCheck = true;
           this.clientes = clientesDb;
 
@@ -91,11 +95,9 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   /**Funciones - Metodos */
 
-  /**Abre el dialog */
+  /**Abre el dialog añadir - editar*/
   openDialog(idEjecucion: string, element: any){
 
-    console.log(this.dialogOpen);
-    
     //Evitar doble ejecucion
     if(this.dialogOpen) {
       return;
@@ -139,23 +141,49 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     }, 20);
   }
 
+  /**OpenDialog Confirm */
+  openDialogConfirm(){
+
+    if(this.confirmDialogOpen){
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent,{
+      width: '250px',
+      disableClose: true,
+      enterAnimationDuration: '600ms',
+      exitAnimationDuration: '500ms',
+      data:{
+        message: '¿Desea Eliminar El cliente?',
+        tittle: 'Eliminar Cliente'
+      }
+    });
+
+    this.confirmDialogOpen = true;
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result === 'Si'){
+        this.clientesService.eliminarCliente(this.editData);
+      }
+          
+    })
+
+  }
+
   /**Obtiene la información del cliente */
   getOrDeleteDataClient(element: any, idEjecucion: string){
     console.log('Get or delete');
-    // this.dialogOpen = false;
+    this.confirmDialogOpen = false;
     
     const idOriginal = this.getIdClient(element);
     
     this.clientesService.getCliente(idOriginal).subscribe( cliente => {
       this.editData = cliente;
       
-      //Abre dialog de editar
-      // if(idEjecucion === 'editClient' && !this.dialogOpen){
-      //   this.openDialog(idEjecucion);
-
       // }/**Elimina la informacion del cliente */
       if(idEjecucion === 'delete'){
-        this.clientesService.eliminarCliente(this.editData);
+        this.openDialogConfirm();
       }
     })
   }

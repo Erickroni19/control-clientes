@@ -4,5 +4,6 @@ export interface Cliente{
     apellido?: string;
     email?: string;
     saldo?: number;
-    [key: string]: string | number | undefined;
+    uid?: string,
+    [key: string]: string | number | undefined; //Firma de indice
 }

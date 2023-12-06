@@ -42,6 +42,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
 import { ConfiguracionService } from './services/configuracion.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NoEncontradoComponent,
     PiePaginaComponent,
     DialogAgregarClientComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

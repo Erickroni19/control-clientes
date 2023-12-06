@@ -91,6 +91,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        /* --mdc-circular-progress-active-indicator-color: : linear-gradient(150deg, #0a366d, #2c578d); */
+    }
+    
+     ::ng-deep .mat-mdc-progress-spinner {
+        --mdc-circular-progress-active-indicator-color: #213ac9;
     }
     
     .title-cliente {
