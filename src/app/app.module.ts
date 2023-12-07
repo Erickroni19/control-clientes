@@ -43,7 +43,6 @@ import { AuthGuard } from './guard/auth.guard';
 import { ConfiguracionService } from './services/configuracion.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -57,8 +56,7 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
     NoEncontradoComponent,
     PiePaginaComponent,
     DialogAgregarClientComponent,
-    ConfirmDialogComponent,
-    SnackBarComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

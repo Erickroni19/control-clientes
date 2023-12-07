@@ -126,3 +126,12 @@
      ::ng-deep .header-table .filter-input .mat-form-field-placeholder {
         color: #FF0000;
     }
+    
+     ::ng-deep .red-snackbar {
+        --mdc-snackbar-container-color: #a70202;
+        --mdc-snackbar-supporting-text-color: white;
+    }
+    
+     ::ng-deep .red-snackbar button {
+        color: white !important;
+    }

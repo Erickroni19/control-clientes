@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Cliente } from '../interfaces/cliente';
-import {Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Observable, from, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { error } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -57,18 +58,34 @@ export class ClienteServices {
   }
 
   /**---Modificamos la información del cliente--- */
-  modificarCliente(cliente: Cliente, id: string){
-     this.clienteDoc = this.firebaseDb.doc(`clientes/${id}`);
+  modificarCliente(cliente: Cliente, id: string): Observable<void>{
+  this.clienteDoc = this.firebaseDb.doc(`clientes/${id}`);
 
-     this.clienteDoc.update(cliente);
+     return from(this.clienteDoc.update(cliente)).pipe(
+       catchError((error) => {
+
+        console.error('Error al actualizar cliente:', error)
+
+        return throwError (() => error)
+       })
+    );
   }
 
   /**---Elimina la información del cliente--- */
-  eliminarCliente(cliente: Cliente){
+  eliminarCliente(cliente: Cliente): Observable<void>{
     if(cliente){
       this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
   
-      this.clienteDoc.delete();
+      return from(this.clienteDoc.delete()).pipe(
+        catchError((error) => {
+
+          console.error('Error al tratar de eliminar el cliente:', error)
+  
+          return throwError (() => error)
+         })
+      )
+    }else{
+      return throwError (() => new Error('The client is null or undefined'))
     }
  }
 }

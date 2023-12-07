@@ -9,6 +9,10 @@ import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-ag
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { LoginService } from 'src/app/services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorType } from 'src/app/interfaces/error-type';
+import { catchError, throwError } from 'rxjs';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-clientes',
@@ -35,12 +39,19 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Filtro */
   filtro: Cliente = {};
 
+  //Traducción de los errores
+  errorTranslations: ErrorType= {
+    'Missing or insufficient permissions.': '!Solo puedes eliminar o editar los clientes que tu agregas¡',
+    'The client is null or undefined': 'El cliente es null o undefined'
+  };
+
   @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
     this.dataSource.paginator = value;
   }
 
   constructor(private clientesService: ClienteServices,
               private loginService: LoginService,
+              private snackBar :MatSnackBar,
               private router: Router,
               public dialog: MatDialog,
               ) {
@@ -146,10 +157,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   
         }else if(result && idEjecucion === 'Editar'){
           
-          this.clientesService.modificarCliente(result, this.editData.id);
-  
-          console.log('edit', result);  
+          this.clientesService.modificarCliente(result, this.editData.id).subscribe({
+           error: (error) => {
+
+            if(error){
+              const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+              this.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+            }
+          }
+        })
+            console.log('edit', result);  
         }
+
         this.dialogOpen = false; 
       });  
     }, 20);
@@ -178,7 +197,14 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result === 'Si'){
-        this.clientesService.eliminarCliente(this.editData);
+        this.clientesService.eliminarCliente(this.editData).subscribe({
+          error: (error) => {
+            if(error){
+              const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+              this.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+            }
+          }
+        });
       }
           
     })
@@ -241,6 +267,16 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Obtien la ruta de editar */
   rutaEditar(){
     this.router.navigate(['cliente/editar/{{clientes.id}}'])
+  }
+
+  /**Snackbar: para mostrar mensajes de error ó estados de notificaciones */
+  snackBarMessages(mensaje: string, accion: string, panelClass: string){
+    this.snackBar.open(mensaje, accion, {
+      duration: 5000, // Duración en milisegundos
+      verticalPosition: 'bottom', // Posición vertical
+      horizontalPosition: 'center', // Posición horizontal
+      panelClass: [panelClass], // Clase de estilo personalizada
+    });
   }
 
 }

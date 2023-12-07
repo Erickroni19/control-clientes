@@ -129,7 +129,7 @@ export class RegistroComponent implements OnInit{
     
   }
 
-  /**Snacbar: para mostrar mensajes de error ó estados de notificaciones */
+  /**Snackbar: para mostrar mensajes de error ó estados de notificaciones */
   snackBarMessages(mensaje: string, accion: string, panelClass: string){
     this.snackBar.open(mensaje, accion, {
       duration: 5000, // Duración en milisegundos
