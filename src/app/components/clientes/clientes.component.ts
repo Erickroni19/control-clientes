@@ -235,12 +235,20 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
     const filterValue = this.filtro;
 
-    //Aplica filtro a la lista original
-    const filteredList = this.clientesCopy.filter( client => {
+    // Aplica filtro a la lista original
+    const filteredList = this.clientesCopy.filter(client => {
       return Object.keys(filterValue).every(key => {
-        return !filterValue[key] || String(client[key]).toLowerCase().includes(String(filterValue[key]).toLowerCase())
-      })
-    })
+        const filterKeyValue = filterValue[key];
+
+        // Verifica si el valor del filtro no es nulo ni indefinido
+        if (filterKeyValue !== null && filterKeyValue !== undefined) {
+          return String(client[key]).toLowerCase().includes(String(filterKeyValue).toLowerCase());
+        }
+
+        // Si el valor del filtro es nulo o indefinido, no aplica filtro para ese campo
+        return true;
+      });
+    });
 
     //Acyualiza la data
     this.dataSource.data = filteredList;
