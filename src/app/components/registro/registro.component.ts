@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorType } from 'src/app/interfaces/error-type';
+import { SnackBarService } from 'src/app/services/snackBar.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,6 +17,7 @@ export class RegistroComponent implements OnInit{
   disableButton: boolean = false;
   registerError: boolean = false;
   errorMessage = "";
+  hide = true;
 
   //Traducción de los errores
   errorTranslations: ErrorType= {
@@ -26,7 +27,7 @@ export class RegistroComponent implements OnInit{
   constructor(private loginService: LoginService,
               private fb: FormBuilder,
               private router: Router,
-              private snackBar: MatSnackBar){}
+              private snackBarService: SnackBarService){}
 
   ngOnInit(){
     //Creamos el formulario
@@ -57,7 +58,7 @@ export class RegistroComponent implements OnInit{
     this.loginService.register(emailValue, passwordValue)
     .then( resp => {
       if(resp){
-        this.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar');
+        this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar');
         this.router.navigate(['/']);
       }
     })
@@ -68,7 +69,7 @@ export class RegistroComponent implements OnInit{
         this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
         setTimeout(() => {
           this.registerError = false;
-        },3500)
+        },3000)
 
       } 
     });
@@ -127,16 +128,6 @@ export class RegistroComponent implements OnInit{
 
     return this.disableButton;
     
-  }
-
-  /**Snackbar: para mostrar mensajes de error ó estados de notificaciones */
-  snackBarMessages(mensaje: string, accion: string, panelClass: string){
-    this.snackBar.open(mensaje, accion, {
-      duration: 5000, // Duración en milisegundos
-      verticalPosition: 'bottom', // Posición vertical
-      horizontalPosition: 'center', // Posición horizontal
-      panelClass: [panelClass], // Clase de estilo personalizada
-    });
   }
   
 }

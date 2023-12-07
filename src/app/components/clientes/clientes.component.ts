@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/interfaces/cliente';
@@ -9,10 +8,8 @@ import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-ag
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { LoginService } from 'src/app/services/login.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorType } from 'src/app/interfaces/error-type';
-import { catchError, throwError } from 'rxjs';
-import { error } from 'jquery';
+import { SnackBarService } from 'src/app/services/snackBar.service';
 
 @Component({
   selector: 'app-clientes',
@@ -51,7 +48,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   constructor(private clientesService: ClienteServices,
               private loginService: LoginService,
-              private snackBar :MatSnackBar,
+              private snackBarService :SnackBarService,
               private router: Router,
               public dialog: MatDialog,
               ) {
@@ -162,7 +159,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
             if(error){
               const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-              this.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+              this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
             }
           }
         })
@@ -201,7 +198,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           error: (error) => {
             if(error){
               const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-              this.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+              this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
             }
           }
         });
@@ -267,16 +264,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   /**Obtien la ruta de editar */
   rutaEditar(){
     this.router.navigate(['cliente/editar/{{clientes.id}}'])
-  }
-
-  /**Snackbar: para mostrar mensajes de error ó estados de notificaciones */
-  snackBarMessages(mensaje: string, accion: string, panelClass: string){
-    this.snackBar.open(mensaje, accion, {
-      duration: 5000, // Duración en milisegundos
-      verticalPosition: 'bottom', // Posición vertical
-      horizontalPosition: 'center', // Posición horizontal
-      panelClass: [panelClass], // Clase de estilo personalizada
-    });
   }
 
 }

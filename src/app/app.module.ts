@@ -43,6 +43,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { ConfiguracionService } from './services/configuracion.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { SnackBarService } from './services/snackBar.service';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     LoginService, 
     AuthGuard, 
     ConfiguracionService,
+    SnackBarService,
     {provide: FIRESTORE_SETTINGS, useValue:{}}
   ],
   bootstrap: [AppComponent],

@@ -20,10 +20,10 @@
             <div class="contraseña">
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" type="password" required>
-                    <!-- <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button> -->
+                    <input matInput formControlName="password" (input)="inputField('password')" [type]="hide ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="(this.registerForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
                 </mat-form-field>
             </div>
