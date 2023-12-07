@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit{
     this.loginService.getAuth().subscribe( auth => {
 
       if(auth) this.router.navigate(['/'])
-
+      
     })
 
   }

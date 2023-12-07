@@ -8,6 +8,7 @@ import { ClienteServices } from 'src/app/services/clientes.service';
 import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-clientes',
@@ -29,7 +30,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   dialogOpen: boolean = false;
   confirmDialogOpen: boolean = false;
   saldoTotalVar: number = 0;
-  pageSize = 5;
+  uid: string = '';
 
   /**Filtro */
   filtro: Cliente = {};
@@ -39,6 +40,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   }
 
   constructor(private clientesService: ClienteServices,
+              private loginService: LoginService,
               private router: Router,
               public dialog: MatDialog,
               ) {
@@ -46,6 +48,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   ngOnInit(){
 
+    //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
       console.log(clientesDb);
       
@@ -82,7 +85,15 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           this.saldoTotalVar = this.saldoTotal(this.clientes);
           console.log(this.saldoTotalVar);
           this.spinnerCheck = false;
-    })   
+    })
+
+    //Obtenemos el uid del usuario loggeado
+    this.loginService.getAuth().subscribe( auth => {
+      this.uid = auth?.uid || '';
+      console.log(this.uid);
+    })
+    
+    
   }
 
   ngAfterViewInit() {
@@ -121,6 +132,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
         data:{
           editData: this.editData || '',
           idEjecucion: idEjecucion,
+          uid: this.uid
         }
       });
   
@@ -128,6 +140,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   
       dialogRef.afterClosed().subscribe(result => {
         if(result && idEjecucion === 'Agregar'){
+          result.uid = this.uid;
+          console.log(result);
           this.clientesService.agregarCliente(result); 
   
         }else if(result && idEjecucion === 'Editar'){

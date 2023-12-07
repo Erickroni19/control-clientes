@@ -90,14 +90,31 @@
 
 /*----Clases SnackBar----*/
 
-.green-snackbar {
-    background-color: #007932 !important;
-    color: #ffffff !important;
+
+/* ::ng-deep .classColor {
+    border-radius: 5px;
+    --mdc-snackbar-container-color: green;
+    --mdc-mdc-snack-bar-button-color: blue;
+} */
+
+::ng-deep .green-snackbar {
+    --mdc-snackbar-container-color: #015201;
+    --mdc-snackbar-supporting-text-color: white;
 }
 
-.red-snackbar {
-    background-color: #790000;
-    color: #ffffff;
+::ng-deep .green-snackbar button {
+    color: white;
+    --mat-mdc-snack-bar-button-color: #f5f5f5;
+}
+
+::ng-deep .red-snackbar {
+    --mdc-snackbar-container-color: #790000;
+    --mdc-snackbar-supporting-text-color: white;
+}
+
+::ng-deep .red-snackbar .mat-snack-bar-container button {
+    color: white;
+    --mat-mdc-snack-bar-button-color: #f5f5f5;
 }
 
 

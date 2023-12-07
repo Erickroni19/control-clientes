@@ -57,7 +57,7 @@ export class RegistroComponent implements OnInit{
     this.loginService.register(emailValue, passwordValue)
     .then( resp => {
       if(resp){
-        this.snackBarMessages('Registro Exitoso');
+        this.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar');
         this.router.navigate(['/']);
       }
     })
@@ -130,12 +130,12 @@ export class RegistroComponent implements OnInit{
   }
 
   /**Snacbar: para mostrar mensajes de error ó estados de notificaciones */
-  snackBarMessages(mensaje: string){
-    this.snackBar.open(mensaje, 'cerrar', {
-      duration: 3000, // Duración en milisegundos
+  snackBarMessages(mensaje: string, accion: string, panelClass: string){
+    this.snackBar.open(mensaje, accion, {
+      duration: 5000, // Duración en milisegundos
       verticalPosition: 'bottom', // Posición vertical
       horizontalPosition: 'center', // Posición horizontal
-      panelClass: 'green-snackbar', // Clase de estilo personalizada
+      panelClass: [panelClass], // Clase de estilo personalizada
     });
   }
   

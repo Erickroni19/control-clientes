@@ -61,7 +61,6 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
   saveData(){
     /**Se pasa la información para abrirlo con el afterClose */
     this.dialogRef.close(this.addClientForm.value); 
-    // this.dialogRef.close(); 
   }
 
   /**Captura los datos ingresados por el usuario*/
