@@ -27,7 +27,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   idObject: any = {};
   booleanCheck: boolean = false;
   spinnerCheck: boolean = true;
-  paginatorPrueba: boolean = false;
+  paginatorCheck: boolean = false;
+  isInitialized  = false;
   dialogOpen: boolean = false;
   confirmDialogOpen: boolean = false;
   saldoTotalVar: number = 0;
@@ -42,9 +43,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     'The client is null or undefined': 'El cliente es null o undefined'
   };
 
-  @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
-    this.dataSource.paginator = value;
-  }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  // @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
+  //   this.dataSource.paginator = value;
+  // }
 
   constructor(private clientesService: ClienteServices,
               private loginService: LoginService,
@@ -58,8 +61,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
     //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
-      console.log(clientesDb);
-      
+      console.log('funcion');
           // this.spinnerCheck = true;
           this.clientes = clientesDb;
 
@@ -67,7 +69,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           this.clientesCopy = JSON.parse(JSON.stringify(clientesDb));
           let newId = 0;
 
-          // console.log(this.clientes, this.clientesCopy);
           /*Se asigna un nuevo id y se crea objeto
           * para almacenar el nuevo id correspondiente a cada id
           * original*/
@@ -81,17 +82,20 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           })
           
           //Asignamos la data al datasource
-          this.dataSource = new MatTableDataSource(this.clientesCopy)
+          this.dataSource = new MatTableDataSource(this.clientesCopy);
+
+          // console.log('cont = ', this.paginatorCont);
           
-          this.dataSource.paginator = this.paginator;
-          // console.log(this.paginator);
+          // setTimeout(() => {
+          //   this.dataSource.paginator = this.paginator;
+          //   console.log(this.dataSource.paginator);
+          // }, 100);
           
-          // console.log(this.dataSource.data, this.clientes);
           this.booleanCheck = true;  
 
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
-          console.log(this.saldoTotalVar);
+
           this.spinnerCheck = false;
     })
 
@@ -105,10 +109,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-
-    // setTimeout(() => {
-    //   console.log(this.paginator.firstPage);
-    // }, 1000);
+   
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource.paginator);
+    },2000);
     
   }
 
@@ -150,7 +155,12 @@ export class ClientesComponent implements OnInit, AfterViewInit{
         if(result && idEjecucion === 'Agregar'){
           result.uid = this.uid;
           console.log(result);
-          this.clientesService.agregarCliente(result); 
+  
+          this.clientesService.agregarCliente(result);
+          setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+            console.log(this.dataSource.paginator);
+          }, 1500);
   
         }else if(result && idEjecucion === 'Editar'){
           
@@ -163,8 +173,13 @@ export class ClientesComponent implements OnInit, AfterViewInit{
             }
           }
         })
-            console.log('edit', result);  
-        }
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+          console.log(this.dataSource.paginator);
+        }, 1300);
+        console.log('editar');
+        // this.paginatorCont = 0;
+      }
 
         this.dialogOpen = false; 
       });  
@@ -203,6 +218,10 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           }
         });
       }
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+        console.log(this.dataSource.paginator);
+      }, 1500);
           
     })
 
