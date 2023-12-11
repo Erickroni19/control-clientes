@@ -48,7 +48,7 @@ export class CabeceroComponent implements OnInit{
   onResize(event: Event) {
     this.screenWidth = window.innerWidth;
 
-    if(this.screenWidth <= 699) this.menuButtonCheck = true;
+    if(this.screenWidth <= 700) this.menuButtonCheck = true;
     else this.menuButtonCheck = false;
   }
 

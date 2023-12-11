@@ -47,7 +47,7 @@
     order: 2;
 }
 
-@media (max-width: 699px) {
+@media (max-width: 700px) {
     .toolbar .buttonMenu {
         color: white;
         width: 50px;
