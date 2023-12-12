@@ -145,11 +145,11 @@
         color: white !important;
     }
     /*--Diseño Responsive--*/
-    /*Diseño Pantalla Vertical (doble-pantalla)*/
+    /*Diseño pantalla tablet ipad*/
     
-    @media (max-width: 800px) {
+    @media (max-width: 1024px) {
         .container-client {
-            width: 780px;
+            width: 1000px;
         }
         .container-BT,
         .container-TC,
@@ -158,7 +158,7 @@
             flex-direction: column;
         }
         .table-container {
-            width: 620px;
+            width: 850px;
             overflow-x: auto;
             overflow-y: hidden;
         }
@@ -197,10 +197,122 @@
             background-color: rgba(0, 0, 0, 0.1);
         } */
     }
+    
+    @media (max-width: 862px) {
+        .container-client {
+            width: 100%;
+        }
+        .container-BT,
+        .container-TC,
+        .table-cards {
+            display: flex;
+            flex-direction: column;
+        }
+        .table-container {
+            width: 780px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    }
+    /*Diseño Pantalla Vertical (doble-pantalla)*/
+    
+    @media (max-width: 800px) {
+        .container-client {
+            width: 780px;
+        }
+        .container-BT,
+        .container-TC,
+        .table-cards {
+            display: flex;
+            flex-direction: column;
+        }
+        .table-container {
+            width: 620px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    }
     /*Diseño Portatil Vertical (doble-pantalla)*/
     
     @media (max-width: 700px) {
         .container-client {
             width: 660px;
+        }
+    }
+    
+    @media (max-width: 660px) {
+        .container-client {
+            width: 630px;
+        }
+        .table-container {
+            width: 550px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .container-client {
+            width: 560px;
+        }
+        .table-container {
+            width: 500px;
+        }
+    }
+    
+    @media (max-width: 550px) {
+        .container-client {
+            width: 540px;
+        }
+        .table-container {
+            width: 450px;
+        }
+    }
+    
+    @media (max-width: 430px) {
+        .container-client {
+            width: 400px;
+        }
+        .table-container {
+            width: 380px;
+        }
+        .container-cards mat-card-title {
+            font-size: 20px;
+        }
+        .card-saldo mat-card-content {
+            font-size: 110%;
+        }
+    }
+    
+    @media (max-width: 414px) {
+        .container-client {
+            width: 390px;
+        }
+        .table-container {
+            width: 350px;
+        }
+        .container-cards mat-card-title {
+            font-size: 20px;
+        }
+        .card-saldo mat-card-content {
+            font-size: 120%;
+        }
+    }
+    
+    @media (max-width: 375px) {
+        .container-client {
+            width: 360px;
+        }
+        .table-container {
+            width: 350px;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .container-client {
+            width: 100%;
+        }
+        .table-container {
+            width: 340px;
         }
     }

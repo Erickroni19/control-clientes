@@ -5,11 +5,11 @@
                 Control Clientes
             </a>
             <div class="buttonMenu">
-                <button mat-icon-button (click)="controlDropDown($event)" *ngIf="menuButtonCheck">
+                <button mat-icon-button (click)="controlDropDown($event)" *ngIf="screenWidth">
                     <mat-icon>menu</mat-icon>
                 </button>
 
-                <div class="containerButtonsHome" [ngClass]="{'ocultar': menuButtonCheck }">
+                <div class="containerButtonsHome" [ngClass]="{'ocultar': screenWidth }">
                     <a mat-button routerLink="/">
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
@@ -36,7 +36,7 @@
 
         </mat-toolbar-row>
 
-        <mat-toolbar-row *ngIf="checkDropDown && menuButtonCheck">
+        <mat-toolbar-row *ngIf="checkDropDown && screenWidth">
             <a mat-button routerLink="/">
                 <mat-icon matListItemIcon>home</mat-icon>
                 Inicio
@@ -56,22 +56,4 @@
         </mat-toolbar-row>
 
     </mat-toolbar>
-
-    <!-- <mat-sidenav-container class="sidenavContainer">
-        <mat-sidenav #sidenav position="end">
-            <mat-nav-list class="navList">
-                <a mat-list-item class="item">
-                    <mat-icon matListItemIcon>home</mat-icon>
-                    Inicio
-                </a>
-                <a mat-list-item>
-                    <mat-icon matListItemIcon>account_circle</mat-icon>
-                    Bienvenido
-                </a>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container> -->
 </div>

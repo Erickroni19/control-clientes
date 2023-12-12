@@ -25,6 +25,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   clientesCopy !: Cliente[];
   editData!: any;
   idObject: any = {};
+  addClient: boolean = true;
   booleanCheck: boolean = false;
   spinnerCheck: boolean = true;
   paginatorCheck: boolean = false;

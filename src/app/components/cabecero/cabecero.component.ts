@@ -1,4 +1,4 @@
-import { Component, HostListener} from '@angular/core';
+import { Component, DoCheck, HostListener} from '@angular/core';
 import { OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -11,10 +11,10 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./cabecero.component.css']
 })
 
-export class CabeceroComponent implements OnInit{
+export class CabeceroComponent implements OnInit, DoCheck{
 
   //Variables
-  screenWidth: number;
+  screenWidth: boolean = window.innerWidth <= 700;
   acumClick: number = 0;
   checkDropDown: boolean = false;
   menuButtonCheck: boolean = false;
@@ -24,9 +24,7 @@ export class CabeceroComponent implements OnInit{
   constructor(private renderer: Renderer2,
               private loginService: LoginService,
               private router: Router
-  ) {
-    this.screenWidth = window.innerWidth;
-  }
+  ) {}
   
   ngOnInit() {
 
@@ -43,14 +41,16 @@ export class CabeceroComponent implements OnInit{
     })
   }
 
+  ngDoCheck() {
+    console.log('Se ha ejecutado ngDoCheck');
+  }
   //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.screenWidth = window.innerWidth;
-
-    if(this.screenWidth <= 700) this.menuButtonCheck = true;
-    else this.menuButtonCheck = false;
+    console.log('listener');   
+    this.screenWidth = window.innerWidth <= 700;
   }
+
 
   //Controla el menu DropDown del Cabecero
   controlDropDown(event: Event) {
