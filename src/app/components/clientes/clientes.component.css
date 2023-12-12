@@ -1,318 +1,366 @@
+.container-client {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container-BT {
+    padding: 10px;
+}
+
+.container-BT .button-container {
+    width: 100%;
+}
+
+.container-TC {
+    display: flex;
+    justify-content: center;
+}
+
+.container-cards {
+    margin-top: 0.5%;
+    margin-left: 15px;
+}
+
+.button-container>button {
+    background: linear-gradient(150deg, #0a366d, #2c578d);
+    color: white;
+}
+
+.container-BT .table-cards {
+    margin-top: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.edit-icon {
+    color: #172e6d;
+}
+
+.delete-icon {
+    color: #862420;
+}
+
+
+/*------------------------------------*/
+
+.container-cards mat-card {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 190px;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.table-cards {
+    max-width: 98%;
+}
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.container-cards mat-card-title {
+    font-size: 24px;
+}
+
+.container-cards .card-saldo {
+    margin-bottom: 10px;
+    background-color: #c93b3b;
+    color: white;
+}
+
+.card-saldo mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    font-size: 150%;
+}
+
+
+/*Card total-clientes*/
+
+.container-cards .card-totalClientes {
+    background-color: rgb(63, 112, 40);
+    color: white;
+}
+
+.card-totalClientes mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    height: 100px;
+    width: 100px;
+}
+
+.card-totalClientes mat-card-content>mat-icon {
+    height: 60px;
+    width: 60px;
+    font-size: 60px;
+    margin-right: 5px;
+}
+
+.card-totalClientes mat-card-content>mat-icon {
+    height: 60px;
+    width: 60px;
+    font-size: 55px;
+    margin-right: 5px;
+}
+
+ ::ng-deep .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: #213ac9;
+}
+
+.title-cliente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: aliceblue;
+    margin: 0 0 0;
+}
+
+ ::ng-deep .mat-mdc-table .header-table {
+    background-color: #0a366d !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.header-table .filter-input {
+    width: 120px;
+    height: 70px;
+    /* margin: 20px 0 0; */
+}
+
+ ::ng-deep .header-table .filter-input .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #0a366d;
+    --mdc-filled-text-field-input-text-placeholder-color: #ffffff;
+    --mdc-filled-text-field-input-text-color: rgb(255 255 255 / 87%);
+}
+
+ ::ng-deep .header-table .filter-input .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: white;
+}
+
+ ::ng-deep .header-table .filter-input .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: rgb(66, 104, 148);
+}
+
+ ::ng-deep .header-table .filter-input .mat-form-field-underline {
+    background-color: #ecf1f7 !important;
+}
+
+ ::ng-deep .table-container .mat-mdc-table {
+    background-color: aliceblue;
+}
+
+::ng-deep .table-cards .mat-mdc-paginator {
+    background-color: aliceblue;
+}
+
+ ::ng-deep .red-snackbar {
+    --mdc-snackbar-container-color: #a70202;
+    --mdc-snackbar-supporting-text-color: white;
+}
+
+ ::ng-deep .red-snackbar button {
+    color: white !important;
+}
+
+::ng-deep .green-snackbar {
+    --mdc-snackbar-container-color: #015201;
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: #fff !important;
+}
+
+::ng-deep .green-snackbar button {
+    color: white !important;
+}
+
+
+/*--Diseño Responsive--*/
+
+
+/*Diseño pantalla tablet ipad*/
+
+@media (max-width: 1024px) {
     .container-client {
+        width: 1000px;
+    }
+    .container-BT,
+    .container-TC,
+    .table-cards {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+    }
+    .table-container {
+        width: 850px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .container-cards {
+        display: flex;
         justify-content: center;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 25px;
     }
-    
-    .container-BT {
-        padding: 10px;
+    .container-BT>button {
+        display: flex;
+        width: 29%;
     }
-    
-    .container-BT .button-container {
+    /*---- Cards ----*/
+    .container-cards {
+        margin-left: 0px;
+    }
+    .container-cards .card-saldo {
+        width: 48%;
+        font-size: 20px;
+    }
+    .container-cards .card-totalClientes {
+        width: 48%;
+    }
+    /*---Estilos del scroll---*/
+    .table-container::-webkit-scrollbar {
+        height: 8px;
+        width: 10px;
+    }
+    .table-container::-webkit-scrollbar-thumb {
+        background-color: #898fa1;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 862px) {
+    .container-client {
         width: 100%;
     }
-    
-    .container-TC {
+    .container-BT,
+    .container-TC,
+    .table-cards {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
     }
-    
-    .container-cards {
-        margin-top: 0.5%;
-        margin-left: 15px;
+    .table-container {
+        width: 780px;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
-    
-    .button-container>button {
-        background-color: #2a5e9e;
-        color: white;
+}
+
+
+/*Diseño Pantalla Vertical (doble-pantalla)*/
+
+@media (max-width: 800px) {
+    .container-client {
+        width: 780px;
     }
-    
-    .container-BT .table-cards {
-        margin-top: 10px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .edit-icon {
-        color: #cfcf0f;
-    }
-    
-    .delete-icon {
-        color: #cf0d0d;
-    }
-    /*------------------------------------*/
-    
-    .container-cards mat-card {
+    .container-BT,
+    .container-TC,
+    .table-cards {
         display: flex;
-        align-items: center;
-        width: 250px;
-        height: 190px;
-        font-size: 20px;
-        margin-top: 5px;
+        flex-direction: column;
     }
-    
+    .table-container {
+        width: 620px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+
+/*Diseño Portatil Vertical (doble-pantalla)*/
+
+@media (max-width: 700px) {
+    .container-client {
+        width: 660px;
+    }
+}
+
+@media (max-width: 660px) {
+    .container-client {
+        width: 630px;
+    }
+    .table-container {
+        width: 550px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-client {
+        width: 560px;
+    }
+    .table-container {
+        width: 500px;
+    }
+}
+
+@media (max-width: 550px) {
+    .container-client {
+        width: 540px;
+    }
+    .table-container {
+        width: 450px;
+    }
+}
+
+@media (max-width: 430px) {
+    .container-client {
+        width: 400px;
+    }
+    .table-container {
+        width: 380px;
+    }
     .container-cards mat-card-title {
-        font-size: 24px;
-    }
-    
-    .container-cards .card-saldo {
-        margin-bottom: 10px;
-        background-color: #c93b3b;
-        color: white;
-    }
-    
-    .card-saldo mat-card-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height: 100px;
-        font-size: 150%;
-    }
-    /*Card total-clientes*/
-    
-    .container-cards .card-totalClientes {
-        background-color: rgb(63, 112, 40);
-        color: white;
-    }
-    
-    .card-totalClientes mat-card-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 38px;
-        height: 100px;
-        width: 100px;
-    }
-    
-    .card-totalClientes mat-card-content>mat-icon {
-        height: 60px;
-        width: 60px;
-        font-size: 60px;
-        margin-right: 5px;
-    }
-    
-    .card-totalClientes mat-card-content>mat-icon {
-        height: 60px;
-        width: 60px;
-        font-size: 55px;
-        margin-right: 5px;
-    }
-    
-    mat-spinner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    
-     ::ng-deep .mat-mdc-progress-spinner {
-        --mdc-circular-progress-active-indicator-color: #213ac9;
-    }
-    
-    .title-cliente {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         font-size: 20px;
     }
-    
-     ::ng-deep .mat-mdc-table .header-table {
-        background-color: #b8cce4 !important;
-        font-size: 16px;
+    .card-saldo mat-card-content {
+        font-size: 110%;
     }
-    
-    .header-table .filter-input {
-        width: 120px;
-        height: 70px;
-        /* margin: 20px 0 0; */
+}
+
+@media (max-width: 414px) {
+    .container-client {
+        width: 390px;
     }
-    
-     ::ng-deep .header-table .filter-input .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-        background-color: #b8cce4;
-        --mdc-filled-text-field-input-text-placeholder-color: black;
+    .table-container {
+        width: 350px;
     }
-    
-     ::ng-deep .header-table .filter-input .mat-form-field-placeholder {
-        color: #FF0000;
+    .container-cards mat-card-title {
+        font-size: 20px;
     }
-    
-     ::ng-deep .red-snackbar {
-        --mdc-snackbar-container-color: #a70202;
-        --mdc-snackbar-supporting-text-color: white;
+    .card-saldo mat-card-content {
+        font-size: 120%;
     }
-    
-     ::ng-deep .red-snackbar button {
-        color: white !important;
+}
+
+@media (max-width: 375px) {
+    .container-client {
+        width: 360px;
     }
-    /*--Diseño Responsive--*/
-    /*Diseño pantalla tablet ipad*/
-    
-    @media (max-width: 1024px) {
-        .container-client {
-            width: 1000px;
-        }
-        .container-BT,
-        .container-TC,
-        .table-cards {
-            display: flex;
-            flex-direction: column;
-        }
-        .table-container {
-            width: 850px;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-        .container-cards {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            justify-content: space-between;
-            margin-top: 25px;
-        }
-        .container-BT>button {
-            display: flex;
-            width: 29%;
-        }
-        /*---- Cards ----*/
-        .container-cards {
-            margin-left: 0px;
-        }
-        .container-cards .card-saldo {
-            width: 48%;
-            font-size: 20px;
-        }
-        .container-cards .card-totalClientes {
-            width: 48%;
-        }
-        /*---Estilos del scroll---*/
-        /* .mat-table {
-            width: 10%;
-            background-color: #213ac9;
-            border-radius: 20px;
-        }
-         ::ng-deep .mat-table ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-            border-radius: 30px;
-            background-color: rgba(0, 0, 0, 0.1);
-        } */
+    .table-container {
+        width: 350px;
     }
-    
-    @media (max-width: 862px) {
-        .container-client {
-            width: 100%;
-        }
-        .container-BT,
-        .container-TC,
-        .table-cards {
-            display: flex;
-            flex-direction: column;
-        }
-        .table-container {
-            width: 780px;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
+}
+
+@media (max-width: 360px) {
+    .container-client {
+        width: 100%;
     }
-    /*Diseño Pantalla Vertical (doble-pantalla)*/
-    
-    @media (max-width: 800px) {
-        .container-client {
-            width: 780px;
-        }
-        .container-BT,
-        .container-TC,
-        .table-cards {
-            display: flex;
-            flex-direction: column;
-        }
-        .table-container {
-            width: 620px;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
+    .table-container {
+        width: 340px;
     }
-    /*Diseño Portatil Vertical (doble-pantalla)*/
-    
-    @media (max-width: 700px) {
-        .container-client {
-            width: 660px;
-        }
-    }
-    
-    @media (max-width: 660px) {
-        .container-client {
-            width: 630px;
-        }
-        .table-container {
-            width: 550px;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-    }
-    
-    @media (max-width: 600px) {
-        .container-client {
-            width: 560px;
-        }
-        .table-container {
-            width: 500px;
-        }
-    }
-    
-    @media (max-width: 550px) {
-        .container-client {
-            width: 540px;
-        }
-        .table-container {
-            width: 450px;
-        }
-    }
-    
-    @media (max-width: 430px) {
-        .container-client {
-            width: 400px;
-        }
-        .table-container {
-            width: 380px;
-        }
-        .container-cards mat-card-title {
-            font-size: 20px;
-        }
-        .card-saldo mat-card-content {
-            font-size: 110%;
-        }
-    }
-    
-    @media (max-width: 414px) {
-        .container-client {
-            width: 390px;
-        }
-        .table-container {
-            width: 350px;
-        }
-        .container-cards mat-card-title {
-            font-size: 20px;
-        }
-        .card-saldo mat-card-content {
-            font-size: 120%;
-        }
-    }
-    
-    @media (max-width: 375px) {
-        .container-client {
-            width: 360px;
-        }
-        .table-container {
-            width: 350px;
-        }
-    }
-    
-    @media (max-width: 360px) {
-        .container-client {
-            width: 100%;
-        }
-        .table-container {
-            width: 340px;
-        }
-    }
+}

@@ -1,4 +1,4 @@
-import { Component, DoCheck, HostListener} from '@angular/core';
+import { Component,HostListener} from '@angular/core';
 import { OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./cabecero.component.css']
 })
 
-export class CabeceroComponent implements OnInit, DoCheck{
+export class CabeceroComponent implements OnInit{
 
   //Variables
   screenWidth: boolean = window.innerWidth <= 700;
@@ -41,9 +41,6 @@ export class CabeceroComponent implements OnInit, DoCheck{
     })
   }
 
-  ngDoCheck() {
-    console.log('Se ha ejecutado ngDoCheck');
-  }
   //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {

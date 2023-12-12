@@ -46,10 +46,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  // @ViewChild(MatPaginator) set paginator(value: MatPaginator) {
-  //   this.dataSource.paginator = value;
-  // }
-
   constructor(private clientesService: ClienteServices,
               private loginService: LoginService,
               private snackBarService :SnackBarService,
@@ -77,21 +73,13 @@ export class ClientesComponent implements OnInit, AfterViewInit{
             let oldId = cliente.id;
 
             cliente.id = `${++newId}`;
-
             
             this.idObject[cliente.id] = oldId;
           })
           
           //Asignamos la data al datasource
           this.dataSource = new MatTableDataSource(this.clientesCopy);
-
-          // console.log('cont = ', this.paginatorCont);
-          
-          // setTimeout(() => {
-          //   this.dataSource.paginator = this.paginator;
-          //   console.log(this.dataSource.paginator);
-          // }, 100);
-          
+            
           this.booleanCheck = true;  
 
           //Saldo total
@@ -110,12 +98,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-   
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource.paginator);
-    },2000);
-    
+      this.paginatorCheck = true;
+    }, 1500);
+
   }
 
   /**Funciones - Metodos */
@@ -130,9 +117,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
     //Editar cliente
     if(idEjecucion === 'Editar'){
-      
       this.getOrDeleteDataClient(element, idEjecucion);
-      
     }
 
     
@@ -157,11 +142,17 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           result.uid = this.uid;
           console.log(result);
   
-          this.clientesService.agregarCliente(result);
+          this.clientesService.agregarCliente(result)
+          .then((clienteId) => {
+            if(clienteId){
+              this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar');
+            }
+          });
+          // this.refreshPaginator();
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
             console.log(this.dataSource.paginator);
-          }, 1500);
+          }, 1400);
   
         }else if(result && idEjecucion === 'Editar'){
           
@@ -176,8 +167,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
         })
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
-          console.log(this.dataSource.paginator);
-        }, 1300);
+        }, 1500);
         console.log('editar');
         // this.paginatorCont = 0;
       }
@@ -221,8 +211,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       }
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
-        console.log(this.dataSource.paginator);
-      }, 1500);
+      }, 1300);
           
     })
 
@@ -289,7 +278,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     return saldoTotal;
   }
 
-  /**Obtien la ruta de editar */
+  /**Obtiene la ruta de editar */
   rutaEditar(){
     this.router.navigate(['cliente/editar/{{clientes.id}}'])
   }

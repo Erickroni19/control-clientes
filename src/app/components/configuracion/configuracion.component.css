@@ -2,21 +2,18 @@
     background-color: #c2b79b;
     height: 10vh;
     display: flex;
-    /* justify-content: flex-start; */
+    justify-content: center;
     align-items: center;
 }
 
 .container-header .text-client {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     color: #243757;
-    margin-left: 20%;
 }
 
 .text-client mat-icon {
     font-size: 25px;
-    /* width: 40px; */
-    /* height: 30px; */
     font-weight: bold;
     margin-right: 5px;
 }
@@ -62,7 +59,8 @@
 
 /*--Responsive---*/
 
-@media (max-width: 699px) {
+
+/* @media (max-width: 699px) {
     .container-header {
         height: 10vh;
         display: flex;
@@ -74,4 +72,4 @@
         color: #243757;
         margin-left: 3%;
     }
-}
+} */

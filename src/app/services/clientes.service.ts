@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, fromDocRef } from '@angular/fire/compat/firestore';
 import { Cliente } from '../interfaces/cliente';
 import {Observable, from, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -35,8 +35,16 @@ export class ClienteServices {
   } 
   
   /**---Agrega un nuevo cliente a la base de datos--- */
-  agregarCliente(cliente: Cliente){
-    this.clientesColeccion.add(cliente);
+  agregarCliente(cliente: Cliente): Promise<string>{
+    return this.clientesColeccion.add(cliente)
+    .then((docRef) => {
+      console.log('Cliente agregado con Id: ', docRef.id);
+      return docRef.id;
+    })
+    .catch((error) => {
+      console.error('Error al agregar cliente:', error);
+      throw error;
+    })
   }
 
   /**---Obtenemos el cliente que deseamos mediante id--- */
