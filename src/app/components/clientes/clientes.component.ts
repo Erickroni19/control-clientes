@@ -26,7 +26,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   editData!: any;
   idObject: any = {};
   addClient: boolean = true;
-  booleanCheck: boolean = false;
   spinnerCheck: boolean = true;
   paginatorCheck: boolean = false;
   isInitialized  = false;
@@ -34,6 +33,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   confirmDialogOpen: boolean = false;
   saldoTotalVar: number = 0;
   uid: string = '';
+  clientesLength = 0;
 
   /**Filtro */
   filtro: Cliente = {};
@@ -56,10 +56,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   ngOnInit(){
 
+    //Obtenemos el uid del usuario loggeado
+    this.loginService.getAuth().subscribe( auth => {
+      this.uid = auth?.uid || '';
+      console.log('UID:',this.uid);
+    })
+    
+  }
+
+  ngAfterViewInit() {
+   
     //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
-      console.log('funcion');
-          // this.spinnerCheck = true;
           this.clientes = clientesDb;
 
           //Copia el array
@@ -79,30 +87,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           
           //Asignamos la data al datasource
           this.dataSource = new MatTableDataSource(this.clientesCopy);
-            
-          this.booleanCheck = true;  
 
+          if(this.dataSource.data && this.paginator){
+
+            this.clientesLength = this.dataSource.data.length;
+            this.dataSource.paginator = this.paginator;
+
+            this.spinnerCheck = false;
+          }
+          
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
-
-          this.spinnerCheck = false;
     })
-
-    //Obtenemos el uid del usuario loggeado
-    this.loginService.getAuth().subscribe( auth => {
-      this.uid = auth?.uid || '';
-      console.log(this.uid);
-    })
-    
-    
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.paginatorCheck = true;
-    }, 1500);
-
   }
 
   /**Funciones - Metodos */
@@ -148,11 +144,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
               this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar');
             }
           });
-          // this.refreshPaginator();
-          setTimeout(() => {
-            this.dataSource.paginator = this.paginator;
-            console.log(this.dataSource.paginator);
-          }, 1400);
   
         }else if(result && idEjecucion === 'Editar'){
           
@@ -165,11 +156,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
             }
           }
         })
-        setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-        }, 1500);
-        console.log('editar');
-        // this.paginatorCont = 0;
       }
 
         this.dialogOpen = false; 
@@ -208,11 +194,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
             }
           }
         });
-      }
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-      }, 1300);
-          
+      }          
     })
 
   }
