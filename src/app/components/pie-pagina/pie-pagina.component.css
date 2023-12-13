@@ -1,11 +1,11 @@
 #main-footer {
     position: sticky;
-    bottom: 0;
+    bottom: 20%;
 }
 
 .container-footer {
-    height: 180px;
-    background-color: #3a5f6f;
+    height: 80px;
+    background: linear-gradient(150deg, #0a366d, #2c578d);
     display: flex;
     justify-content: center;
     align-items: center;

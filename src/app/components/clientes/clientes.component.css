@@ -18,8 +18,6 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    /* border: 5px solid #0a366d;
-    border-top-color: transparent; */
     animation: spin 1.2s linear infinite;
 }
 

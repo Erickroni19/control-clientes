@@ -98,6 +98,9 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
+    }, (error) => {
+      this.snackBarService.snackBarMessages('Ha ocurrido un error', 'Ok', 'red-snackbar');
+      console.error(error);
     })
   }
 
@@ -146,7 +149,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           });
   
         }else if(result && idEjecucion === 'Editar'){
-          
+        
           this.clientesService.modificarCliente(result, this.editData.id).subscribe({
            error: (error) => {
 
