@@ -68,6 +68,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
    
     //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
+          console.log(clientesDb);
+          
           this.clientes = clientesDb;
 
           //Copia el array
@@ -98,9 +100,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           
           //Saldo total
           this.saldoTotalVar = this.saldoTotal(this.clientes);
-    }, (error) => {
-      this.snackBarService.snackBarMessages('Ha ocurrido un error', 'Ok', 'red-snackbar');
-      console.error(error);
     })
   }
 
