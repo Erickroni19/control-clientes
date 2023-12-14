@@ -1,4 +1,4 @@
-# ControlClientes
+# Control Clientes
 
 This project was developed with Angular version 16.2.6, in which we made use of Angular Material from which we used different components such as dialog, table, snackbar, input, form Field, among others.
 A Firestore database was also implemented to store customer information and user authentication.
