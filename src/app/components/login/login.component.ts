@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { error } from 'jquery';
 import { Configuracion } from 'src/app/interfaces/configuracion';
 import { ErrorType } from 'src/app/interfaces/error-type';
-import { ClienteServices } from 'src/app/services/clientes.service';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -85,14 +84,12 @@ export class LoginComponent implements OnInit{
   inputField(fieldName: String){
     let fieldInput = '';
     fieldInput = this.loginForm.get(`${fieldName}`)?.value
-    console.log(fieldInput);
 
     return fieldInput
   }
 
   /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
-    // console.log(this.disableButton);
     this.disableButton = false;
     
     if(this.loginForm.get(`${fieldInput}`)?.hasError('required')){
@@ -124,6 +121,16 @@ export class LoginComponent implements OnInit{
     }
 
     return false
+  }
+
+  /**Validar contraseña */
+  customPasswordValidator(control: any) {
+    const value = control.value;
+
+    // Requiere al menos un carácter y un número consecutivo
+    const regex = /^(?=.*[A-Za-z])(?=.*\d{2,})/;
+
+    return regex.test(value) ? null : { invalidPassword: true };
   }
 
   /**Validamos Que el formulario no sea invalido */

@@ -1,5 +1,5 @@
 import { Component,HostListener} from '@angular/core';
-import { OnInit, Renderer2 } from '@angular/core';
+import { OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -17,12 +17,10 @@ export class CabeceroComponent implements OnInit{
   screenWidth: boolean = window.innerWidth <= 700;
   acumClick: number = 0;
   checkDropDown: boolean = false;
-  menuButtonCheck: boolean = false;
   isLoggedIn: boolean = false;
   loggedInUser!: string;
 
-  constructor(private renderer: Renderer2,
-              private loginService: LoginService,
+  constructor(private loginService: LoginService,
               private router: Router
   ) {}
   
@@ -44,14 +42,12 @@ export class CabeceroComponent implements OnInit{
   //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    console.log('listener');   
     this.screenWidth = window.innerWidth <= 700;
   }
 
 
   //Controla el menu DropDown del Cabecero
   controlDropDown(event: Event) {
-    console.log(this.acumClick);
     
     if(event.type == 'click' && this.acumClick === 0) {
       this.checkDropDown = true

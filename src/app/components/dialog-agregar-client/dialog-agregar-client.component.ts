@@ -32,7 +32,6 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
   ngAfterViewInit() {
 
     setTimeout(() => {
-      console.log(this.data.editData);
       if(this.data.idEjecucion === 'Editar'){
        this.setInputData(this.data.editData)
       }
@@ -67,7 +66,6 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
   inputField(fieldName: String){
     let fieldInput = '';
     fieldInput = this.addClientForm.get(`${fieldName}`)?.value
-    console.log(fieldInput);
 
     return fieldInput
   }

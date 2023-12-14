@@ -66,34 +66,29 @@ export class ClienteServices {
   }
 
   /**---Modificamos la información del cliente--- */
-  modificarCliente(cliente: Cliente, id: string): Observable<void>{
+  modificarCliente(cliente: Cliente, id: string): Promise<void>{
   this.clienteDoc = this.firebaseDb.doc(`clientes/${id}`);
 
-     return from(this.clienteDoc.update(cliente)).pipe(
-       catchError((error) => {
-
-        console.error('Error al actualizar cliente:', error)
-
-        return throwError (() => error)
-       })
-    );
+    return this.clienteDoc.update(cliente).then((docRef) =>{
+      return docRef
+    }).catch((error) =>{
+      console.error(error);
+      throw error
+    });
   }
 
   /**---Elimina la información del cliente--- */
-  eliminarCliente(cliente: Cliente): Observable<void>{
+  eliminarCliente(cliente: Cliente): Promise<void>{
     if(cliente){
       this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
-  
-      return from(this.clienteDoc.delete()).pipe(
-        catchError((error) => {
 
-          console.error('Error al tratar de eliminar el cliente:', error)
-  
-          return throwError (() => error)
-         })
-      )
-    }else{
-      return throwError (() => new Error('The client is null or undefined'))
+      return this.clienteDoc.delete().then((docRef) => {
+          return docRef
+      }).catch((error) =>{
+        console.error(error);
+        throw error
+      })
     }
+    return cliente;
  }
 }
