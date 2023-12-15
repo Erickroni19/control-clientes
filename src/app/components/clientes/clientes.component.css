@@ -56,12 +56,9 @@
     display: none;
 }
 
-.container-BT {
-    padding: 10px;
-}
-
 .container-BT .button-container {
     width: 100%;
+    margin-top: 10px;
 }
 
 .container-TC {
