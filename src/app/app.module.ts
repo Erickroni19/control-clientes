@@ -44,7 +44,6 @@ import { ConfiguracionService } from './services/configuracion.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './services/snackBar.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +56,7 @@ import { SnackBarService } from './services/snackBar.service';
     NoEncontradoComponent,
     PiePaginaComponent,
     DialogAgregarClientComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

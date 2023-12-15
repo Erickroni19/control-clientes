@@ -1,11 +1,11 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { error } from 'jquery';
 import { Configuracion } from 'src/app/interfaces/configuracion';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { LoginService } from 'src/app/services/login.service';
+import { SnackBarService } from 'src/app/services/snackBar.service';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit{
 
   constructor(private loginService: LoginService,
               private configuracionService: ConfiguracionService,
+              private snackBarService: SnackBarService,
               private fb: FormBuilder,
               private router: Router) {}
 
@@ -103,12 +104,7 @@ export class LoginComponent implements OnInit{
       this.disableButton = true;
       return 'El email no es valido'
     }
-
-    if(fieldInput ==='password' && this.validarPassword()){
-      this.disableButton = true;
-      return 'La contraseña debe tener min 10 caracteres'
-    }
-
+    
     return '';
   }
 
@@ -146,7 +142,7 @@ export class LoginComponent implements OnInit{
   private crearFormulario(){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
-      password: ['', [Validators.required, Validators.minLength(10)]]
+      password: ['', [Validators.required]]
     });
   }
 
@@ -155,6 +151,17 @@ export class LoginComponent implements OnInit{
     this.router.navigate(['/registrarse']);
   } 
 
+  changePassword(){
+    const email = this.inputField('email')
+    console.log(email);
+    this.loginService.sendPasswordResetEmail(email).then(()=>{
+      const message = 'Se ha enviado un email, verifica tu bandeja de entrada';
+      this.snackBarService.snackBarMessages(message, 'OK', 'green-snackbar')
+    })
+    .catch((error) =>{
+      this.snackBarService.snackBarMessages('Ingrese un email valido', 'Ok', 'red-snackbar')
+    })
+  }
 
 
 }

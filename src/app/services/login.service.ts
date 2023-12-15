@@ -38,4 +38,13 @@ export class LoginService {
       error => reject(error))
     })
   }
+
+  /**Cambiar Contraseña*/
+  sendPasswordResetEmail(email: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.authService.sendPasswordResetEmail(email)
+        .then(() => resolve())
+        .catch((error) => reject(error));
+    });
+  }
 }

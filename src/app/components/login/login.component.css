@@ -15,8 +15,6 @@
     border-radius: 10px;
     width: 400px;
     border-radius: 10px solid gray;
-    /* color: gray; */
-    /* box-shadow: 5px 5px 5px rgba(99, 145, 243, 0.644); */
 }
 
 .login h1 {
@@ -88,4 +86,28 @@
     border-radius: 5px;
     /* margin-bottom: 20px; */
     margin: 0 20px 0;
+}
+
+.login .change-password {
+    color: #1a1ace;
+    font-size: 14px;
+}
+
+::ng-deep .green-snackbar {
+    --mdc-snackbar-container-color: #015201;
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: #fff !important;
+}
+
+::ng-deep .green-snackbar button {
+    color: white !important;
+}
+
+::ng-deep .red-snackbar {
+    --mdc-snackbar-container-color: #a70202;
+    --mdc-snackbar-supporting-text-color: white;
+}
+
+::ng-deep .red-snackbar button {
+    color: white !important;
 }
