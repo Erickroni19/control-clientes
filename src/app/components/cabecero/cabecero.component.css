@@ -53,3 +53,12 @@
         font-size: 12px;
     }
 }
+
+@media (max-width: 280px) {
+    .menu-button .text-welcome {
+        display: none;
+    }
+    .home-button .home-text {
+        font-size: 13px;
+    }
+}

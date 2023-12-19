@@ -1,11 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Configuracion } from 'src/app/interfaces/configuracion';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
+import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email.component';
 
 @Component({
   selector: 'app-login',
@@ -25,14 +27,14 @@ export class LoginComponent implements OnInit{
   //Traducción de los errores
   errorTranslations: ErrorType= {
     'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
-};
+  };
  
-
   constructor(private loginService: LoginService,
               private configuracionService: ConfiguracionService,
               private snackBarService: SnackBarService,
               private fb: FormBuilder,
-              private router: Router) {}
+              private router: Router,
+              public dialog: MatDialog) {}
 
   ngOnInit() {
     this.configuracionService.getConfiguracion().subscribe(       
@@ -160,6 +162,23 @@ export class LoginComponent implements OnInit{
     })
     .catch((error) =>{
       this.snackBarService.snackBarMessages('Ingrese un email valido', 'Ok', 'red-snackbar')
+    })
+  }
+
+  /**Abre el dialog de olvifo su contraseña */
+  OpenDialogNewPassword(){
+    const dialogRef = this.dialog.open(DialogSendEmailComponent,{
+      width: '500px',
+      height: '200px',
+      disableClose: true,
+      enterAnimationDuration: '600ms',
+      exitAnimationDuration: '500ms',
+      data:{
+        email: '',
+    }});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('result:' , result);
     })
   }
 

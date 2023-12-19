@@ -37,20 +37,28 @@
         </mat-toolbar-row>
 
         <mat-toolbar-row *ngIf="checkDropDown && screenWidth">
-            <a mat-button routerLink="/">
+            <a mat-button routerLink="/" class="home-button">
                 <mat-icon matListItemIcon>home</mat-icon>
-                Inicio
+                <div class="home-text">
+                    Inicio
+                </div>
             </a>
 
             <a mat-button [matMenuTriggerFor]="menu" class="menu-button">
                 <mat-icon matListItemIcon>account_circle</mat-icon>
-                Bienvenido
+                <div class="text-welcome">
+                    Bienvenido
+                </div>
                 <mat-icon id="arrow-down">arrow_drop_down</mat-icon>
             </a>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item routerLink="/configuracion">
                     <mat-icon matListItemIcon>settings</mat-icon>
                     Configuración
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon matListItemIcon>logout</mat-icon>
+                    Salir
                 </button>
             </mat-menu>
         </mat-toolbar-row>
