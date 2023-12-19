@@ -17,6 +17,6 @@
 
     </div>
     <div class="buttons">
-        <button mat-raised-button color="primary" [disabled]="validarFormulario()" [ngStyle]="{'background-color': validarFormulario() ? 'lightgray' : '#0f4d99'}">Restablecer contraseña</button>
+        <button mat-raised-button color="primary" [disabled]="validarFormulario()" [ngStyle]="{'background-color': validarFormulario() ? 'lightgray' : '#0f4d99'}" (click)="guardaEmail()">Restablecer contraseña</button>
     </div>
 </div>

@@ -58,7 +58,7 @@ export class RegistroComponent implements OnInit{
     this.loginService.register(emailValue, passwordValue)
     .then( resp => {
       if(resp){
-        this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar');
+        this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
         this.router.navigate(['/']);
       }
     })

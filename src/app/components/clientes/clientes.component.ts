@@ -137,18 +137,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           this.clientesService.agregarCliente(result)
           .then((clienteId) => {
             if(clienteId){
-              this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar');
+              this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
             }
           });
   
         }else if(result && idEjecucion === 'Editar'){
         
           this.clientesService.modificarCliente(result, this.editData.id).then(() => {
-              this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar');
+              this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
           }, (error) => {
             if(error){
               const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-              this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+              this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
             }
           })
       }
@@ -181,11 +181,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'Si'){
         this.clientesService.eliminarCliente(this.editData).then(() =>{
-          this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'red-snackbar');
-        },(error) => {
+          this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'red-snackbar', 'bottom');
+        },(error: any) => {
           if(error){
             const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-            this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar');
+            this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
           }
         })
       }          

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -14,17 +14,19 @@ export class DialogSendEmailComponent implements OnInit{
   disableButton: boolean = false;
 
   constructor(public dialog: MatDialog,
-              private fb: FormBuilder,
               public dialogRef: MatDialogRef<DialogSendEmailComponent>,
               @Inject(MAT_DIALOG_DATA) public data:any){}
 
   ngOnInit(){
-      console.log(this.email.invalid);
-      
   }
 
   /**Cierra el dialog */
   dialogClose(){
+    this.dialogRef.close();
+  }
+
+  /**Cierra el dialog */
+  guardaEmail(){
     this.dialogRef.close(this.email.value);
   }
 
