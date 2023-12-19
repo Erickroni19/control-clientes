@@ -111,3 +111,80 @@
 ::ng-deep .red-snackbar button {
     color: white !important;
 }
+
+@media (max-width: 414px) {
+    .login {
+        width: 350px;
+    }
+    .login .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login {
+        width: 320px;
+    }
+    .login .form {
+        padding: 0 35px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .login .email mat-form-field {
+        position: relative;
+        width: 250px;
+    }
+    .login .contraseña mat-form-field {
+        width: 250px;
+    }
+    .login .registrarse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+    .login .registrarse a {
+        font-size: 12px;
+    }
+    .login .change-password {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 280px) {
+    .login {
+        width: 250px;
+    }
+    .login .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .login .email mat-form-field {
+        position: relative;
+        width: 210px;
+    }
+    .login .contraseña mat-form-field {
+        width: 210px;
+    }
+    .login .registrarse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9px;
+        margin-bottom: 15px;
+    }
+    .login .registrarse a {
+        font-size: 9px;
+    }
+    .login .change-password {
+        font-size: 10px;
+    }
+    .login .button-ingresar button {
+        font-size: 13px;
+        width: 85%;
+    }
+}

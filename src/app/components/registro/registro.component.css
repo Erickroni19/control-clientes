@@ -113,3 +113,54 @@
     color: white;
     margin: 5% 10% 0;
 }
+
+@media (max-width: 414px) {
+    .registro {
+        width: 350px;
+    }
+    .registro .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .registro {
+        width: 320px;
+    }
+    .registro .form {
+        padding: 0 35px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .registro .email mat-form-field {
+        position: relative;
+        width: 250px;
+    }
+    .registro .contraseña mat-form-field {
+        width: 250px;
+    }
+}
+
+@media (max-width: 280px) {
+    .registro {
+        width: 250px;
+    }
+    .registro .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .registro .email mat-form-field {
+        position: relative;
+        width: 210px;
+    }
+    .registro .contraseña mat-form-field {
+        width: 210px;
+    }
+    .registro .button-registrar button {
+        font-size: 13px;
+        width: 85%;
+    }
+}
