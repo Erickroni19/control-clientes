@@ -153,18 +153,6 @@ export class LoginComponent implements OnInit{
     this.router.navigate(['/registrarse']);
   } 
 
-  // changePassword(){
-  //   const email = this.inputField('email')
-  //   console.log(email);
-  //   this.loginService.sendPasswordResetEmail(email).then(()=>{
-  //     const message = 'Se ha enviado un email, verifica tu bandeja de entrada';
-  //     this.snackBarService.snackBarMessages(message, 'OK', 'green-snackbar')
-  //   })
-  //   .catch((error) =>{
-  //     this.snackBarService.snackBarMessages('Ingrese un email valido', 'Ok', 'red-snackbar')
-  //   })
-  // }
-
   /**Abre el dialog de olvifo su contraseña */
   OpenDialogNewPassword(){
     const dialogRef = this.dialog.open(DialogSendEmailComponent,{
