@@ -8,13 +8,8 @@ A Firestore database was also implemented to store customer information and user
 - It also has a login, registration and configuration view.
 
 ## My App
-
 Deployed application => https://controlclientess.netlify.app/
   
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
 ## Author
 - [@Erickroni19](https://github.com/Erickroni19)
 
