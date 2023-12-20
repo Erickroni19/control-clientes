@@ -7,7 +7,7 @@ A Firestore database was also implemented to store customer information and user
 - This project contains a customer module in which the list of customers is displayed in a table, you can also add, edit and delete customers.
 - It also has a login, registration and configuration view.
 
-# My App
+## My App
 
 Deployed application => https://controlclientess.netlify.app/
   
