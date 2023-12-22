@@ -45,7 +45,7 @@ export class RegistroComponent implements OnInit{
   private crearFormulario(){
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
-      password: ['', [Validators.required,Validators.pattern(/[!@#$%^&*(),.?":{}|<>]/), Validators.minLength(10)]]
+      password: ['', [Validators.required,Validators.minLength(10)]]
     });
   }
 
@@ -97,11 +97,6 @@ export class RegistroComponent implements OnInit{
     if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')){
       this.disableButton = true;
       return 'El email no es valido'
-    }
-
-    if(fieldInput ==='password' && this.registerForm.get('password')?.hasError('pattern')){
-      this.disableButton = true;
-      return 'Requiere al menos un caracter especial - Ejemplo: @3e...'
     }
 
     if(fieldInput ==='password' && this.validarPassword()){
