@@ -5,11 +5,11 @@
                 Control Clientes
             </a>
             <div class="buttonMenu">
-                <button mat-icon-button (click)="controlDropDown($event)" *ngIf="screenWidth">
+                <button mat-icon-button (click)="controlDropDown($event)" *ngIf="isHeaderResponsive">
                     <mat-icon>menu</mat-icon>
                 </button>
 
-                <div class="containerButtonsHome" [ngClass]="{'ocultar': screenWidth }">
+                <div class="containerButtonsHome" [ngClass]="{'ocultar': isHeaderResponsive }">
                     <a mat-button routerLink="/">
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
@@ -36,7 +36,7 @@
 
         </mat-toolbar-row>
 
-        <mat-toolbar-row *ngIf="checkDropDown && screenWidth">
+        <mat-toolbar-row *ngIf="hasHideResponsiveMenu && isHeaderResponsive">
             <a mat-button routerLink="/" class="home-button">
                 <mat-icon matListItemIcon>home</mat-icon>
                 <div class="home-text">

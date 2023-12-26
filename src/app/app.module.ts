@@ -10,7 +10,7 @@ import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from '@angular/f
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CabeceroComponent } from './components/cabecero/cabecero.component';
+import { HeaderComponent } from './components/header/header.component';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { LoginComponent } from './components/login/login.component';
@@ -48,7 +48,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
 @NgModule({
   declarations: [
     AppComponent,
-    CabeceroComponent,
+    HeaderComponent,
     TableroComponent,
     ClientesComponent,
     LoginComponent,

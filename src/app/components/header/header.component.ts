@@ -6,19 +6,19 @@ import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
-  selector: 'app-cabecero',
-  templateUrl: './cabecero.component.html',
-  styleUrls: ['./cabecero.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 
-export class CabeceroComponent implements OnInit{
+export class HeaderComponent implements OnInit{
 
   //Variables
-  screenWidth: boolean = window.innerWidth <= 700;
-  acumClick: number = 0;
-  checkDropDown: boolean = false;
+  isHeaderResponsive: boolean = window.innerWidth <= 700;
+  hasHideResponsiveMenu: boolean = false;
   isLoggedIn: boolean = false;
-  loggedInUser!: string;
+  hasClicked: boolean = false;
+  emailOfLoggedInUser: string = '';
 
   constructor(private loginService: LoginService,
               private router: Router
@@ -31,7 +31,7 @@ export class CabeceroComponent implements OnInit{
       if(auth){
         this.isLoggedIn = true;
 
-        if(auth.email !== null) this.loggedInUser = auth.email;
+        if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
       }else{
         this.isLoggedIn = false;
         this.router.navigate(['/login'])
@@ -42,21 +42,21 @@ export class CabeceroComponent implements OnInit{
   //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.screenWidth = window.innerWidth <= 700;
+    this.isHeaderResponsive = window.innerWidth <= 700;
   }
 
 
   //Controla el menu DropDown del Cabecero
   controlDropDown(event: Event) {
     
-    if(event.type == 'click' && this.acumClick === 0) {
-      this.checkDropDown = true
-      this.acumClick = 1;
+    if(event.type == 'click' && !this.hasClicked) {
+      this.hasHideResponsiveMenu = true
+      this.hasClicked = true;
 
-    }else if(event.type == 'click' && this.acumClick == 1){
+    }else if(event.type == 'click' && this.hasClicked){
 
-      this.checkDropDown = false
-      this.acumClick = 0;
+      this.hasHideResponsiveMenu = false
+      this.hasClicked = false;
     }
   }
 
