@@ -1,7 +1,7 @@
-<div class="container-loading" *ngIf="spinnerCheck">
+<div class="container-loading" *ngIf="isLoading">
     <div class="loading"></div>
 </div>
-<div [ngClass]="{'hide' : spinnerCheck , 'container-client' : !spinnerCheck}">
+<div [ngClass]="{'hide' : isLoading , 'container-client' : !isLoading}">
     <div class="container-BT">
         <div class="button-container">
             <button mat-raised-button (click)="openDialog('Agregar', 'noId')">
@@ -86,7 +86,7 @@
                         <mat-card-title>Saldo Total</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        {{saldoTotalVar | currency: 'USD'}}
+                        {{totalBalance | currency: 'USD'}}
                     </mat-card-content>
                 </mat-card>
 
@@ -97,7 +97,7 @@
                     <mat-card-content>
                         <mat-icon>groups</mat-icon>
                         <div>
-                            {{clientesLength}}
+                            {{clientsLength}}
                         </div>
                     </mat-card-content>
                 </mat-card>

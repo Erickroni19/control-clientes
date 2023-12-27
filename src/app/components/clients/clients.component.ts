@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Cliente } from 'src/app/interfaces/cliente';
+import { Cliente, Ids } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
 import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,25 +12,24 @@ import { ErrorType } from 'src/app/interfaces/error-type';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 
 @Component({
-  selector: 'app-clientes',
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  selector: 'app-clients',
+  templateUrl: './clients.component.html',
+  styleUrls: ['./clients.component.css']
 })
 export class ClientesComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
   displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar', 'eliminar'];
 
   //Variables
-  confirmDialogOpen: boolean = false;
-  spinnerCheck: boolean = true;
-  clientesCopy: Cliente[] = [];
-  dialogOpen: boolean = false;
-  saldoTotalVar: number = 0;
-  clientes: Cliente[] = [];
-  idObject: any = {};
-  clientesLength = 0;
-  uid: string = '';
-  editData!: any;
+  isDialogOpen: boolean = false;
+  clientsCopy: Cliente[] = [];
+  isLoading: boolean = true;
+  totalBalance: number = 0;
+  clients: Cliente[] = [];
+  idsClients: Ids = {};
+  clientsLength = 0;
+  userId: string = '';
+  clientData!: any;
 
   /**Filtro */
   filtro: Cliente = {};
@@ -55,7 +54,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
     //Obtenemos el uid del usuario loggeado
     this.loginService.getAuth().subscribe( auth => {
-      this.uid = auth?.uid || '';
+      this.userId = auth?.uid || '';
     })
     
   }
@@ -65,36 +64,36 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
           
-          this.clientes = clientesDb;
+          this.clients = clientesDb;
 
           //Copia el array
-          this.clientesCopy = JSON.parse(JSON.stringify(clientesDb));
+          this.clientsCopy = JSON.parse(JSON.stringify(clientesDb));
           let newId = 0;
 
           /*Se asigna un nuevo id y se crea objeto
           * para almacenar el id original como valor clave
           * del obejeto donde se guardaran ambos id*/
-          this.clientesCopy.forEach( cliente => {
+          this.clientsCopy.forEach( cliente => {
             let oldId = cliente.id;
 
             cliente.id = `${++newId}`;
             
-            this.idObject[cliente.id] = oldId;
+            this.idsClients[cliente.id] = oldId;      
           })
           
           //Asignamos la data al datasource
-          this.dataSource = new MatTableDataSource(this.clientesCopy);
+          this.dataSource = new MatTableDataSource(this.clientsCopy);
 
           if(this.dataSource.data && this.paginator){
 
-            this.clientesLength = this.dataSource.data.length;
+            this.clientsLength = this.dataSource.data.length;
             this.dataSource.paginator = this.paginator;
 
-            this.spinnerCheck = false;
+            this.isLoading = false;
           }
           
           //Saldo total
-          this.saldoTotalVar = this.saldoTotal(this.clientes);
+          this.totalBalance = this.saldoTotal(this.clients);
     })
   }
 
@@ -102,9 +101,9 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   /**Abre el dialog añadir - editar*/
   openDialog(idEjecucion: string, element: any){
-
+    console.log(this.isDialogOpen, 'sss');
     //Evitar doble ejecucion
-    if(this.dialogOpen) {
+    if(this.isDialogOpen) {
       return;
     }
 
@@ -122,17 +121,17 @@ export class ClientesComponent implements OnInit, AfterViewInit{
         enterAnimationDuration: '600ms',
         exitAnimationDuration: '500ms',
         data:{
-          editData: this.editData || '',
+          editData: this.clientData || '',
           idEjecucion: idEjecucion,
-          uid: this.uid
+          uid: this.userId
         }
       });
   
-      this.dialogOpen = true
+      this.isDialogOpen = true
   
       dialogRef.afterClosed().subscribe(result => {
         if(result && idEjecucion === 'Agregar'){
-          result.uid = this.uid;
+          result.uid = this.userId;
   
           this.clientesService.agregarCliente(result)
           .then((clienteId) => {
@@ -142,8 +141,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           });
   
         }else if(result && idEjecucion === 'Editar'){
-        
-          this.clientesService.modificarCliente(result, this.editData.id).then(() => {
+          
+          this.clientesService.modificarCliente(result, this.clientData.id).then(() => {
               this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
           }, (error) => {
             if(error){
@@ -153,15 +152,15 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           })
       }
 
-        this.dialogOpen = false; 
+        this.isDialogOpen = false; 
       });  
     }, 20);
   }
 
   /**OpenDialog Confirm */
   openDialogConfirm(){
-
-    if(this.confirmDialogOpen){
+    
+    if(this.isDialogOpen){
       return;
     }
 
@@ -176,11 +175,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       }
     });
 
-    this.confirmDialogOpen = true;
+    this.isDialogOpen = true;
 
     dialogRef.afterClosed().subscribe(result => {
       if(result === 'Si'){
-        this.clientesService.eliminarCliente(this.editData).then(() =>{
+        this.clientesService.eliminarCliente(this.clientData).then(() =>{
           this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'red-snackbar', 'bottom');
         },(error: any) => {
           if(error){
@@ -191,29 +190,39 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       }          
     })
 
+    console.log(this.isDialogOpen, 'OpenConfirm');
+
   }
 
   /**Obtiene la información del cliente */
   getOrDeleteDataClient(element: any, idEjecucion: string){
     
-    this.confirmDialogOpen = false;
+    this.isDialogOpen = false;
     
     const idOriginal = this.getIdClient(element);
+
+    if(idOriginal !== undefined){
+      this.clientesService.getCliente(idOriginal).subscribe( cliente => {
+        this.clientData = cliente;
+        console.log(this.clientData);
+        
+        
+        /**Elimina la informacion del cliente */
+        if(idEjecucion === 'delete'){
+          this.openDialogConfirm();
+        }
+        this.isDialogOpen = false;
+  
+        console.log(this.isDialogOpen, 'funcion');
+        idEjecucion = ''
+      })
+    }
     
-    this.clientesService.getCliente(idOriginal).subscribe( cliente => {
-      this.editData = cliente;
-      
-      /**Elimina la informacion del cliente */
-      if(idEjecucion === 'delete'){
-        this.openDialogConfirm();
-      }
-      idEjecucion = ''
-    })
   }
 
   /**Obtiene el id original del cliente*/
   getIdClient(element: any) { 
-    return this.idObject[element.id]
+    return this.idsClients[element.id]
   }
 
   /**Filtra los datos de la lista */
@@ -222,7 +231,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     const filterValue = this.filtro;
 
     // Aplica filtro a la lista original
-    const filteredList = this.clientesCopy.filter(client => {
+    const filteredList = this.clientsCopy.filter(client => {
       return Object.keys(filterValue).every(key => {
         const filterKeyValue = filterValue[key];
 
