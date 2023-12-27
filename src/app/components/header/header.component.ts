@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit{
 
   //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
+  captureScreenSize(event: Event) {
     this.isHeaderResponsive = window.innerWidth <= 700;
   }
 
