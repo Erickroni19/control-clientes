@@ -15,7 +15,7 @@ import { TableroComponent } from './components/tablero/tablero.component';
 import { ClientesComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
-import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
+import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
 import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,7 +53,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     ClientesComponent,
     LoginComponent,
     RegistroComponent,
-    ConfiguracionComponent,
+    ConfigurationComponent,
     NoEncontradoComponent,
     PiePaginaComponent,
     DialogAgregarClientComponent,

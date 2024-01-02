@@ -4,11 +4,11 @@ import { Configuracion } from 'src/app/interfaces/configuracion';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
 
 @Component({
-  selector: 'app-configuracion',
-  templateUrl: './configuracion.component.html',
-  styleUrls: ['./configuracion.component.css']
+  selector: 'app-configuration',
+  templateUrl: './configuration.component.html',
+  styleUrls: ['./configuration.component.css']
 })
-export class ConfiguracionComponent implements OnInit{
+export class ConfigurationComponent implements OnInit{
 
   permitirRegistro: boolean = false;
 
