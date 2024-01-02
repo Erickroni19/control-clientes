@@ -5,7 +5,7 @@ import { Cliente, Ids } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
 import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { LoginService } from 'src/app/services/login.service';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { SnackBarService } from 'src/app/services/snackBar.service';

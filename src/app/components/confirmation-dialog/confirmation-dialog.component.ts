@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-confirm-dialog',
-  templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.css']
+  selector: 'app-confirmation-dialog',
+  templateUrl: './confirmation-dialog.component.html',
+  styleUrls: ['./confirmation-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit{
 
@@ -15,7 +15,6 @@ export class ConfirmDialogComponent implements OnInit{
   ngOnInit(){   
   }
 
-  /**Cierra el dialog */
   dialogClose(id: string){
     this.dialogRef.close(id);
   }
