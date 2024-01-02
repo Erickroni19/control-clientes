@@ -11,7 +11,7 @@ export class DialogSendEmailComponent implements OnInit{
 
   email = new FormControl('', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]);
 
-  disableButton: boolean = false;
+  isButtonDisabled: boolean = false;
 
   constructor(public dialog: MatDialog,
               public dialogRef: MatDialogRef<DialogSendEmailComponent>,
@@ -20,45 +20,28 @@ export class DialogSendEmailComponent implements OnInit{
   ngOnInit(){
   }
 
-  /**Cierra el dialog */
-  dialogClose(){
-    this.dialogRef.close();
+  validateForm(){
+    
+    this.email.valid ? this.isButtonDisabled = false : this.isButtonDisabled = true;
+    
+    return this.isButtonDisabled;
   }
 
-  /**Cierra el dialog */
-  guardaEmail(){
-    this.dialogRef.close(this.email.value);
-  }
+  getErrorMessage(){
 
-  /**Envia mensaje de error de las validaciones */
-  getErrorMessage(fieldInput: string){
-    if(this.email.hasError('required')){
-
-      return 'Campo requerido'
+    if(this.email.hasError('required')) return 'Campo requerido';
       
-    }else if(this.email.hasError('pattern')){
-      return 'El email no es valido'
-    }
+    if(this.email.hasError('pattern')) return 'El email no es valido'
     
     return '';
   }
 
-  /**Captura los datos ingresados por el usuario*/
-  inputField(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.email.get(`${fieldName}`)?.value
-
-    return fieldInput
+  dialogClose(){
+    this.dialogRef.close();
   }
 
-   /**Validamos Que el formulario no sea invalido */
-   validarFormulario(){
-    console.log(this.disableButton);
-    
-    if(this.email.valid) this.disableButton = false;
-    else this.disableButton = true;
-
-    return this.disableButton;
-    
+  saveEmail(){
+    this.dialogRef.close(this.email.value);
   }
+
 }

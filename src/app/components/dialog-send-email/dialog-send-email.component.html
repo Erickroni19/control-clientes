@@ -10,13 +10,13 @@
         <form>
             <mat-form-field appearance="outline" id="email">
                 <mat-label>Ingrese su email</mat-label>
-                <input matInput placeholder="email@example.com" type="email" [formControl]="email" (input)="inputField('email')">
-                <mat-error *ngIf="(this.email.invalid)">{{getErrorMessage('email')}}</mat-error>
+                <input matInput placeholder="email@example.com" type="email" [formControl]="email">
+                <mat-error *ngIf="(this.email.invalid)">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </form>
 
     </div>
     <div class="buttons">
-        <button mat-raised-button color="primary" [disabled]="validarFormulario()" [ngStyle]="{'background-color': validarFormulario() ? 'lightgray' : '#0f4d99'}" (click)="guardaEmail()">Restablecer contraseña</button>
+        <button mat-raised-button color="primary" [disabled]="validateForm()" [ngStyle]="{'background-color': validateForm() ? 'lightgray' : '#0f4d99'}" (click)="saveEmail()">Restablecer contraseña</button>
     </div>
 </div>
