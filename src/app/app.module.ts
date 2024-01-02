@@ -35,14 +35,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoginService } from './services/login.service';
-import { DialogAgregarClientComponent } from './components/dialog-agregar-client/dialog-agregar-client.component';
+import { DialogAddClientComponent } from './components/dialog-add-client/dialog-add-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
 import { ConfiguracionService } from './services/configuration.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ConfirmDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SnackBarService } from './services/snackBar.service';
 import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
 @NgModule({
@@ -56,8 +56,8 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     ConfigurationComponent,
     NoEncontradoComponent,
     PiePaginaComponent,
-    DialogAgregarClientComponent,
-    ConfirmDialogComponent,
+    DialogAddClientComponent,
+    ConfirmationDialogComponent,
     DialogSendEmailComponent,
   ],
   imports: [

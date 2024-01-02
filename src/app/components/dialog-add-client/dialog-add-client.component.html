@@ -18,7 +18,7 @@
         <div class="email-saldo">
             <mat-form-field appearance="outline" id="email">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')">
+                <input matInput placeholder="email@example.com" type="email" formControlName="email">
                 <mat-error *ngIf="(this.addClientForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" id="saldo">
@@ -31,7 +31,7 @@
         </div>
     </form>
     <div class="buttons">
-        <button mat-raised-button color="primary" [ngStyle]="{'background-color': validarFormulario() ? 'lightgray' : '#2f6136'}" [disabled]="validarFormulario()" (click)="saveData()">Guardar</button>
+        <button mat-raised-button color="primary" [ngStyle]="{'background-color': validateForm() ? 'lightgray' : '#2f6136'}" [disabled]="validateForm()" (click)="saveClient()">Guardar</button>
         <button mat-raised-button color="warn" (click)="dialogClose()">Cerrar</button>
     </div>
 </div>

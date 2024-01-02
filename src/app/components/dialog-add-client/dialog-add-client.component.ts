@@ -3,18 +3,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dialog-agregar-client',
-  templateUrl: './dialog-agregar-client.component.html',
-  styleUrls: ['./dialog-agregar-client.component.css']
+  selector: 'app-dialog-add-client',
+  templateUrl: './dialog-add-client.component.html',
+  styleUrls: ['./dialog-add-client.component.css']
 })
-export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
+export class DialogAddClientComponent implements OnInit, AfterViewInit{
 
   addClientForm!: FormGroup;
-  disableButton: boolean = true;
+  isButtonDisabled: boolean = true;
   
   constructor(public dialog: MatDialog,
               private fb: FormBuilder,
-              public dialogRef: MatDialogRef<DialogAgregarClientComponent>,
+              public dialogRef: MatDialogRef<DialogAddClientComponent>,
               @Inject(MAT_DIALOG_DATA) public data:any){
   }
 
@@ -38,13 +38,7 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
     }, 10);
     
   }
-
-  /**Cierra el dialog */
-  dialogClose(){
-    this.dialogRef.close();
-  }
-
-  /**Agrega los datos a los inputs cuando se va a editar */
+  
   setInputData(editData: any){
     if(editData){
       this.addClientForm.setValue({
@@ -56,46 +50,37 @@ export class DialogAgregarClientComponent implements OnInit, AfterViewInit{
     }
   }
 
-  /**Guardar data cliente */
-  saveData(){
-    /**Se pasa la información para abrirlo con el afterClose */
-    this.dialogRef.close(this.addClientForm.value); 
+  validateForm(){
+
+    this.addClientForm.valid ? this.isButtonDisabled = false : this.isButtonDisabled = true;
+
+    return this.isButtonDisabled;    
   }
 
-  /**Captura los datos ingresados por el usuario*/
-  inputField(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.addClientForm.get(`${fieldName}`)?.value
-
-    return fieldInput
-  }
-
-   /**Validamos Que el formulario no sea invalido */
-   validarFormulario(){
-
-    if(this.addClientForm.valid) this.disableButton = false;
-    else this.disableButton = true;
-
-    return this.disableButton;
-    
-  }
-
-  /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
-    this.disableButton = false;
+    this.isButtonDisabled = false;
     
     if(this.addClientForm.get(`${fieldInput}`)?.hasError('required')){
 
-      this.disableButton = true;
+      this.isButtonDisabled = true;
       return 'Campo requerido'
       
     }
 
     if(fieldInput ==='email' && this.addClientForm.get('email')?.hasError('pattern')){
-      this.disableButton = true;
+      this.isButtonDisabled = true;
       return 'El email no es valido'
     }
     return '';
+  }
+
+  saveClient(){
+    
+    this.dialogRef.close(this.addClientForm.value); 
+  }
+
+  dialogClose(){
+    this.dialogRef.close();
   }
 
 }

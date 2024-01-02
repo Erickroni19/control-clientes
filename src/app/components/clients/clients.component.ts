@@ -3,9 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cliente, Ids } from 'src/app/interfaces/cliente';
 import { ClienteServices } from 'src/app/services/clientes.service';
-import { DialogAgregarClientComponent } from '../dialog-agregar-client/dialog-agregar-client.component';
+import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { LoginService } from 'src/app/services/login.service';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { SnackBarService } from 'src/app/services/snackBar.service';
@@ -90,7 +90,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     if(idEjecucion === 'Editar') this.getClient(client);
     
     setTimeout(() => {      
-      const dialogRef = this.dialog.open(DialogAgregarClientComponent,{
+      const dialogRef = this.dialog.open(DialogAddClientComponent,{
         width: '600px',
         height: '265px',
         disableClose: true,
@@ -120,7 +120,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     
     if(this.isDialogOpen) return;
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent,{
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
       disableClose: true,
       enterAnimationDuration: '600ms',

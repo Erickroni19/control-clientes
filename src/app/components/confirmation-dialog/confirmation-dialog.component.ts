@@ -6,10 +6,10 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.css']
 })
-export class ConfirmDialogComponent implements OnInit{
+export class ConfirmationDialogComponent implements OnInit{
 
   constructor(public dialog: MatDialog,
-              public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+              public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data:any){}
 
   ngOnInit(){   
