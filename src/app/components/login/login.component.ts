@@ -2,9 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Configuracion } from 'src/app/interfaces/configuracion';
+import { Configuration } from 'src/app/interfaces/configuration';
 import { ErrorType } from 'src/app/interfaces/error-type';
-import { ConfiguracionService } from 'src/app/services/configuracion.service';
+import { ConfiguracionService } from 'src/app/services/configuration.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email.component';
@@ -38,11 +38,9 @@ export class LoginComponent implements OnInit{
 
   ngOnInit() {
     this.configuracionService.getConfiguracion().subscribe(       
-      (configuracion: Configuracion) => {
+      (configuration: Configuration) => {
 
-        if(configuracion && configuracion.permitirRegistro !== undefined){
-          this.permitirRegistro = configuracion.permitirRegistro;
-        }
+        if(configuration.canRegister) this.permitirRegistro = configuration.canRegister;
 
       }
     )

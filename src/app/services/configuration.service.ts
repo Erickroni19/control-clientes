@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Configuracion } from '../interfaces/configuracion';
+import { Configuration } from '../interfaces/configuration';
 import { Observable, filter, map } from 'rxjs';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { Observable, filter, map } from 'rxjs';
 })
 export class ConfiguracionService {
 
-  configuracionDoc!: AngularFirestoreDocument<Configuracion>;
-  configuracion!: Observable<Configuracion>;
+  configuracionDoc!: AngularFirestoreDocument<Configuration>;
+  configuracion!: Observable<Configuration>;
 
   //unico id de la colección
   id = "1";
@@ -17,22 +17,22 @@ export class ConfiguracionService {
 
   constructor(private fireStoreDb: AngularFirestore) { }
 
-  getConfiguracion():Observable<Configuracion>{
-    this.configuracionDoc = this.fireStoreDb.doc<Configuracion>(`configuracion/${this.id}`);
+  getConfiguracion():Observable<Configuration>{
+    this.configuracionDoc = this.fireStoreDb.doc<Configuration>(`configuracion/${this.id}`);
 
     this.configuracion = this.configuracionDoc.valueChanges().pipe(
 
       // Utilizamos el operador filter para asegurarnos de que configuracion no sea undefined
       // Utilizamos el operador map para convertir Configuracion | undefined a Configuracion
       filter(configuracion => !!configuracion),
-      map(configuracion => configuracion as Configuracion)
+      map(configuracion => configuracion as Configuration)
     );
 
     return this.configuracion;
   }
 
-  modificarConfiguracion( configuracion: Configuracion){
-    this.configuracionDoc = this.fireStoreDb.doc<Configuracion>(`configuracion/${this.id}`);
+  modificarConfiguracion( configuracion: Configuration){
+    this.configuracionDoc = this.fireStoreDb.doc<Configuration>(`configuracion/${this.id}`);
     this.configuracionDoc.update(configuracion);
   }
 }

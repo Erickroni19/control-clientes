@@ -40,7 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
-import { ConfiguracionService } from './services/configuracion.service';
+import { ConfiguracionService } from './services/configuration.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './services/snackBar.service';
