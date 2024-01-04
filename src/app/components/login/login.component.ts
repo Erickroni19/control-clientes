@@ -16,143 +16,130 @@ import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email
 })
 export class LoginComponent implements OnInit{
 
-  loginForm!: FormGroup;
-  disableButton: boolean = false;
-  hide = true;
-  loginError: boolean = false;
-  permitirRegistro: boolean = false;
-  errorMessage = "";
+  isButtonDisabled: boolean = false;
+  hasLoginError: boolean = false;
+  canRegister: boolean = false;
+  errorMessage: string = "";
+  isHidden: boolean = true;
 
+  loginForm!: FormGroup;
   
   //Traducción de los errores
   errorTranslations: ErrorType= {
     'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
   };
  
-  constructor(private loginService: LoginService,
-              private configuracionService: ConfiguracionService,
+  constructor(private configurationService: ConfiguracionService,
               private snackBarService: SnackBarService,
-              private fb: FormBuilder,
-              private router: Router,
-              public dialog: MatDialog) {}
+              private loginService: LoginService,
+              public dialog: MatDialog,
+              private formBuilder: FormBuilder,
+              private router: Router
+              ) {}
 
   ngOnInit() {
-    this.configuracionService.getConfiguracion().subscribe(       
+
+    this.configurationService.getConfiguracion().subscribe(       
       (configuration: Configuration) => {
 
-        if(configuration.canRegister) this.permitirRegistro = configuration.canRegister;
+        if(configuration.canRegister) this.canRegister = configuration.canRegister;
 
       }
     )
-    //Inicia el formulario
-    this.crearFormulario();
 
-    /**Si el usuario esta logeado redirecciona a la ventana de inicio */
-    this.loginService.getAuth().subscribe( auth => {
+    this.createForm();
 
-      if(auth) this.router.navigate(['/'])
+    this.loginService.getAuth().subscribe( userLoggedIn => {
+      
+      if(userLoggedIn) this.router.navigate(['/']);
       
     })
 
   }
 
-  /**Obtiene la información ingresada por el usuario y la envia a back*/
-  dataSubmit() {
-    // Obtener los valores del formulario
-    let emailValue = this.inputField('email');
-    let passwordValue = this.inputField('password');
+  sendLoginData() {
+
+    let emailValue = this.getFormData('email');
+    let passwordValue = this.getFormData('password');
     
     this.loginService.login(emailValue, passwordValue)
-    .then( resp => {
-      if(resp){
-        this.router.navigate(['/']);
-      }
+    .then( userLoggedIn => {
+
+      if(userLoggedIn) this.router.navigate(['/']);
+      
     })
     .catch(error => {
-      //Mostrar Mensaje De Error
-      if(error){
+    
+      if(error) {
         this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-        this.loginError = true;
+
+        this.hasLoginError = true;
+
         setTimeout(() => {
-          this.loginError = false;
+
+          this.hasLoginError = false;
+
         },3500)
       }
     });
    
   }
 
-  /**Captura los datos ingresados por el usuario*/
-  inputField(fieldName: String){
+  getFormData(fieldName: String){
     let fieldInput = '';
     fieldInput = this.loginForm.get(`${fieldName}`)?.value
 
     return fieldInput
   }
 
-  /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
-    this.disableButton = false;
+    this.isButtonDisabled = false;
     
     if(this.loginForm.get(`${fieldInput}`)?.hasError('required')){
 
-      this.disableButton = true;
+      this.isButtonDisabled = true;
       return 'Campo requerido'
       
     }
 
     if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')){
-      this.disableButton = true;
+
+      this.isButtonDisabled = true;
       return 'El email no es valido'
     }
     
     return '';
   }
 
-  /**Validar contraseña */
-  validarPassword(){
-    const password = this.inputField('password');
+  validatePassword(){
+    const password = this.getFormData('password');
 
-    if(password.length < 10){
-      return true;
-    }
+    if(password.length < 10) return true;
 
     return false
   }
 
-  /**Validar contraseña */
-  customPasswordValidator(control: any) {
-    const value = control.value;
+  validateForm(){
 
-    // Requiere al menos un carácter y un número consecutivo
-    const regex = /^(?=.*[A-Za-z])(?=.*\d{2,})/;
-
-    return regex.test(value) ? null : { invalidPassword: true };
-  }
-
-  /**Validamos Que el formulario no sea invalido */
-  validarFormulario(){
-
-    if(this.loginForm.valid) this.disableButton = false;
-    else this.disableButton = true;
-
-    return this.disableButton;
+    this.loginForm.valid ? this.isButtonDisabled = false : this.isButtonDisabled = true;
+   
+    return this.isButtonDisabled;
     
   }
 
-  private crearFormulario(){
-    this.loginForm = this.fb.group({
+  private createForm(){
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       password: ['', [Validators.required]]
     });
   }
 
-  // Para navegar a la página de registro
   navigateToRegistro() {
     this.router.navigate(['/registrarse']);
   } 
 
-  /**Abre el dialog de olvifo su contraseña */
   OpenDialogNewPassword(){
+    
     const dialogRef = this.dialog.open(DialogSendEmailComponent,{
       width: '500px',
       height: '200px',
@@ -166,9 +153,12 @@ export class LoginComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('result:' , result);
       if(result !== undefined){
+
         this.loginService.sendPasswordResetEmail(result).then(()=>{
+
           const message = 'Se ha enviado un email, verifica tu bandeja de entrada';
           this.snackBarService.snackBarMessages(message, 'OK', 'green-snackbar', 'top')
+
         })
       }
     })

@@ -1,7 +1,7 @@
 <div class="container-login">
     <div class="login">
         <h1>Bienvenido</h1>
-        <div class="errorMessage" *ngIf="loginError">
+        <div class="errorMessage" *ngIf="hasLoginError">
             {{errorMessage}}
         </div>
         <form class="form" [formGroup]="loginForm ">
@@ -9,7 +9,7 @@
             <div class="email">
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="inputField('email')" required>
+                    <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="getFormData('email')" required>
                     <mat-error *ngIf="(this.loginForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
                 </mat-form-field>
             </div>
@@ -17,16 +17,16 @@
             <div class="contraseña">
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" (input)="inputField('password')" [type]="hide ? 'password' : 'text'" required>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <input matInput formControlName="password" (input)="getFormData('password')" [type]="isHidden ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
+                        <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
                     </button>
                     <mat-error *ngIf="(this.loginForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
                 </mat-form-field>
             </div>
             <a mat-button class="change-password" (click)="OpenDialogNewPassword()">¿Olvido su contraseña?</a>
             <div class="button-ingresar">
-                <button mat-raised-button color="primary" (click)="dataSubmit()" [disabled]="validarFormulario()">Ingresar</button>
+                <button mat-raised-button color="primary" (click)="sendLoginData()" [disabled]="validateForm()">Ingresar</button>
             </div>
             <div class="registrarse">
                 <span>¿Aun no tienes cuenta? -</span>

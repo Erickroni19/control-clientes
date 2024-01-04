@@ -39,14 +39,12 @@ export class HeaderComponent implements OnInit{
     })
   }
 
-  //Captura la medida de la pantalla
   @HostListener('window:resize', ['$event'])
   captureScreenSize(event: Event) {
     this.isHeaderResponsive = window.innerWidth <= 700;
   }
 
 
-  //Controla el menu DropDown del Cabecero
   controlDropDown(event: Event) {
     
     if(event.type == 'click' && !this.hasClicked) {
@@ -60,7 +58,6 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  /**Cierra a la sesión de la app */
   logout(){
 
     this.loginService.logout();
