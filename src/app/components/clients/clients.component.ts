@@ -19,13 +19,12 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
   displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar', 'eliminar'];
 
-  //Variables
   isDialogOpen: boolean = false;
   clientsCopy: Cliente[] = [];
   isLoading: boolean = true;
+  clientsLength: number = 0;
   totalBalance: number = 0;
   clients: Cliente[] = [];
-  clientsLength = 0;
   userId: string = "";
   
   clientData: Cliente = {};
