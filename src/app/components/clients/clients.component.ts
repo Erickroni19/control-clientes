@@ -25,11 +25,11 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   isLoading: boolean = true;
   totalBalance: number = 0;
   clients: Cliente[] = [];
-  idsClients: Ids = {};
   clientsLength = 0;
-  userId: string = '';
+  userId: string = "";
+  
   clientData: Cliente = {};
-
+  idsClients: Ids = {};
   filtro: Cliente = {};
 
   errorTranslations: ErrorType= {
@@ -48,21 +48,18 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   ngOnInit(){
 
-    //Obtenemos el userid del usuario loggeado
-    this.loginService.getAuth().subscribe( auth => {
-      this.userId = auth?.uid || '';
+    this.loginService.getAuth().subscribe( userLoggedIn => {
+      this.userId = userLoggedIn?.uid || '';
     })
     
   }
 
   ngAfterViewInit() {
    
-    //Obtenemos la información de los clientes
     this.clientesService.getClientes().subscribe(clientesDb => {
           
           this.clients = clientesDb;
 
-          //Copia el array
           this.clientsCopy = JSON.parse(JSON.stringify(clientesDb));
 
           this.assignNewId(this.clientsCopy);
@@ -80,8 +77,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
           this.totalBalance = this.getTotalBalance(this.clients);
     })
   }
-
-  /**Funciones - Metodos */
 
   openAddAndEditDialog(idEjecucion: string, client: string){
     
