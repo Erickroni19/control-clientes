@@ -13,13 +13,12 @@ import { SnackBarService } from 'src/app/services/snackBar.service';
 
 export class RegisterComponent implements OnInit{
 
-  registerForm!: FormGroup;
-  disableButton: boolean = false;
-  registerError: boolean = false;
+  hasRegisterError: boolean = false;
   errorMessage = "";
-  hide = true;
+  isHidden = true;
+  
+  registerForm!: FormGroup;
 
-  //Traducción de los errores
   errorTranslations: ErrorType= {
       'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
   };
@@ -30,30 +29,53 @@ export class RegisterComponent implements OnInit{
               private snackBarService: SnackBarService){}
 
   ngOnInit(){
-    //Creamos el formulario
-    this.crearFormulario();
+ 
+    this.createForm();
 
     /**Si el usuario esta logeado redirecciona a la ventana de inicio */
-    this.loginService.getAuth().subscribe( auth => {
+    this.loginService.getAuth().subscribe( userLoggedIn => {
 
-      if(auth) this.router.navigate(['/'])
+      if(userLoggedIn) this.router.navigate(['/'])
 
     })
   }
 
-  /**Inicia el formGroup */
-  private crearFormulario(){
+  private createForm(){
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       password: ['', [Validators.required,Validators.minLength(10)]]
     });
   }
 
-  /**Obtiene la información ingresada por el usuario y la envia a back*/
-  dataSubmit() {
+  getFormData(fieldName: String){
+    let fieldInput = '';
+    fieldInput = this.registerForm.get(`${fieldName}`)?.value
+  
+    return fieldInput
+  }
+
+  validateForm(){
+
+    let isButtonDisabled: boolean;
+
+    this.registerForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
+
+    return isButtonDisabled;
+    
+  }
+
+  validatePassword(){
+    const password = this.getFormData('password');
+  
+    if(password.length < 10) return true;
+    
+    return false
+  }
+
+  sendRegisterData() {
     // Obtener los valores del formulario
-    let emailValue = this.inputField('email');
-    let passwordValue = this.inputField('password');
+    let emailValue = this.getFormData('email');
+    let passwordValue = this.getFormData('password');
     
     this.loginService.register(emailValue, passwordValue)
     .then( resp => {
@@ -65,67 +87,25 @@ export class RegisterComponent implements OnInit{
     .catch(error => {
 
       if(error){
-        this.registerError = true;
+        this.hasRegisterError = true;
         this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
         setTimeout(() => {
-          this.registerError = false;
+          this.hasRegisterError = false;
         },3000)
 
       } 
     });
   }
 
-  /**Captura los datos ingresados por el usuario*/
-  inputField(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.registerForm.get(`${fieldName}`)?.value
-  
-    return fieldInput
-  }
-
-  /**Envia mensaje de error de las validaciones */
   getErrorMessage(fieldInput: string){
-    this.disableButton = false;
     
-    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')){
+    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido'
 
-      this.disableButton = true;
-      return 'Campo requerido'
-      
-    }
+    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido'
 
-    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')){
-      this.disableButton = true;
-      return 'El email no es valido'
-    }
-
-    if(fieldInput ==='password' && this.validarPassword()){
-      this.disableButton = true;
-      return 'La contraseña debe tener min 10 caracteres'
-    }
+    if(fieldInput ==='password' && this.validatePassword()) return 'La contraseña debe tener min 10 caracteres'
 
     return '';
   }
 
-  /**Validar contraseña */
-  validarPassword(){
-    const password = this.inputField('password');
-  
-    if(password.length < 10){
-       return true;
-    }
-  
-    return false
-  }
-
-  /**Validamos Que el formulario no sea invalido */
-  validarFormulario(){
-
-    if(this.registerForm.valid) this.disableButton = false;
-    else this.disableButton = true;
-
-    return this.disableButton;
-    
-  }
-  
 }
