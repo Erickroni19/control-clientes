@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from 'src/environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from '@angular/fire/compat/firestore';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { TableroComponent } from './components/tablero/tablero.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClientesComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -49,7 +47,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
   declarations: [
     AppComponent,
     HeaderComponent,
-    TableroComponent,
+    DashboardComponent,
     ClientesComponent,
     LoginComponent,
     RegisterComponent,

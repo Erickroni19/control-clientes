@@ -3,20 +3,20 @@ import { OnInit} from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-tablero',
-  templateUrl: './tablero.component.html',
-  styleUrls: ['./tablero.component.css']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class TableroComponent implements OnInit{
+export class DashboardComponent implements OnInit{
 
   isLoggedIn: boolean = false;
 
   constructor(private loginService: LoginService){}
 
   ngOnInit(){
-    this.loginService.getAuth().subscribe( auth => {
-      if(auth){
-        this.isLoggedIn = true;
-      }
+    this.loginService.getAuth().subscribe( userLoggedIn => {
+
+      if(userLoggedIn) this.isLoggedIn = true;
+
     })
   }
 
