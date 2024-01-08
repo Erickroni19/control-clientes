@@ -16,7 +16,7 @@ import { ClientesComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
-import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -54,7 +54,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     LoginComponent,
     RegistroComponent,
     ConfigurationComponent,
-    NoEncontradoComponent,
+    PageNotFoundComponent,
     PiePaginaComponent,
     DialogAddClientComponent,
     ConfirmationDialogComponent,

@@ -4,7 +4,7 @@ import { TableroComponent } from './components/tablero/tablero.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
-import { NoEncontradoComponent } from './components/no-encontrado/no-encontrado.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registrarse', component: RegistroComponent},
   {path: 'configuracion', component: ConfigurationComponent, canActivate: [AuthGuard]},
-  {path: '**', component: NoEncontradoComponent}
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   
-  //Traducción de los errores
   errorTranslations: ErrorType= {
     'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
   };
@@ -139,7 +138,7 @@ export class LoginComponent implements OnInit{
   } 
 
   OpenDialogNewPassword(){
-    
+
     const dialogRef = this.dialog.open(DialogSendEmailComponent,{
       width: '500px',
       height: '200px',
@@ -163,6 +162,5 @@ export class LoginComponent implements OnInit{
       }
     })
   }
-
 
 }
