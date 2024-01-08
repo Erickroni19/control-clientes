@@ -6,12 +6,12 @@ import { ErrorType } from 'src/app/interfaces/error-type';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 
-export class RegistroComponent implements OnInit{
+export class RegisterComponent implements OnInit{
 
   registerForm!: FormGroup;
   disableButton: boolean = false;

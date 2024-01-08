@@ -14,10 +14,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { ClientesComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -52,10 +52,10 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     TableroComponent,
     ClientesComponent,
     LoginComponent,
-    RegistroComponent,
+    RegisterComponent,
     ConfigurationComponent,
     PageNotFoundComponent,
-    PiePaginaComponent,
+    FooterComponent,
     DialogAddClientComponent,
     ConfirmationDialogComponent,
     DialogSendEmailComponent,
