@@ -59,6 +59,12 @@
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
+.registro .button-registrar button:disabled {
+    background-color: #d8d9da;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
 .registro a {
     display: flex;
     justify-content: flex-start;

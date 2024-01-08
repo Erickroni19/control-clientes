@@ -99,11 +99,11 @@ export class RegisterComponent implements OnInit{
 
   getErrorMessage(fieldInput: string){
     
-    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido'
+    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
 
-    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido'
+    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido';
 
-    if(fieldInput ==='password' && this.validatePassword()) return 'La contraseña debe tener min 10 caracteres'
+    if(fieldInput ==='password' && this.validatePassword()) return 'La contraseña debe tener min 10 caracteres';
 
     return '';
   }

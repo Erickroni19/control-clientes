@@ -57,6 +57,12 @@
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
+.login .button-ingresar button:disabled {
+    background-color: #d8d9da;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
 .login a {
     display: flex;
     justify-content: flex-start;

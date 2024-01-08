@@ -11,8 +11,6 @@ export class DialogSendEmailComponent implements OnInit{
 
   email = new FormControl('', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]);
 
-  isButtonDisabled: boolean = false;
-
   constructor(public dialog: MatDialog,
               public dialogRef: MatDialogRef<DialogSendEmailComponent>,
               @Inject(MAT_DIALOG_DATA) public data:any){}
@@ -21,10 +19,11 @@ export class DialogSendEmailComponent implements OnInit{
   }
 
   validateForm(){
+    let isButtonDisabled
+
+    this.email.valid ? isButtonDisabled = false : isButtonDisabled = true;
     
-    this.email.valid ? this.isButtonDisabled = false : this.isButtonDisabled = true;
-    
-    return this.isButtonDisabled;
+    return isButtonDisabled;
   }
 
   getErrorMessage(){

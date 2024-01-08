@@ -66,6 +66,12 @@
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
+.buttons button:disabled {
+    background-color: #d8d9da;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
 @media (max-width: 430px) {
     .title h1 {
         font-size: 15px;

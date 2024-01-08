@@ -16,7 +16,6 @@ import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email
 })
 export class LoginComponent implements OnInit{
 
-  isButtonDisabled: boolean = false;
   hasLoginError: boolean = false;
   canRegister: boolean = false;
   errorMessage: string = "";
@@ -92,21 +91,11 @@ export class LoginComponent implements OnInit{
   }
 
   getErrorMessage(fieldInput: string){
-    this.isButtonDisabled = false;
     
-    if(this.loginForm.get(`${fieldInput}`)?.hasError('required')){
-
-      this.isButtonDisabled = true;
-      return 'Campo requerido'
+    if(this.loginForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
       
-    }
-
-    if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')){
-
-      this.isButtonDisabled = true;
-      return 'El email no es valido'
-    }
-    
+    if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')) return 'El email no es valido';
+      
     return '';
   }
 
@@ -119,10 +108,11 @@ export class LoginComponent implements OnInit{
   }
 
   validateForm(){
+    let isButtonDisabled: boolean;
 
-    this.loginForm.valid ? this.isButtonDisabled = false : this.isButtonDisabled = true;
+    this.loginForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
    
-    return this.isButtonDisabled;
+    return isButtonDisabled;
     
   }
 
