@@ -1,7 +1,7 @@
-import { Component,HostListener} from '@angular/core';
-import { OnInit} from '@angular/core';
-import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { Component,HostListener} from '@angular/core';
+import { Router } from '@angular/router';
+import { OnInit} from '@angular/core';
 
 
 
@@ -16,9 +16,9 @@ export class HeaderComponent implements OnInit{
   //Variables
   isHeaderResponsive: boolean = window.innerWidth <= 700;
   hasHideResponsiveMenu: boolean = false;
+  emailOfLoggedInUser: string = '';
   isLoggedIn: boolean = false;
   hasClicked: boolean = false;
-  emailOfLoggedInUser: string = '';
 
   constructor(private loginService: LoginService,
               private router: Router

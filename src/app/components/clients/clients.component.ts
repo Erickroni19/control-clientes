@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { Cliente, Ids } from 'src/app/interfaces/cliente';
-import { ClienteServices } from 'src/app/services/clientes.service';
-import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { LoginService } from 'src/app/services/login.service';
-import { ErrorType } from 'src/app/interfaces/error-type';
+import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ClienteServices } from 'src/app/services/clientes.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
+import { LoginService } from 'src/app/services/login.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { Cliente, Ids } from 'src/app/interfaces/cliente';
+import { ErrorType } from 'src/app/interfaces/error-type';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-clients',

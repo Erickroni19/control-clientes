@@ -1,7 +1,7 @@
+import { ConfiguracionService } from 'src/app/services/configuration.service';
+import { Configuration } from 'src/app/interfaces/configuration';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Configuration } from 'src/app/interfaces/configuration';
-import { ConfiguracionService } from 'src/app/services/configuration.service';
 
 @Component({
   selector: 'app-configuration',

@@ -1,6 +1,6 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-tablero',
   templateUrl: './dashboard.component.html',

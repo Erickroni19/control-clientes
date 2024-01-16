@@ -1,13 +1,13 @@
-import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { Configuration } from 'src/app/interfaces/configuration';
-import { ErrorType } from 'src/app/interfaces/error-type';
-import { ConfiguracionService } from 'src/app/services/configuration.service';
-import { LoginService } from 'src/app/services/login.service';
-import { SnackBarService } from 'src/app/services/snackBar.service';
 import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email.component';
+import { ConfiguracionService } from 'src/app/services/configuration.service';
+import { SnackBarService } from 'src/app/services/snackBar.service';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Configuration } from 'src/app/interfaces/configuration';
+import { LoginService } from 'src/app/services/login.service';
+import { ErrorType } from 'src/app/interfaces/error-type';
+import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',

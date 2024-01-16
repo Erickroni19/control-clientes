@@ -1,6 +1,6 @@
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-add-client',
@@ -9,8 +9,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class DialogAddClientComponent implements OnInit, AfterViewInit{
 
-  addClientForm!: FormGroup;
   isButtonDisabled: boolean = true;
+  addClientForm!: FormGroup;
   
   constructor(public dialog: MatDialog,
               private fb: FormBuilder,
