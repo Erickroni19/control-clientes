@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, fromDocRef } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 import { Cliente } from '../interfaces/client';
-import {Observable, from, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { error } from 'jquery';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteServices {
-  clientesColeccion: AngularFirestoreCollection<Cliente>;
+
+  clientsCollection: AngularFirestoreCollection<Cliente>;
   clienteDoc!: AngularFirestoreDocument<Cliente | null>;
   clientes!: Observable<Cliente[]>;
   cliente!: Observable<Cliente | null>;
   
   constructor(private firebaseDb: AngularFirestore) {
     //Se hace la petición a la firebase para que retorne los nombres en orden ascendente 
-    this.clientesColeccion = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
+    this.clientsCollection = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
   }
 
   /**---Nos retorna la información de los clientes-----*/
   getClientes(): Observable<Cliente[]>{
       //Obtenemos los clientes
-      this.clientes = this.clientesColeccion.snapshotChanges().pipe(
+      this.clientes = this.clientsCollection.snapshotChanges().pipe(
         map( cambios => {
           return cambios.map( accion => {
             const datos = accion.payload.doc.data() as Cliente;
@@ -36,7 +36,7 @@ export class ClienteServices {
   
   /**---Agrega un nuevo cliente a la base de datos--- */
   agregarCliente(cliente: Cliente): Promise<string>{
-    return this.clientesColeccion.add(cliente)
+    return this.clientsCollection.add(cliente)
     .then((docRef) => {
       console.log('Cliente agregado con Id: ', docRef.id);
       return docRef.id;

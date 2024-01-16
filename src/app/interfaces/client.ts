@@ -1,4 +1,4 @@
-export interface Cliente{
+export interface Client{
     apellido?: string;
     email?: string;
     id?: string;

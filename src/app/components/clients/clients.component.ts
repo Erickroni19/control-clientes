@@ -1,12 +1,12 @@
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ClienteServices } from 'src/app/services/clientes.service';
+import { ClienteServices } from 'src/app/services/clients.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Cliente, Ids } from 'src/app/interfaces/client';
+import { Client, Ids } from 'src/app/interfaces/client';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -16,20 +16,20 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit, AfterViewInit{
-  dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
+  dataSource: MatTableDataSource<Client> = new MatTableDataSource();
   displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar', 'eliminar'];
 
   isDialogOpen: boolean = false;
-  clientsCopy: Cliente[] = [];
+  clientsCopy: Client[] = [];
   isLoading: boolean = true;
   clientsLength: number = 0;
   totalBalance: number = 0;
-  clients: Cliente[] = [];
+  clients: Client[] = [];
   userId: string = "";
   
-  clientData: Cliente = {};
+  clientData: Client = {};
   idsClients: Ids = {};
-  filtro: Cliente = {};
+  filtro: Client = {};
 
   errorTranslations: ErrorType= {
     'Missing or insufficient permissions.': '!Solo puedes eliminar o editar los clientes que tu agregas¡',
@@ -77,11 +77,11 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     })
   }
 
-  openAddAndEditDialog(idEjecucion: string, client: string){
+  openAddAndEditDialog(idExecution: string, client: string){
     
     if(this.isDialogOpen) return;
 
-    if(idEjecucion === 'Editar') this.getClient(client);
+    if(idExecution === 'Editar') this.getClient(client);
     
     setTimeout(() => {      
       const dialogRef = this.dialog.open(DialogAddClientComponent,{
@@ -92,7 +92,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
         exitAnimationDuration: '500ms',
         data:{
           editData: this.clientData || '',
-          idEjecucion: idEjecucion,
+          idEjecucion: idExecution,
           uid: this.userId
         }
       });
@@ -101,9 +101,9 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   
       dialogRef.afterClosed().subscribe(result => {
 
-        if(result && idEjecucion === 'Agregar') this.addClient(result);
+        if(result && idExecution === 'Agregar') this.addClient(result);
         
-        if(result && idEjecucion === 'Editar' && this.clientData.id) this.editClient(result, this.clientData.id);
+        if(result && idExecution === 'Editar' && this.clientData.id) this.editClient(result, this.clientData.id);
 
         this.isDialogOpen = false; 
       });  
@@ -140,7 +140,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     })
   }
 
-  deleteClient(clientData: Cliente){
+  deleteClient(clientData: Client){
     
     this.clientsService.eliminarCliente(clientData).then(() =>{
       this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
@@ -171,7 +171,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     return this.idsClients[client.id]
   }
 
-  addClient(client: Cliente){
+  addClient(client: Client){
     client.uid = this.userId;
   
           this.clientsService.agregarCliente(client)
@@ -182,7 +182,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
           });
   }
 
-  editClient(client: Cliente, id: string){
+  editClient(client: Client, id: string){
     this.clientsService.modificarCliente(client, id).then(() => {
       this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
     }, (error) => {
@@ -212,13 +212,13 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     this.dataSource.data = filteredList;
   }
 
-  getTotalBalance(clientes: Cliente[]){
+  getTotalBalance(clients: Client[]){
     
     let saldoTotal: number = 0;
     
-    clientes.forEach( cliente => {
-      if(cliente && cliente.saldo !== undefined){
-        saldoTotal += cliente.saldo;
+    clients.forEach( client => {
+      if(client && client.saldo !== undefined){
+        saldoTotal += client.saldo;
       }else {
         return;
       }
@@ -226,15 +226,15 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     return saldoTotal;
   }
 
-  assignNewId(cliente: Cliente[]){
+  assignNewId(client: Client[]){
     let newId: number = 0;
 
-    cliente.forEach( cliente => {
-      let oldId = cliente.id;
+    client.forEach( client => {
+      let oldId = client.id;
 
-      cliente.id = `${++newId}`;
+      client.id = `${++newId}`;
       
-      this.idsClients[cliente.id] = oldId;  
+      this.idsClients[client.id] = oldId;  
     })
   }
 }
