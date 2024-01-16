@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import { Cliente } from '../interfaces/client';
+import { Client } from '../interfaces/client';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,34 +9,32 @@ import { map } from 'rxjs/operators';
 })
 export class ClienteServices {
 
-  clientsCollection: AngularFirestoreCollection<Cliente>;
-  clienteDoc!: AngularFirestoreDocument<Cliente | null>;
-  clientes!: Observable<Cliente[]>;
-  cliente!: Observable<Cliente | null>;
+  clientsCollection: AngularFirestoreCollection<Client>;
+  clientDocument!: AngularFirestoreDocument<Client | null>;
+  clients!: Observable<Client[]>;
+  client!: Observable<Client | null>;
   
   constructor(private firebaseDb: AngularFirestore) {
     //Se hace la petición a la firebase para que retorne los nombres en orden ascendente 
     this.clientsCollection = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
   }
 
-  /**---Nos retorna la información de los clientes-----*/
-  getClientes(): Observable<Cliente[]>{
+  getClients(): Observable<Client[]>{
       //Obtenemos los clientes
-      this.clientes = this.clientsCollection.snapshotChanges().pipe(
-        map( cambios => {
-          return cambios.map( accion => {
-            const datos = accion.payload.doc.data() as Cliente;
-            datos.id = accion.payload.doc.id;
-            return datos
+      this.clients = this.clientsCollection.snapshotChanges().pipe(
+        map( changes => {
+          return changes.map( action => {
+            const data = action.payload.doc.data() as Client;
+            data.id = action.payload.doc.id;
+            return data
           })
         })
       )
-      return this.clientes
+      return this.clients
   } 
   
-  /**---Agrega un nuevo cliente a la base de datos--- */
-  agregarCliente(cliente: Cliente): Promise<string>{
-    return this.clientsCollection.add(cliente)
+  addClient(client: Client): Promise<string>{
+    return this.clientsCollection.add(client)
     .then((docRef) => {
       console.log('Cliente agregado con Id: ', docRef.id);
       return docRef.id;
@@ -47,29 +45,27 @@ export class ClienteServices {
     })
   }
 
-  /**---Obtenemos el cliente que deseamos mediante id--- */
-  getCliente(id:string){
-    this.clienteDoc = this.firebaseDb.doc<Cliente | null>(`clientes/${id}`);
+  getClientById(id:string){
+    this.clientDocument = this.firebaseDb.doc<Client | null>(`clientes/${id}`);
 
-    this.cliente = this.clienteDoc.snapshotChanges().pipe(
-      map( accion => {
-        if(accion.payload.exists === false){
+    this.client = this.clientDocument.snapshotChanges().pipe(
+      map( action => {
+        if(action.payload.exists === false){
           return null;
         }else{
-          const datos = accion.payload.data() as Cliente;
-          datos.id = accion.payload.id;
-          return datos;
+          const data = action.payload.data() as Client;
+          data.id = action.payload.id;
+          return data;
         }
       })
       );
-      return this.cliente;
+      return this.client;
   }
 
-  /**---Modificamos la información del cliente--- */
-  modificarCliente(cliente: Cliente, id: string): Promise<void>{
-  this.clienteDoc = this.firebaseDb.doc(`clientes/${id}`);
+  editClient(client: Client, id: string): Promise<void>{
+  this.clientDocument = this.firebaseDb.doc(`clientes/${id}`);
 
-    return this.clienteDoc.update(cliente).then((docRef) =>{
+    return this.clientDocument.update(client).then((docRef) =>{
       return docRef
     }).catch((error) =>{
       console.error(error);
@@ -77,18 +73,17 @@ export class ClienteServices {
     });
   }
 
-  /**---Elimina la información del cliente--- */
-  eliminarCliente(cliente: Cliente): Promise<void>{
-    if(cliente){
-      this.clienteDoc = this.firebaseDb.doc(`clientes/${cliente.id}`);
+  deleteClient(client: Client): Promise<void>{
+    if(client){
+      this.clientDocument = this.firebaseDb.doc(`clientes/${client.id}`);
 
-      return this.clienteDoc.delete().then((docRef) => {
+      return this.clientDocument.delete().then((docRef) => {
           return docRef
       }).catch((error) =>{
         console.error(error);
         throw error
       })
     }
-    return cliente;
+    return client;
  }
 }

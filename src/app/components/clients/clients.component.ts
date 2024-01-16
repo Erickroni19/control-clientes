@@ -55,11 +55,11 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit() {
    
-    this.clientsService.getClientes().subscribe(clientesDb => {
+    this.clientsService.getClients().subscribe(clientsDb => {
           
-          this.clients = clientesDb;
+          this.clients = clientsDb;
 
-          this.clientsCopy = JSON.parse(JSON.stringify(clientesDb));
+          this.clientsCopy = JSON.parse(JSON.stringify(clientsDb));
 
           this.assignNewId(this.clientsCopy);
           
@@ -142,7 +142,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
   deleteClient(clientData: Client){
     
-    this.clientsService.eliminarCliente(clientData).then(() =>{
+    this.clientsService.deleteClient(clientData).then(() =>{
       this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
 
     },(error: Error) => {
@@ -159,9 +159,9 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     const idOriginal = this.getIdClient(client);
 
     if(idOriginal !== undefined){
-      this.clientsService.getCliente(idOriginal).subscribe( cliente => {
+      this.clientsService.getClientById(idOriginal).subscribe( client => {
 
-        if(cliente !== null) this.clientData = cliente;
+        if(client !== null) this.clientData = client;
             
       })
     }
@@ -174,16 +174,16 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   addClient(client: Client){
     client.uid = this.userId;
   
-          this.clientsService.agregarCliente(client)
-          .then((clienteId) => {
+          this.clientsService.addClient(client)
+          .then((clientId) => {
 
-            if(clienteId) this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
+            if(clientId) this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
 
           });
   }
 
   editClient(client: Client, id: string){
-    this.clientsService.modificarCliente(client, id).then(() => {
+    this.clientsService.editClient(client, id).then(() => {
       this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
     }, (error) => {
       if(error){
