@@ -1,5 +1,5 @@
 import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email.component';
-import { ConfiguracionService } from 'src/app/services/configuration.service';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Configuration } from 'src/app/interfaces/configuration';
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit{
     'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
   };
  
-  constructor(private configurationService: ConfiguracionService,
+  constructor(private configurationService: ConfigurationService,
               private snackBarService: SnackBarService,
               private loginService: LoginService,
               public dialog: MatDialog,
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit() {
 
-    this.configurationService.getConfiguracion().subscribe(       
+    this.configurationService.getConfiguration().subscribe(       
       (configuration: Configuration) => {
 
         if(configuration.canRegister) this.canRegister = configuration.canRegister;

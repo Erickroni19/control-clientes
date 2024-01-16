@@ -1,7 +1,7 @@
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ClienteServices } from 'src/app/services/clients.service';
+import { ClientsServices } from 'src/app/services/clients.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -38,7 +38,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private clientsService: ClienteServices,
+  constructor(private clientsService: ClientsServices,
               private snackBarService :SnackBarService,
               private loginService: LoginService,
               public dialog: MatDialog,

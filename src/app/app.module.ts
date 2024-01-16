@@ -28,7 +28,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
-import { ClienteServices } from './services/clients.service';
+import { ClientsServices } from './services/clients.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -38,7 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AuthGuard } from './guard/auth.guard';
-import { ConfiguracionService } from './services/configuration.service';
+import { ConfigurationService } from './services/configuration.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SnackBarService } from './services/snackBar.service';
@@ -85,10 +85,10 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     MatSnackBarModule
   ],
   providers: [
-    ClienteServices, 
+    ClientsServices, 
     LoginService, 
     AuthGuard, 
-    ConfiguracionService,
+    ConfigurationService,
     SnackBarService,
     {provide: FIRESTORE_SETTINGS, useValue:{}}
   ],

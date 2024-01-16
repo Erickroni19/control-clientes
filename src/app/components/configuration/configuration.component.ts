@@ -1,4 +1,4 @@
-import { ConfiguracionService } from 'src/app/services/configuration.service';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Configuration } from 'src/app/interfaces/configuration';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,11 +12,11 @@ export class ConfigurationComponent implements OnInit{
 
   canRegister: boolean = false;
 
-  constructor(private configurationService: ConfiguracionService,
+  constructor(private configurationService: ConfigurationService,
               private router: Router){}
 
   ngOnInit() {
-    this.configurationService.getConfiguracion().subscribe(       
+    this.configurationService.getConfiguration().subscribe(       
       (configuration: Configuration) => {
 
         if(configuration.canRegister) this.canRegister = configuration.canRegister;
@@ -31,7 +31,7 @@ export class ConfigurationComponent implements OnInit{
       canRegister: this.canRegister
     };
 
-    this.configurationService.modificarConfiguracion(configuration);
+    this.configurationService.editConfiguration(configuration);
 
     //navegamos a inicio
     this.router.navigate(['/']);

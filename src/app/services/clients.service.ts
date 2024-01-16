@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 import { Client } from '../interfaces/client';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteServices {
+export class ClientsServices {
 
   clientsCollection: AngularFirestoreCollection<Client>;
   clientDocument!: AngularFirestoreDocument<Client | null>;
