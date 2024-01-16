@@ -6,7 +6,7 @@ import { SnackBarService } from 'src/app/services/snackBar.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Cliente, Ids } from 'src/app/interfaces/cliente';
+import { Cliente, Ids } from 'src/app/interfaces/client';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.css']
 })
-export class ClientesComponent implements OnInit, AfterViewInit{
+export class ClientsComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Cliente> = new MatTableDataSource();
   displayedColumns: string[] = ['id','nombre','apellido', 'email', 'saldo', 'editar', 'eliminar'];
 
@@ -38,7 +38,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private clientesService: ClienteServices,
+  constructor(private clientsService: ClienteServices,
               private snackBarService :SnackBarService,
               private loginService: LoginService,
               public dialog: MatDialog,
@@ -55,7 +55,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit() {
    
-    this.clientesService.getClientes().subscribe(clientesDb => {
+    this.clientsService.getClientes().subscribe(clientesDb => {
           
           this.clients = clientesDb;
 
@@ -142,7 +142,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
 
   deleteClient(clientData: Cliente){
     
-    this.clientesService.eliminarCliente(clientData).then(() =>{
+    this.clientsService.eliminarCliente(clientData).then(() =>{
       this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
 
     },(error: Error) => {
@@ -159,7 +159,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     const idOriginal = this.getIdClient(client);
 
     if(idOriginal !== undefined){
-      this.clientesService.getCliente(idOriginal).subscribe( cliente => {
+      this.clientsService.getCliente(idOriginal).subscribe( cliente => {
 
         if(cliente !== null) this.clientData = cliente;
             
@@ -174,7 +174,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   addClient(client: Cliente){
     client.uid = this.userId;
   
-          this.clientesService.agregarCliente(client)
+          this.clientsService.agregarCliente(client)
           .then((clienteId) => {
 
             if(clienteId) this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
@@ -183,7 +183,7 @@ export class ClientesComponent implements OnInit, AfterViewInit{
   }
 
   editClient(client: Cliente, id: string){
-    this.clientesService.modificarCliente(client, id).then(() => {
+    this.clientsService.modificarCliente(client, id).then(() => {
       this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
     }, (error) => {
       if(error){

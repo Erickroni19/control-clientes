@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, fromDocRef } from '@angular/fire/compat/firestore';
-import { Cliente } from '../interfaces/cliente';
+import { Cliente } from '../interfaces/client';
 import {Observable, from, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { error } from 'jquery';

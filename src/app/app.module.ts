@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ClientesComponent } from './components/clients/clients.component';
+import { ClientsComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
@@ -48,7 +48,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     AppComponent,
     HeaderComponent,
     DashboardComponent,
-    ClientesComponent,
+    ClientsComponent,
     LoginComponent,
     RegisterComponent,
     ConfigurationComponent,
