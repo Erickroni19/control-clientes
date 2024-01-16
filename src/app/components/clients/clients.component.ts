@@ -47,7 +47,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
   ngOnInit(){
 
-    this.loginService.getAuth().subscribe( userLoggedIn => {
+    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
       this.userId = userLoggedIn?.uid || '';
     })
     

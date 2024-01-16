@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit{
 
     this.createForm();
 
-    this.loginService.getAuth().subscribe( userLoggedIn => {
+    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
       
       if(userLoggedIn) this.router.navigate(['/']);
       
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit{
     let emailValue = this.getFormData('email');
     let passwordValue = this.getFormData('password');
     
-    this.loginService.login(emailValue, passwordValue)
+    this.loginService.validateLoginCredentials(emailValue, passwordValue)
     .then( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/']);
@@ -143,7 +143,7 @@ export class LoginComponent implements OnInit{
       console.log('result:' , result);
       if(result !== undefined){
 
-        this.loginService.sendPasswordResetEmail(result).then(()=>{
+        this.loginService.changePassword(result).then(()=>{
 
           const message = 'Se ha enviado un email, verifica tu bandeja de entrada';
           this.snackBarService.snackBarMessages(message, 'OK', 'green-snackbar', 'top')

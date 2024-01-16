@@ -13,8 +13,8 @@ export class DashboardComponent implements OnInit{
   constructor(private loginService: LoginService){}
 
   ngOnInit(){
-    this.loginService.getAuth().subscribe( userLoggedIn => {
-
+    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
+      
       if(userLoggedIn) this.isLoggedIn = true;
 
     })

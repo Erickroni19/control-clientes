@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit{
   ngOnInit() {
 
     /**Verificamos que el usuario este autenticado */
-    this.loginService.getAuth().subscribe( auth => {
+    this.loginService.getAuthenticatedUser().subscribe( auth => {
       if(auth){
         this.isLoggedIn = true;
 

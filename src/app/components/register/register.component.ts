@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit{
     this.createForm();
 
     /**Si el usuario esta logeado redirecciona a la ventana de inicio */
-    this.loginService.getAuth().subscribe( userLoggedIn => {
+    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/'])
 
@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit{
     let emailValue = this.getFormData('email');
     let passwordValue = this.getFormData('password');
     
-    this.loginService.register(emailValue, passwordValue)
+    this.loginService.registerUser(emailValue, passwordValue)
     .then( resp => {
       if(resp){
         this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
