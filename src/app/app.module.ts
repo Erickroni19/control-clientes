@@ -37,7 +37,6 @@ import { DialogAddClientComponent } from './components/dialog-add-client/dialog-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { AuthGuard } from './guard/auth.guard';
 import { ConfigurationService } from './services/configuration.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
@@ -87,7 +86,6 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
   providers: [
     ClientsServices, 
     LoginService, 
-    AuthGuard, 
     ConfigurationService,
     SnackBarService,
     {provide: FIRESTORE_SETTINGS, useValue:{}}

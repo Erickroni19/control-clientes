@@ -27,16 +27,16 @@ export class HeaderComponent implements OnInit{
   ngOnInit() {
 
     /**Verificamos que el usuario este autenticado */
-    this.loginService.getAuthenticatedUser().subscribe( auth => {
-      if(auth){
-        this.isLoggedIn = true;
+    // this.loginService.getAuthenticatedUser().subscribe( auth => {
+    //   if(auth){
+    //     this.isLoggedIn = true;
 
-        if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
-      }else{
-        this.isLoggedIn = false;
-        this.router.navigate(['/login'])
-      }
-    })
+    //     if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
+    //   }else{
+    //     this.isLoggedIn = false;
+    //     // this.router.navigate(['/login'])
+    //   }
+    // })
   }
 
   @HostListener('window:resize', ['$event'])
