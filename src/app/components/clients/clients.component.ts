@@ -22,6 +22,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   isDialogOpen: boolean = false;
   clientsCopy: Client[] = [];
   isLoading: boolean = true;
+  isLoggedIn: boolean = false;
   clientsLength: number = 0;
   totalBalance: number = 0;
   clients: Client[] = [];
@@ -49,6 +50,9 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
     this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
       this.userId = userLoggedIn?.uid || '';
+
+      userLoggedIn ? this.isLoggedIn = true : this.isLoggedIn = false;
+
     })
     
   }
@@ -147,9 +151,21 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
     },(error: Error) => {
 
+      if(error && !this.isLoggedIn){
+        const errorMessage = 'Debe iniciar sesion para eliminar cliente';
+
+        this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
+
+        return;
+      }
+
+
       if(error){
         const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+
         this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
+
+        return;
       }
     })
   }
@@ -176,9 +192,13 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   
           this.clientsService.addClient(client)
           .then((clientId) => {
-
             if(clientId) this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
 
+          }, (error) => {
+            if(error && !this.isLoggedIn){
+              const errorMessage = 'Debe iniciar sesion para agregar cliente';
+              this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
+            }
           });
   }
 
@@ -186,9 +206,19 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     this.clientsService.editClient(client, id).then(() => {
       this.snackBarService.snackBarMessages('Cliente Editado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
     }, (error) => {
+      if(error && !this.isLoggedIn){
+        const errorMessage = 'Debe iniciar sesion para editar cliente';
+
+        this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
+
+        return
+      }
       if(error){
         const errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+
         this.snackBarService.snackBarMessages(errorMessage, 'Ok', 'red-snackbar', 'bottom');
+
+        return;
       }
     })
   }

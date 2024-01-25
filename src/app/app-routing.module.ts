@@ -5,7 +5,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-// import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},

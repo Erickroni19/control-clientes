@@ -13,12 +13,12 @@ import { OnInit} from '@angular/core';
 
 export class HeaderComponent implements OnInit{
 
-  //Variables
   isHeaderResponsive: boolean = window.innerWidth <= 700;
   hasHideResponsiveMenu: boolean = false;
   emailOfLoggedInUser: string = '';
   isLoggedIn: boolean = false;
   hasClicked: boolean = false;
+  userStatus: string = '';
 
   constructor(private loginService: LoginService,
               private router: Router
@@ -26,17 +26,18 @@ export class HeaderComponent implements OnInit{
   
   ngOnInit() {
 
-    /**Verificamos que el usuario este autenticado */
-    // this.loginService.getAuthenticatedUser().subscribe( auth => {
-    //   if(auth){
-    //     this.isLoggedIn = true;
+    this.loginService.getAuthenticatedUser().subscribe( auth => {
+      if(auth){
+        this.isLoggedIn = true;
+        this.userStatus = 'Bienvenido';
 
-    //     if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
-    //   }else{
-    //     this.isLoggedIn = false;
-    //     // this.router.navigate(['/login'])
-    //   }
-    // })
+        if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
+      }else{
+        this.isLoggedIn = false;
+        
+        this.userStatus = 'Iniciar Sesion';
+      }
+    })
   }
 
   @HostListener('window:resize', ['$event'])
@@ -65,6 +66,5 @@ export class HeaderComponent implements OnInit{
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }
-
 
 }
