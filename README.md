@@ -8,7 +8,7 @@ A Firestore database was also implemented to store customer information and user
 - It also has a login, registration and configuration view.
 
 ## My App
-Deployed application => https://controlclientess.netlify.app/
+Application => https://controlclientess.netlify.app/
   
 ## Author
 - [@Erickroni19](https://github.com/Erickroni19)
