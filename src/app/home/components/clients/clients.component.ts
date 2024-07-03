@@ -1,6 +1,5 @@
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
 import { ClientsServices } from 'src/app/services/clients.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -9,9 +8,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Client, Ids } from 'src/app/interfaces/client';
 import { ErrorType } from 'src/app/interfaces/error-type';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogAddClientComponent } from 'src/app/components/dialog-add-client/dialog-add-client.component';
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-clients',
+  selector: 'home-clients',
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.css']
 })
@@ -27,7 +28,7 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   totalBalance: number = 0;
   clients: Client[] = [];
   userId: string = "";
-  
+
   clientData: Client = {};
   idsClients: Ids = {};
   filtro: Client = {};
@@ -54,19 +55,19 @@ export class ClientsComponent implements OnInit, AfterViewInit{
       userLoggedIn ? this.isLoggedIn = true : this.isLoggedIn = false;
 
     })
-    
+
   }
 
   ngAfterViewInit() {
-   
+
     this.clientsService.getClients().subscribe(clientsDb => {
-          
+
           this.clients = clientsDb;
 
           this.clientsCopy = JSON.parse(JSON.stringify(clientsDb));
 
           this.assignNewId(this.clientsCopy);
-          
+
           this.dataSource = new MatTableDataSource(this.clientsCopy);
 
           if(this.dataSource.data && this.paginator){
@@ -76,18 +77,18 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
             this.isLoading = false;
           }
-        
+
           this.totalBalance = this.getTotalBalance(this.clients);
     })
   }
 
   openAddAndEditDialog(idExecution: string, client: string){
-    
+
     if(this.isDialogOpen) return;
 
     if(idExecution === 'Editar') this.getClient(client);
-    
-    setTimeout(() => {      
+
+    setTimeout(() => {
       const dialogRef = this.dialog.open(DialogAddClientComponent,{
         width: '600px',
         height: '265px',
@@ -100,22 +101,22 @@ export class ClientsComponent implements OnInit, AfterViewInit{
           uid: this.userId
         }
       });
-      
+
       this.isDialogOpen = true
-  
+
       dialogRef.afterClosed().subscribe(result => {
 
         if(result && idExecution === 'Agregar') this.addClient(result);
-        
+
         if(result && idExecution === 'Editar' && this.clientData.id) this.editClient(result, this.clientData.id);
 
-        this.isDialogOpen = false; 
-      });  
+        this.isDialogOpen = false;
+      });
     }, 20);
   }
 
   openConfirmDialog(client: string){
-    
+
     if(this.isDialogOpen) return;
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
@@ -130,22 +131,22 @@ export class ClientsComponent implements OnInit, AfterViewInit{
     });
 
     this.isDialogOpen = true;
-    
+
     dialogRef.afterClosed().subscribe(result => {
 
       this.getClient(client);
 
-      setTimeout(() => { 
-        if(result === 'Si') this.deleteClient(this.clientData);  
+      setTimeout(() => {
+        if(result === 'Si') this.deleteClient(this.clientData);
 
       },50)
-  
-      this.isDialogOpen = false;          
+
+      this.isDialogOpen = false;
     })
   }
 
   deleteClient(clientData: Client){
-    
+
     this.clientsService.deleteClient(clientData).then(() =>{
       this.snackBarService.snackBarMessages('Cliente Eliminado Exitosamente', 'Ok', 'green-snackbar', 'bottom');
 
@@ -178,18 +179,18 @@ export class ClientsComponent implements OnInit, AfterViewInit{
       this.clientsService.getClientById(idOriginal).subscribe( client => {
 
         if(client !== null) this.clientData = client;
-            
+
       })
     }
   }
 
-  getIdClient(client: any) { 
+  getIdClient(client: any) {
     return this.idsClients[client.id]
   }
 
   addClient(client: Client){
     client.uid = this.userId;
-  
+
           this.clientsService.addClient(client)
           .then((clientId) => {
             if(clientId) this.snackBarService.snackBarMessages('Cliente Agregado Exitosamente', 'Ok', 'green-snackbar','bottom');
@@ -243,9 +244,9 @@ export class ClientsComponent implements OnInit, AfterViewInit{
   }
 
   getTotalBalance(clients: Client[]){
-    
+
     let saldoTotal: number = 0;
-    
+
     clients.forEach( client => {
       if(client && client.saldo !== undefined){
         saldoTotal += client.saldo;
@@ -263,8 +264,8 @@ export class ClientsComponent implements OnInit, AfterViewInit{
       let oldId = client.id;
 
       client.id = `${++newId}`;
-      
-      this.idsClients[client.id] = oldId;  
+
+      this.idsClients[client.id] = oldId;
     })
   }
 }

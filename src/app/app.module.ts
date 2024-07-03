@@ -9,8 +9,6 @@ import {AngularFirestoreModule, SETTINGS as FIRESTORE_SETTINGS} from '@angular/f
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ClientsComponent } from './components/clients/clients.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -44,8 +42,6 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
   declarations: [
     AppComponent,
     HeaderComponent,
-    DashboardComponent,
-    ClientsComponent,
     ConfigurationComponent,
     PageNotFoundComponent,
     FooterComponent,
