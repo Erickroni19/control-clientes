@@ -11,8 +11,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClientsComponent } from './components/clients/clients.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -48,8 +46,6 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     HeaderComponent,
     DashboardComponent,
     ClientsComponent,
-    LoginComponent,
-    RegisterComponent,
     ConfigurationComponent,
     PageNotFoundComponent,
     FooterComponent,
@@ -84,8 +80,8 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     MatSnackBarModule
   ],
   providers: [
-    ClientsServices, 
-    LoginService, 
+    ClientsServices,
+    LoginService,
     ConfigurationService,
     SnackBarService,
     {provide: FIRESTORE_SETTINGS, useValue:{}}

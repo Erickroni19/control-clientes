@@ -1,0 +1,31 @@
+<div class="registro">
+    <h1>Registrate</h1>
+    <form class="form" [formGroup]="registerForm">
+        <!-- <span>Email*</span> -->
+        <div class="email">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
+                <mat-error *ngIf="(this.registerForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <!-- <span>Password*</span> -->
+        <div class="contraseña">
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" (input)="getFormData('password')" [type]="isHidden ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
+                    <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="(this.registerForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="button-registrar">
+            <button mat-raised-button color="primary" (click)="sendRegisterData()" [disabled]="validateForm()">Registrarse</button>
+        </div>
+        <div class="errorMessage" *ngIf="hasRegisterError">
+            {{errorMessage}}
+        </div>
+    </form>
+</div>
+

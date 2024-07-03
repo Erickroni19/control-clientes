@@ -1,13 +1,14 @@
-import { DialogSendEmailComponent } from '../dialog-send-email/dialog-send-email.component';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { SnackBarService } from 'src/app/services/snackBar.service';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Configuration } from 'src/app/interfaces/configuration';
 import { LoginService } from 'src/app/services/login.service';
 import { ErrorType } from 'src/app/interfaces/error-type';
-import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { DialogSendEmailComponent } from 'src/app/components/dialog-send-email/dialog-send-email.component';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,11 @@ export class LoginComponent implements OnInit{
   isHidden: boolean = true;
 
   loginForm!: FormGroup;
-  
+
   errorTranslations: ErrorType= {
     'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
   };
- 
+
   constructor(private configurationService: ConfigurationService,
               private snackBarService: SnackBarService,
               private loginService: LoginService,
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit() {
 
-    this.configurationService.getConfiguration().subscribe(       
+    this.configurationService.getConfiguration().subscribe(
       (configuration: Configuration) => {
 
         if(configuration.canRegister) this.canRegister = configuration.canRegister;
@@ -48,9 +49,9 @@ export class LoginComponent implements OnInit{
     this.createForm();
 
     this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
-      
+
       if(userLoggedIn) this.router.navigate(['/']);
-      
+
     })
 
   }
@@ -59,15 +60,15 @@ export class LoginComponent implements OnInit{
 
     let emailValue = this.getFormData('email');
     let passwordValue = this.getFormData('password');
-    
+
     this.loginService.validateLoginCredentials(emailValue, passwordValue)
     .then( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/']);
-      
+
     })
     .catch(error => {
-    
+
       if(error) {
         this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
 
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit{
         },3500)
       }
     });
-   
+
   }
 
   getFormData(fieldName: String){
@@ -91,11 +92,11 @@ export class LoginComponent implements OnInit{
   }
 
   getErrorMessage(fieldInput: string){
-    
+
     if(this.loginForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
-      
+
     if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')) return 'El email no es valido';
-      
+
     return '';
   }
 
@@ -111,9 +112,9 @@ export class LoginComponent implements OnInit{
     let isButtonDisabled: boolean;
 
     this.loginForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
-   
+
     return isButtonDisabled;
-    
+
   }
 
   private createForm(){
@@ -124,8 +125,8 @@ export class LoginComponent implements OnInit{
   }
 
   navigateToRegistro() {
-    this.router.navigate(['/registrarse']);
-  } 
+    this.router.navigate(['auth/register']);
+  }
 
   OpenDialogNewPassword(){
 
