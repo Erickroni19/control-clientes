@@ -1,7 +1,7 @@
-import { LoginService } from 'src/app/services/login.service';
 import { Component,HostListener} from '@angular/core';
 import { Router } from '@angular/router';
 import { OnInit} from '@angular/core';
+import { LoginService } from 'src/app/core/services/login.service';
 
 
 
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit{
   constructor(private loginService: LoginService,
               private router: Router
   ) {}
-  
+
   ngOnInit() {
 
     this.loginService.getAuthenticatedUser().subscribe( auth => {
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit{
         if(auth.email !== null) this.emailOfLoggedInUser = auth.email;
       }else{
         this.isLoggedIn = false;
-        
+
         this.userStatus = 'Iniciar Sesion';
       }
     })
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit{
 
 
   controlDropDown(event: Event) {
-    
+
     if(event.type == 'click' && !this.hasClicked) {
       this.hasHideResponsiveMenu = true
       this.hasClicked = true;

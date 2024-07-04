@@ -1,5 +1,5 @@
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Configuration } from '../interfaces/configuration';
+import { Configuration } from '../interfaces/configuration.interface';
 import { Observable, filter, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 

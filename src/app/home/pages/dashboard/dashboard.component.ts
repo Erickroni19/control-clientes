@@ -1,6 +1,6 @@
-import { LoginService } from 'src/app/services/login.service';
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
+import { LoginService } from 'src/app/core/services/login.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(){
     this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
-      
+
       if(userLoggedIn) this.isLoggedIn = true;
 
     })

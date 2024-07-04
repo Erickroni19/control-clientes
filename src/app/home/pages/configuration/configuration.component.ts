@@ -1,5 +1,5 @@
-import { ConfigurationService } from 'src/app/services/configuration.service';
-import { Configuration } from 'src/app/interfaces/configuration';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
+import { Configuration } from 'src/app/core/interfaces/configuration.interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,11 +16,11 @@ export class ConfigurationComponent implements OnInit{
               private router: Router){}
 
   ngOnInit() {
-    this.configurationService.getConfiguration().subscribe(       
+    this.configurationService.getConfiguration().subscribe(
       (configuration: Configuration) => {
 
         if(configuration.canRegister) this.canRegister = configuration.canRegister;
-          
+
       }
     )
   }
@@ -34,7 +34,7 @@ export class ConfigurationComponent implements OnInit{
     this.configurationService.editConfiguration(configuration);
 
     //navegamos a inicio
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
 }

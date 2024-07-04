@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './pages/register/register.component';
+import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RegisterComponent } from './pages/register/register.component';
     AuthLayoutComponent,
     LoginComponent,
     RegisterComponent,
+    DialogSendEmailComponent,
   ],
   imports: [
     AuthRoutingModule,

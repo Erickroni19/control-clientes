@@ -1,5 +1,5 @@
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import { Client } from '../interfaces/client';
+import { Client } from '../../core/interfaces/client.interface';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -13,9 +13,9 @@ export class ClientsServices {
   clientDocument!: AngularFirestoreDocument<Client | null>;
   clients!: Observable<Client[]>;
   client!: Observable<Client | null>;
-  
+
   constructor(private firebaseDb: AngularFirestore) {
-    //Se hace la petición a la firebase para que retorne los nombres en orden ascendente 
+    //Se hace la petición a la firebase para que retorne los nombres en orden ascendente
     this.clientsCollection = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
   }
 
@@ -31,8 +31,8 @@ export class ClientsServices {
         })
       )
       return this.clients
-  } 
-  
+  }
+
   addClient(client: Client): Promise<string>{
     return this.clientsCollection.add(client)
     .then((docRef) => {

@@ -1,3 +1,4 @@
+//TODO: Revisar porque todo es opcional client(User)
 export interface Client{
     apellido?: string;
     email?: string;

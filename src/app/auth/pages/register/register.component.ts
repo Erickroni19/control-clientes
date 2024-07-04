@@ -1,9 +1,9 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnackBarService } from 'src/app/services/snackBar.service';
-import { LoginService } from 'src/app/services/login.service';
-import { ErrorType } from 'src/app/interfaces/error-type';
+import { SnackBarService } from 'src/app/core/services/snackBar.service';
+import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -16,20 +16,20 @@ export class RegisterComponent implements OnInit{
   hasRegisterError: boolean = false;
   errorMessage = "";
   isHidden = true;
-  
+
   registerForm!: FormGroup;
 
   errorTranslations: ErrorType= {
       'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
   };
-  
+
   constructor(private loginService: LoginService,
               private fb: FormBuilder,
               private router: Router,
               private snackBarService: SnackBarService){}
 
   ngOnInit(){
- 
+
     this.createForm();
 
     /**Si el usuario esta logeado redirecciona a la ventana de inicio */
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit{
   getFormData(fieldName: String){
     let fieldInput = '';
     fieldInput = this.registerForm.get(`${fieldName}`)?.value
-  
+
     return fieldInput
   }
 
@@ -61,14 +61,14 @@ export class RegisterComponent implements OnInit{
     this.registerForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
 
     return isButtonDisabled;
-    
+
   }
 
   validatePassword(){
     const password = this.getFormData('password');
-  
+
     if(password.length < 10) return true;
-    
+
     return false
   }
 
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit{
     // Obtener los valores del formulario
     let emailValue = this.getFormData('email');
     let passwordValue = this.getFormData('password');
-    
+
     this.loginService.registerUser(emailValue, passwordValue)
     .then( resp => {
       if(resp){
@@ -93,12 +93,12 @@ export class RegisterComponent implements OnInit{
           this.hasRegisterError = false;
         },3000)
 
-      } 
+      }
     });
   }
 
   getErrorMessage(fieldInput: string){
-    
+
     if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
 
     if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido';

@@ -3,12 +3,13 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { ConfigurationService } from 'src/app/services/configuration.service';
-import { SnackBarService } from 'src/app/services/snackBar.service';
-import { Configuration } from 'src/app/interfaces/configuration';
-import { LoginService } from 'src/app/services/login.service';
-import { ErrorType } from 'src/app/interfaces/error-type';
-import { DialogSendEmailComponent } from 'src/app/components/dialog-send-email/dialog-send-email.component';
+import { ConfigurationService } from 'src/app/core/services/configuration.service';
+import { SnackBarService } from 'src/app/core/services/snackBar.service';
+import { Configuration } from 'src/app/core/interfaces/configuration.interface';
+import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
+import { DialogSendEmailComponent } from 'src/app/auth/components/dialog-send-email/dialog-send-email.component';
+import { LoginService } from 'src/app/core/services/login.service';
+
 
 @Component({
   selector: 'app-login',

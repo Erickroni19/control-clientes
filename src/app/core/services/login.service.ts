@@ -30,7 +30,7 @@ export class LoginService {
   registerUser(email: string, password: string){
     return new Promise((resolve, reject) =>{
       this.authService.createUserWithEmailAndPassword(email, password)
-      .then(data => resolve(data), 
+      .then(data => resolve(data),
       error => reject(error))
     })
   }
