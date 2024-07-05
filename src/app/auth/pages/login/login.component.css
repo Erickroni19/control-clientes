@@ -1,0 +1,196 @@
+/* .container-login {
+    margin: 0px;
+    padding: 0px;
+    background: linear-gradient(150deg, #0a366d, #2c578d);
+    width: 100%;
+    height: 100%;
+}
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    width: 400px;
+    border-radius: 10px solid gray;
+} */
+
+.login h1 {
+    margin-top: 20px;
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.login .form {
+    padding: 0 40px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.login .email mat-form-field {
+    position: relative;
+    width: 300px;
+}
+
+.login .contraseña mat-form-field {
+    width: 300px;
+}
+
+.login .button-ingresar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .button-ingresar button {
+    font-size: 17px;
+    width: 90%;
+    border-radius: 19px;
+    margin-bottom: 15px;
+    background-color: #0f4d99;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
+.login .button-ingresar button:disabled {
+    background-color: #d8d9da;
+    color: white;
+    box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
+.login a {
+    display: flex;
+    justify-content: flex-start;
+    /* margin-top: 5px; */
+    margin-bottom: 20px;
+}
+
+.login .registrarse {
+    /* margin-top: 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.login .registrarse a {
+    margin-top: 15px;
+    color: #1a1ace;
+}
+
+.login .errorMessage {
+    display: flex;
+    justify-content: center;
+    color: red;
+    background-color: rgba(252, 163, 163, 0.308);
+    padding: 5px;
+    border-radius: 5px;
+    /* margin-bottom: 20px; */
+    margin: 0 20px 0;
+}
+
+.login .change-password {
+    color: #1a1ace;
+    font-size: 14px;
+}
+
+::ng-deep .green-snackbar {
+    --mdc-snackbar-container-color: #015201;
+    --mdc-snackbar-supporting-text-color: white;
+    --mat-mdc-snack-bar-button-color: #fff !important;
+}
+
+::ng-deep .green-snackbar button {
+    color: white !important;
+}
+
+::ng-deep .red-snackbar {
+    --mdc-snackbar-container-color: #a70202;
+    --mdc-snackbar-supporting-text-color: white;
+}
+
+::ng-deep .red-snackbar button {
+    color: white !important;
+}
+
+@media (max-width: 414px) {
+    .login {
+        width: 350px;
+    }
+    .login .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login {
+        width: 320px;
+    }
+    .login .form {
+        padding: 0 35px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .login .email mat-form-field {
+        position: relative;
+        width: 250px;
+    }
+    .login .contraseña mat-form-field {
+        width: 250px;
+    }
+    .login .registrarse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+    .login .registrarse a {
+        font-size: 12px;
+    }
+    .login .change-password {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 280px) {
+    .login {
+        width: 250px;
+    }
+    .login .form {
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .login .email mat-form-field {
+        position: relative;
+        width: 210px;
+    }
+    .login .contraseña mat-form-field {
+        width: 210px;
+    }
+    .login .registrarse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9px;
+        margin-bottom: 15px;
+    }
+    .login .registrarse a {
+        font-size: 9px;
+    }
+    .login .change-password {
+        font-size: 10px;
+    }
+    .login .button-ingresar button {
+        font-size: 13px;
+        width: 85%;
+    }
+}
