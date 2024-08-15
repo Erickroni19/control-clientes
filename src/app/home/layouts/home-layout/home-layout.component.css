@@ -1,0 +1,11 @@
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: 25px;
+}
+
+

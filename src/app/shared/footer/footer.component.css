@@ -1,10 +1,10 @@
-#main-footer {
+/* #main-footer {
     position: sticky;
     bottom: 20%;
-}
+} */
 
 .container-footer {
-    height: 80px;
+    height: 150px;
     background: linear-gradient(150deg, #0a366d, #2c578d);
     display: flex;
     justify-content: center;
