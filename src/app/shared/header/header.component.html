@@ -1,7 +1,8 @@
 <div class="header">
     <mat-toolbar class="toolbar">
         <mat-toolbar-row id="rowOne">
-            <a mat-button routerLink="/">
+            <a class="main-logo" mat-button routerLink="/">
+              <!-- <img src="../../../assets/img/client.png" alt="logo" width="40px"> -->
                 Control Clientes
             </a>
             <div class="buttonMenu">
@@ -14,7 +15,7 @@
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
                     </a>
-                    <a mat-button class="menu-button" *ngIf="userStatus == 'Iniciar Sesion'" routerLink="/login">
+                    <a mat-button class="menu-button" *ngIf="userStatus == 'Iniciar Sesion'" routerLink="auth/login">
                         <mat-icon matListItemIcon>account_circle</mat-icon>
                         {{userStatus}}
                     </a>

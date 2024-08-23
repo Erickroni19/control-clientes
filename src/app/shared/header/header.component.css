@@ -23,6 +23,12 @@
 
 /*-------Menu Button--------*/
 
+.main-logo {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttonMenu mat-icon-button {
     flex: end;
 }

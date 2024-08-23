@@ -54,6 +54,7 @@
 
 .footer-decoration {
   height: 8px;
-  background: linear-gradient(to right, #b43939, #aa5d1e, #8a8122, #209233, #293d8b);
+  background: linear-gradient(to right, #8c9fb2,  #366d0a);
+  /* background-color: #366d0a; */
 }
 

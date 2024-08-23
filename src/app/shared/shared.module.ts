@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -22,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,

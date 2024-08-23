@@ -82,7 +82,7 @@
 }
 
 .edit-icon {
-    color: #172e6d;
+    color: #0a4a7d;
 }
 
 .delete-icon {
@@ -116,7 +116,7 @@
 
 .container-cards .card-saldo {
     margin-bottom: 10px;
-    background-color: #c93b3b;
+    background-color: #366d0a;
     color: white;
 }
 
@@ -133,7 +133,7 @@
 /*Card total-clientes*/
 
 .container-cards .card-totalClientes {
-    background-color: rgb(63, 112, 40);
+    background-color: #4a6d8c;
     color: white;
 }
 

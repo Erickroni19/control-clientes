@@ -4,8 +4,12 @@
   flex-direction: column;
 }
 
+/* .header {
+  margin-bottom: 20px;
+} */
+
 .footer {
-  margin-top: 25px;
+  margin-top: 35px;
 }
 
 
