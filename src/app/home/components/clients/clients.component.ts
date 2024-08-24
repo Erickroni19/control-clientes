@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
-import { ClientsServices } from 'src/app/home/services/clients.service';
+import { ClientsServices } from 'src/app/core/services/clients.service';
 import { SnackBarService } from 'src/app/core/services/snackBar.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

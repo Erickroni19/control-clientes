@@ -4,6 +4,14 @@
         <!-- <span>Email*</span> -->
         <div class="email">
             <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="juanito123" type="text" formControlName="username" required>
+                <mat-error *ngIf="(this.registerForm.get('username')?.invalid)">{{getErrorMessage('email')}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="email">
+            <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
                 <mat-error *ngIf="(this.registerForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
@@ -18,6 +26,17 @@
                     <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </button>
                 <mat-error *ngIf="(this.registerForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="contraseña">
+            <mat-form-field appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmPassword" (input)="getFormData('password')" [type]="isHidden ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
+                    <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="(this.registerForm.get('confirmPassword')?.invalid)">{{getErrorMessage('password')}}</mat-error>
             </mat-form-field>
         </div>
         <div class="button-registrar">

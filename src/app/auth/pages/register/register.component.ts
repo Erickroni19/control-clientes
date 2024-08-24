@@ -13,9 +13,9 @@ import { LoginService } from 'src/app/core/services/login.service';
 
 export class RegisterComponent implements OnInit{
 
-  hasRegisterError: boolean = false;
-  errorMessage = "";
-  isHidden = true;
+  public hasRegisterError: boolean = false;
+  public errorMessage = "";
+  public isHidden = true;
 
   registerForm!: FormGroup;
 
@@ -42,8 +42,10 @@ export class RegisterComponent implements OnInit{
 
   private createForm(){
     this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
-      password: ['', [Validators.required,Validators.minLength(10)]]
+      password: ['', [Validators.required, Validators.minLength(10)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
@@ -73,28 +75,30 @@ export class RegisterComponent implements OnInit{
   }
 
   sendRegisterData() {
-    // Obtener los valores del formulario
-    let emailValue = this.getFormData('email');
-    let passwordValue = this.getFormData('password');
 
-    this.loginService.registerUser(emailValue, passwordValue)
-    .then( resp => {
-      if(resp){
-        this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
-        this.router.navigate(['/']);
-      }
-    })
-    .catch(error => {
+    const { username, email, password } = this.registerForm.value;
 
-      if(error){
-        this.hasRegisterError = true;
-        this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-        setTimeout(() => {
-          this.hasRegisterError = false;
-        },3000)
+    console.log(email, password);
 
-      }
-    });
+
+    this.loginService.registerUser(email, password)
+      .then( resp => {
+        if(resp){
+          this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
+          this.router.navigate(['/']);
+        }
+      })
+      .catch(error => {
+
+        if(error){
+          this.hasRegisterError = true;
+          this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+          setTimeout(() => {
+            this.hasRegisterError = false;
+          },3000)
+
+        }
+      });
   }
 
   getErrorMessage(fieldInput: string){

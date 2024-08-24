@@ -1,22 +1,27 @@
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import { Client } from '../../core/interfaces/client.interface';
+import { Client } from '../interfaces/client.interface';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/core/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientsServices {
 
-  clientsCollection: AngularFirestoreCollection<Client>;
-  clientDocument!: AngularFirestoreDocument<Client | null>;
-  clients!: Observable<Client[]>;
-  client!: Observable<Client | null>;
+  //TODO: Revisar que es private y que es public
+  public clientsCollection: AngularFirestoreCollection<Client>;
+  public usersCollection: AngularFirestoreCollection<User>;
+  public clientDocument!: AngularFirestoreDocument<Client | null>;
+  public clients!: Observable<Client[]>;
+  public client!: Observable<Client | null>;
 
   constructor(private firebaseDb: AngularFirestore) {
     //Se hace la petición a la firebase para que retorne los nombres en orden ascendente
     this.clientsCollection = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
+
+    this.usersCollection = firebaseDb.collection('users');
   }
 
   getClients(): Observable<Client[]>{
