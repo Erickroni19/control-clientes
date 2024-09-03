@@ -1,12 +1,10 @@
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
-import { ConfigurationService } from 'src/app/core/services/configuration.service';
-import { SnackBarService } from 'src/app/core/services/snackBar.service';
-import { Configuration } from 'src/app/core/interfaces/configuration.interface';
-import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
+import { Configuration, ErrorType } from 'src/app/core/interfaces';
+import { ConfigurationService, SnackBarService } from 'src/app/core/services';
 import { DialogSendEmailComponent } from 'src/app/auth/components/dialog-send-email/dialog-send-email.component';
 import { LoginService } from 'src/app/core/services/login.service';
 
@@ -32,10 +30,11 @@ export class LoginComponent implements OnInit{
   constructor(private configurationService: ConfigurationService,
               private snackBarService: SnackBarService,
               private loginService: LoginService,
-              public dialog: MatDialog,
               private formBuilder: FormBuilder,
-              private router: Router
-              ) {}
+              private router: Router,
+
+              public dialog: MatDialog,
+            ) {}
 
   ngOnInit() {
 
@@ -123,10 +122,6 @@ export class LoginComponent implements OnInit{
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       password: ['', [Validators.required]]
     });
-  }
-
-  navigateToRegistro() {
-    this.router.navigate(['auth/register']);
   }
 
   OpenDialogNewPassword(){

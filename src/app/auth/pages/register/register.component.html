@@ -45,6 +45,10 @@
         <div class="errorMessage" *ngIf="hasRegisterError">
             {{errorMessage}}
         </div>
+        <div class="login">
+          <span>¿Ya tienes una cuenta? -</span>
+          <a mat-button routerLink="/auth/login">Iniciar Sesión</a>
+      </div>
     </form>
 </div>
 

@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
     MatFormFieldModule,
     MatInputModule,
