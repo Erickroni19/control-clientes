@@ -1,9 +1,8 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnackBarService } from 'src/app/core/services/snackBar.service';
-import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
 import { Component, OnInit } from '@angular/core';
+import { ErrorType } from 'src/app/core/interfaces';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService, SnackBarService } from 'src/app/core/services';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-register',
