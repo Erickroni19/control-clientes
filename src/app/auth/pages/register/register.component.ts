@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorType } from 'src/app/core/interfaces';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { LoginService, SnackBarService } from 'src/app/core/services';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit{
   public errorMessage = "";
   public isHidden = true;
 
-  registerForm!: FormGroup;
+  public registerForm!: FormGroup;
 
   errorTranslations: ErrorType= {
       'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit{
 
     this.createForm();
 
-    /**Si el usuario esta logeado redirecciona a la ventana de inicio */
     this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/'])
@@ -45,40 +44,14 @@ export class RegisterComponent implements OnInit{
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
       password: ['', [Validators.required, Validators.minLength(10)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(10)]]
+    }, {
+      validators: [ this.isFieldOneEqualFieldTwo('password', 'confirmPassword') ]
     });
-  }
-
-  getFormData(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.registerForm.get(`${fieldName}`)?.value
-
-    return fieldInput
-  }
-
-  validateForm(){
-
-    let isButtonDisabled: boolean;
-
-    this.registerForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
-
-    return isButtonDisabled;
-
-  }
-
-  validatePassword(){
-    const password = this.getFormData('password');
-
-    if(password.length < 10) return true;
-
-    return false
   }
 
   sendRegisterData() {
 
     const { username, email, password } = this.registerForm.value;
-
-    console.log(email, password);
-
 
     this.loginService.registerUser(email, password)
       .then( resp => {
@@ -100,15 +73,21 @@ export class RegisterComponent implements OnInit{
       });
   }
 
-  getErrorMessage(fieldInput: string){
+  isFieldOneEqualFieldTwo( formControlName1: string, formControlName2: string ) {
 
-    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
+    return ( formGroup: AbstractControl ): ValidationErrors | null => {
 
-    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido';
+      const fieldValue1 = formGroup.get(formControlName1)?.value;
+      const fieldValue2 = formGroup.get(formControlName2)?.value;
 
-    if(fieldInput ==='password' && this.validatePassword()) return 'La contraseña debe tener min 10 caracteres';
+      if ( fieldValue1 !== fieldValue2 ) {
+        formGroup.get(formControlName2)?.setErrors({ notEqual: true });
+        return { notEqual: true }
+      }
 
-    return '';
+      formGroup.get(formControlName2)?.setErrors(null);
+      return null;
+    }
   }
 
 }

@@ -5,28 +5,27 @@
       {{errorMessage}}
   </div>
   <form class="form" [formGroup]="loginForm ">
-      <!-- <span>Email*</span> -->
       <div class="email">
           <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="email@example.com" type="email" formControlName="email" (input)="getFormData('email')" required>
-              <mat-error *ngIf="(this.loginForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
+              <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
+              <mat-error CustomLabel [errors]="loginForm.get('email')?.errors"></mat-error>
           </mat-form-field>
       </div>
-      <!-- <span>Password*</span> -->
+
       <div class="contraseña">
           <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
-              <input matInput formControlName="password" (input)="getFormData('password')" [type]="isHidden ? 'password' : 'text'" required>
+              <input matInput formControlName="password" [type]="isHidden ? 'password' : 'text'" required>
               <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
                   <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
               </button>
-              <mat-error *ngIf="(this.loginForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
+              <mat-error CustomLabel [errors]="loginForm.get('password')?.errors"></mat-error>
           </mat-form-field>
       </div>
       <a mat-button class="change-password" (click)="OpenDialogNewPassword()">¿Olvido su contraseña?</a>
       <div class="button-ingresar">
-          <button mat-raised-button color="primary" (click)="sendLoginData()" [disabled]="validateForm()">Ingresar</button>
+          <button mat-raised-button color="primary" (click)="sendLoginData()" [disabled]="loginForm.invalid">Ingresar</button>
       </div>
       <div class="registrarse">
           <span>¿Aun no tienes cuenta? -</span>
@@ -35,4 +34,3 @@
   </form>
 </div>
 
-<!-- <p>skjlsjaaa</p> -->

@@ -58,10 +58,9 @@ export class LoginComponent implements OnInit{
 
   sendLoginData() {
 
-    let emailValue = this.getFormData('email');
-    let passwordValue = this.getFormData('password');
+    const { email, password } = this.loginForm.value;
 
-    this.loginService.validateLoginCredentials(emailValue, passwordValue)
+    this.loginService.validateLoginCredentials(email, password)
     .then( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/']);
@@ -81,39 +80,6 @@ export class LoginComponent implements OnInit{
         },3500)
       }
     });
-
-  }
-
-  getFormData(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.loginForm.get(`${fieldName}`)?.value
-
-    return fieldInput
-  }
-
-  getErrorMessage(fieldInput: string){
-
-    if(this.loginForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
-
-    if(fieldInput ==='email' && this.loginForm.get('email')?.hasError('pattern')) return 'El email no es valido';
-
-    return '';
-  }
-
-  validatePassword(){
-    const password = this.getFormData('password');
-
-    if(password.length < 10) return true;
-
-    return false
-  }
-
-  validateForm(){
-    let isButtonDisabled: boolean;
-
-    this.loginForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
-
-    return isButtonDisabled;
 
   }
 

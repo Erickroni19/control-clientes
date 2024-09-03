@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
 import { RouterModule } from '@angular/router';
+import { CustomLabelDirective } from '../core/directives/custom-label.directive';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    CustomLabelDirective
   ]
 })
 export class AuthModule { }
