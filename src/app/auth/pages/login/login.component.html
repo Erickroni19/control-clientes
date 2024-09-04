@@ -1,15 +1,18 @@
 
 <div class="login">
   <h1>Bienvenido</h1>
-  <div class="errorMessage" *ngIf="hasLoginError">
-      {{errorMessage}}
-  </div>
+  <span
+    class="errorMessage"
+    *ngIf="hasLoginError"
+    CustomLabel
+    [firebaseErrors]="errorMessage"
+  ></span>
   <form class="form" [formGroup]="loginForm ">
       <div class="email">
           <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
               <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
-              <mat-error CustomLabel [errors]="loginForm.get('email')?.errors"></mat-error>
+              <mat-error CustomLabel [formErrors]="loginForm.get('email')?.errors"></mat-error>
           </mat-form-field>
       </div>
 
@@ -20,16 +23,16 @@
               <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
                   <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
               </button>
-              <mat-error CustomLabel [errors]="loginForm.get('password')?.errors"></mat-error>
+              <mat-error CustomLabel [formErrors]="loginForm.get('password')?.errors"></mat-error>
           </mat-form-field>
       </div>
-      <a mat-button class="change-password" (click)="OpenDialogNewPassword()">¿Olvido su contraseña?</a>
+      <a mat-button class="change-password" (click)="OpenDialogNewPassword()">¿Has olvidado tu contraseña?</a>
       <div class="button-ingresar">
-          <button mat-raised-button color="primary" (click)="sendLoginData()" [disabled]="loginForm.invalid">Ingresar</button>
+        <button mat-raised-button color="primary" (click)="sendLoginData()" [disabled]="loginForm.invalid">Iniciar sesión</button>
       </div>
       <div class="registrarse">
-          <span>¿Aun no tienes cuenta? -</span>
-          <a mat-button routerLink="/auth/register"> Registrarme</a>
+          <span>¿Aun no tienes una cuenta? - </span>
+          <a mat-button routerLink="/auth/register">Registrate</a>
       </div>
   </form>
 </div>

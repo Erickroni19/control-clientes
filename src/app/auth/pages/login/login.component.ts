@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit{
   public loginForm!: FormGroup;
 
   errorTranslations: ErrorType= {
-    'Firebase: Error (auth/invalid-login-credentials).': 'Email o contraseña invalido',
+    'auth/invalid-login-credentials': 'Email o contraseña invalido',
   };
 
   constructor(private configurationService: ConfigurationService,
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit{
 
     const { email, password } = this.loginForm.value;
 
-    this.authService.validateLoginCredentials(email, password)
+    this.authService.login(email, password)
     .then( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/']);
@@ -69,15 +69,19 @@ export class LoginComponent implements OnInit{
     .catch(error => {
 
       if(error) {
-        this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+        let waitingTime = 4000;
+
+        this.errorMessage = error;
 
         this.hasLoginError = true;
+
+        if(error === 'auth/too-many-requests') waitingTime = 10000;
 
         setTimeout(() => {
 
           this.hasLoginError = false;
 
-        },3500)
+        },waitingTime)
       }
     });
 

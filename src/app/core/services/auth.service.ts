@@ -20,11 +20,11 @@ export class AuthService {
     this.usersCollection = firebaseDb.collection('users');
   }
 
-  validateLoginCredentials(email: string, password: string){
+  login(email: string, password: string){
     return new Promise((resolve, reject) =>{
       this.authService.signInWithEmailAndPassword(email, password)
       .then(data => resolve(data),
-      error => reject(error));
+      error => reject(error.code));
     })
   }
 

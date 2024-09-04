@@ -10,15 +10,21 @@ export class CustomLabelDirective implements OnInit{
   private htmlElement?: ElementRef<HTMLElement>;
   private _color: string = 'red';
   private _errors?: ValidationErrors | null;
+  private _firebaseErrors?: string;
 
   @Input() set color( value: string ) {
     this._color = value;
     this.setStyle();
   };
 
-  @Input({ required: true }) set errors( value: ValidationErrors | null | undefined) {
+  @Input() set formErrors( value: ValidationErrors | null | undefined) {
     this._errors = value;
-    this.setErrorMessage();
+    this.setFormErrorMessage();
+  }
+
+  @Input() set firebaseErrors( value: string) {
+    this._firebaseErrors = value;
+    this.setFirebaseErrorMessage();
   }
 
   constructor( private elementRef: ElementRef<HTMLElement> ) {
@@ -34,7 +40,25 @@ export class CustomLabelDirective implements OnInit{
     this.htmlElement.nativeElement.style.color = this._color;
   }
 
-  setErrorMessage(): void {
+  setFirebaseErrorMessage(): void {
+    if(!this.htmlElement) return;
+    if(!this._firebaseErrors) {
+      this.htmlElement.nativeElement.innerText = '';
+      return;
+    }
+
+    if(this._firebaseErrors.includes('auth/invalid-login-credentials')) {
+      this.htmlElement.nativeElement.innerText = 'Email o contraseña invalido';
+      return;
+    };
+
+    if(this._firebaseErrors.includes('auth/too-many-requests')) {
+      this.htmlElement.nativeElement.innerText = 'Cuenta deshabilitada por intentos fallidos; restaura inmediatamente restableciendo la contraseña';
+      return;
+    };
+
+  }
+  setFormErrorMessage(): void {
     if(!this.htmlElement) return;
     if(!this._errors) {
       this.htmlElement.nativeElement.innerText = '';

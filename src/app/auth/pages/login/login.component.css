@@ -13,13 +13,9 @@
     margin-top: 20px;
 }
 
-.login .email mat-form-field {
+.login mat-form-field {
     position: relative;
-    width: 300px;
-}
-
-.login .contraseña mat-form-field {
-    width: 300px;
+    width: 100%;
 }
 
 .login .button-ingresar {
@@ -30,12 +26,16 @@
 
 .login .button-ingresar button {
     font-size: 17px;
-    width: 90%;
+    width: 100%;
     border-radius: 19px;
     margin-bottom: 15px;
     background-color: #0f4d99;
     color: white;
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
+}
+
+.login .button-ingresar button:hover {
+  background-color: #125ab1;
 }
 
 .login .button-ingresar button:disabled {
@@ -47,19 +47,23 @@
 .login a {
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 20px;
 }
 
 .login .registrarse {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
     margin-bottom: 15px;
+    margin-top: 5px;
 }
 
-.login .registrarse a {
-    margin-top: 15px;
-    color: #1a1ace;
+.login .registrarse > a {
+    color: #0f4d99;
+}
+
+.login .registrarse > a:hover {
+    color: #1775e7;
 }
 
 .login .errorMessage {
@@ -69,13 +73,18 @@
     background-color: rgba(252, 163, 163, 0.308);
     padding: 5px;
     border-radius: 5px;
-    /* margin-bottom: 20px; */
     margin: 0 20px 0;
 }
 
 .login .change-password {
-    color: #1a1ace;
-    font-size: 14px;
+    color: #0f4d99;
+    font-size: 13.5px;
+    margin-bottom: 13px;
+    margin-top: -15px;
+}
+
+.login .change-password:hover {
+  color: #1775e7;
 }
 
 ::ng-deep .green-snackbar {

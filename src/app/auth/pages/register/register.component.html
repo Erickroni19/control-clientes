@@ -5,7 +5,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Username</mat-label>
                 <input matInput placeholder="juanito123" type="text" formControlName="username" required>
-                <mat-error CustomLabel [errors]="registerForm.get('username')?.errors"></mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('username')?.errors"></mat-error>
             </mat-form-field>
         </div>
 
@@ -13,7 +13,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
-                <mat-error CustomLabel [errors]="registerForm.get('email')?.errors"></mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('email')?.errors"></mat-error>
             </mat-form-field>
         </div>
         <div class="contraseña">
@@ -23,7 +23,7 @@
                 <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
                     <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </button>
-                <mat-error CustomLabel [errors]="registerForm.get('password')?.errors"></mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('password')?.errors"></mat-error>
             </mat-form-field>
         </div>
 
@@ -34,7 +34,7 @@
                 <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
                     <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </button>
-                <mat-error CustomLabel [errors]="registerForm.get('confirmPassword')?.errors"></mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('confirmPassword')?.errors"></mat-error>
             </mat-form-field>
         </div>
         <div class="button-registrar">
