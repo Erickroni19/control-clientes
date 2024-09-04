@@ -9,7 +9,7 @@ import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/home/components/confirmation-dialog/confirmation-dialog.component';
 import { DialogAddClientComponent } from '../dialog-add-client/dialog-add-client.component';
-import { LoginService } from 'src/app/core/services/login.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'home-clients',
@@ -42,14 +42,14 @@ export class ClientsComponent implements OnInit, AfterViewInit{
 
   constructor(private clientsService: ClientsServices,
               private snackBarService :SnackBarService,
-              private loginService: LoginService,
+              private authService: AuthService,
               public dialog: MatDialog,
               ) {
   }
 
   ngOnInit(){
 
-    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
+    this.authService.getAuthenticatedUser().subscribe( userLoggedIn => {
       this.userId = userLoggedIn?.uid || '';
 
       userLoggedIn ? this.isLoggedIn = true : this.isLoggedIn = false;

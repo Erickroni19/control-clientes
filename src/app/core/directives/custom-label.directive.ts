@@ -42,8 +42,6 @@ export class CustomLabelDirective implements OnInit{
     }
 
     const errors = Object.keys(this._errors);
-    console.log(errors);
-
 
     if (errors.includes('required')) {
       this.htmlElement.nativeElement.innerText = 'Este campo es requerido';

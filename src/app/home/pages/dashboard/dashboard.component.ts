@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit} from '@angular/core';
-import { LoginService } from 'src/app/core/services/login.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,10 +10,10 @@ export class DashboardComponent implements OnInit{
 
   isLoggedIn: boolean = false;
 
-  constructor(private loginService: LoginService){}
+  constructor(private authService: AuthService){}
 
   ngOnInit(){
-    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
+    this.authService.getAuthenticatedUser().subscribe( userLoggedIn => {
 
       if(userLoggedIn) this.isLoggedIn = true;
 

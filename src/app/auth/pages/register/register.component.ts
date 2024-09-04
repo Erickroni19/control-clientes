@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorType } from 'src/app/core/interfaces';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { LoginService, SnackBarService } from 'src/app/core/services';
+import { AuthService, SnackBarService } from 'src/app/core/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit{
       'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
   };
 
-  constructor(private loginService: LoginService,
+  constructor(private authService: AuthService,
               private fb: FormBuilder,
               private router: Router,
               private snackBarService: SnackBarService){}
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit{
 
     this.createForm();
 
-    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
+    this.authService.getAuthenticatedUser().subscribe( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/'])
 
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit{
 
     const { username, email, password } = this.registerForm.value;
 
-    this.loginService.registerUser(email, password)
+    this.authService.registerUser(email, password)
       .then( resp => {
         if(resp){
           this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
