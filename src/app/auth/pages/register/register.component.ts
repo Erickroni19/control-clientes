@@ -51,9 +51,7 @@ export class RegisterComponent implements OnInit{
 
   sendRegisterData() {
 
-    const { username, email, password } = this.registerForm.value;
-
-    this.authService.registerUser(email, password)
+    this.authService.registerUser(this.registerForm.value)
       .then( resp => {
         if(resp){
           this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
@@ -71,6 +69,7 @@ export class RegisterComponent implements OnInit{
 
         }
       });
+
   }
 
   isFieldOneEqualFieldTwo( formControlName1: string, formControlName2: string ) {

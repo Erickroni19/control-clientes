@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { User } from '../interfaces';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,11 +38,22 @@ export class AuthService {
     this.authService.signOut();
   }
 
-  registerUser(email: string, password: string){
-    return new Promise((resolve, reject) =>{
-      this.authService.createUserWithEmailAndPassword(email, password)
-        .then(data => resolve(data),
-        error => reject(error))
+  registerUser(user: User){
+
+    const { username, email, password } = user;
+
+    return new Promise((resolve, reject) => {
+
+      if( password ) {
+
+        this.authService.createUserWithEmailAndPassword(email, password)
+          .then(data => {
+            this.addUser({username, email});
+            resolve(data);
+          })
+          .catch( (error) => reject(error));
+
+      }
     })
   }
 
@@ -53,7 +65,8 @@ export class AuthService {
     });
   }
 
-  addUser(user: User): Promise<string> {
+  private addUser(user: User): Promise<string> {
+
     return this.usersCollection.add(user)
       .then((docRef) => {
         console.log('Usuario agregado con Id: ', docRef.id);
