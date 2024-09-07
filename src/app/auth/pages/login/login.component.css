@@ -66,10 +66,8 @@
     color: #1775e7;
 }
 
-.login .errorMessage {
+/* .login .errorMessage {
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
     gap: 5px;
     color: #cc0000;
     background-color: rgba(255, 195, 195, 0.308);
@@ -80,17 +78,13 @@
     width: 97%;
 }
 
-/* .login .errorMessage .icon{
-
-} */
-
 .login .errorMessage .message{
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 13.5px;
   flex: 1;
-}
+} */
 
 .login .change-password {
     color: #0f4d99;

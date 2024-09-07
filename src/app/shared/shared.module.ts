@@ -8,6 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { ErrorMessageComponent } from './error-message/error-message.component';
+import { CustomLabelDirective } from '../core/directives/custom-label.directive';
 
 
 
@@ -16,6 +18,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     PageNotFoundComponent,
     FooterComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -23,11 +26,13 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    CustomLabelDirective
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
+    ErrorMessageComponent
   ]
 })
 export class SharedModule { }

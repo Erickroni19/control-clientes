@@ -2,17 +2,7 @@
 <div class="login">
   <h1>Bienvenido</h1>
   <form class="form" [formGroup]="loginForm ">
-    <div class="errorMessage">
-      <mat-icon class="icon material-icons-outlined">
-        error_outline
-      </mat-icon>
-      <span
-        class="message"
-        CustomLabel
-        color="#be0202"
-        [firebaseErrors]="errorMessage"
-      ></span>
-    </div>
+    <app-error-message [errorMessage]="errorMessage" *ngIf="hasLoginError"></app-error-message>
       <div class="email">
           <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>

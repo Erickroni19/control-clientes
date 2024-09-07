@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit{
 
         this.hasLoginError = true;
 
-        if(error === 'auth/too-many-requests') waitingTime = 10000;
+        if(error === 'auth/too-many-requests') waitingTime = 7000;
 
         setTimeout(() => {
 

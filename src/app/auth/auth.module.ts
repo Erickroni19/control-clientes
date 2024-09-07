@@ -13,6 +13,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
 import { RouterModule } from '@angular/router';
 import { CustomLabelDirective } from '../core/directives/custom-label.directive';
+import { ErrorMessageComponent } from '../shared/error-message/error-message.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { CustomLabelDirective } from '../core/directives/custom-label.directive'
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    SharedModule,
 
     MatFormFieldModule,
     MatInputModule,
