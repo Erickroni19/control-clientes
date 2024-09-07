@@ -32,12 +32,8 @@
     margin-top: 20px;
 }
 
-.registro .email mat-form-field {
-    width: 300px;
-}
-
-.registro .contraseña mat-form-field {
-    width: 300px;
+.registro mat-form-field {
+    width: 100%;
 }
 
 .registro .button-registrar {
@@ -48,7 +44,7 @@
 
 .registro .button-registrar button {
     font-size: 17px;
-    width: 90%;
+    width: 100%;
     border-radius: 19px;
     margin-top: 5px;
     margin-bottom: 5px;
