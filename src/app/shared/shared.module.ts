@@ -8,7 +8,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
-import { RouterModule } from '@angular/router';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { CustomLabelDirective } from '../core/directives/custom-label.directive';
 
