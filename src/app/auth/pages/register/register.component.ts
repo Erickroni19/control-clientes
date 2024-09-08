@@ -18,10 +18,6 @@ export class RegisterComponent implements OnInit{
 
   public registerForm!: FormGroup;
 
-  errorTranslations: ErrorType= {
-      'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
-  };
-
   constructor(private authService: AuthService,
               private fb: FormBuilder,
               private router: Router,
@@ -62,10 +58,10 @@ export class RegisterComponent implements OnInit{
 
         if(error){
           this.hasRegisterError = true;
-          this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
+          this.errorMessage = error;
           setTimeout(() => {
             this.hasRegisterError = false;
-          },3000)
+          },4000)
 
         }
       });

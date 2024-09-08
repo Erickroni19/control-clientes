@@ -1,6 +1,7 @@
 <div class="registro">
     <h1>Registrate</h1>
     <form class="form" [formGroup]="registerForm">
+      <app-error-message [errorMessage]="errorMessage" *ngIf="hasRegisterError"></app-error-message>
         <div class="email">
             <mat-form-field appearance="fill">
                 <mat-label>Username</mat-label>
@@ -39,9 +40,6 @@
         </div>
         <div class="button-registrar">
             <button mat-raised-button color="primary" (click)="sendRegisterData()" [disabled]="registerForm.invalid">Registrarse</button>
-        </div>
-        <div class="errorMessage" *ngIf="hasRegisterError">
-            {{errorMessage}}
         </div>
         <div class="login">
           <span>¿Ya tienes una cuenta? -</span>

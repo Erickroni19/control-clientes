@@ -1,5 +1,7 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { error } from 'jquery';
+import { ErrorType } from '../interfaces';
 
 @Directive({
   selector: '[CustomLabel]',
@@ -22,7 +24,7 @@ export class CustomLabelDirective implements OnInit{
     this.setFormErrorMessage();
   }
 
-  @Input() set firebaseErrors( value: string) {
+  @Input() set firebaseErrors( value: string | undefined ) {
     this._firebaseErrors = value;
     this.setFirebaseErrorMessage();
   }
@@ -42,51 +44,33 @@ export class CustomLabelDirective implements OnInit{
 
   setFirebaseErrorMessage(): void {
     if(!this.htmlElement) return;
-    if(!this._firebaseErrors) {
-      this.htmlElement.nativeElement.innerText = '';
-      return;
-    }
 
-    if(this._firebaseErrors.includes('auth/invalid-login-credentials')) {
-      this.htmlElement.nativeElement.innerText = 'Email o contraseña invalido';
-      return;
+    const firebaseErrorMessages: ErrorType = {
+      'auth/invalid-login-credentials': 'Email o contraseña invalido',
+      'auth/too-many-requests': 'Cuenta deshabilitada por intentos fallidos; restaura inmediatamente restableciendo la contraseña.',
+      'auth/email-already-in-use': 'La dirección de correo electrónico ya está en uso por otra cuenta.',
     };
 
-    if(this._firebaseErrors.includes('auth/too-many-requests')) {
-      this.htmlElement.nativeElement.innerText = 'Cuenta deshabilitada por intentos fallidos; restaura inmediatamente restableciendo la contraseña';
-      return;
-    };
+    const errorMessage = this._firebaseErrors ? firebaseErrorMessages[this._firebaseErrors] || 'Ha ocurrido un error' : '';
+    this.htmlElement.nativeElement.innerText = errorMessage;
 
   }
+
   setFormErrorMessage(): void {
     if(!this.htmlElement) return;
-    if(!this._errors) {
-      this.htmlElement.nativeElement.innerText = '';
-      return;
-    }
 
-    const errors = Object.keys(this._errors);
-
-    if (errors.includes('required')) {
-      this.htmlElement.nativeElement.innerText = 'Este campo es requerido';
-      return;
+    const formErrorMessages: ErrorType = {
+      'required': 'Este campo es requerido',
+      'minlength': `La contraseña debe tener mín ${this._errors?.['minlength']?.['requiredLength']} caracteres`,
+      'pattern': 'Correo electrónico inválido',
+      'notEqual': 'Las contraseñas no coinciden',
     };
 
-    if (errors.includes('minlength')) {
-      const min = this._errors['minlength']['requiredLength'];
-      this.htmlElement.nativeElement.innerText = `La contraseña debe tener mín ${min} caracteres`;
-      return;
-    };
+    const firstErrorKey = this._errors ? Object.keys(this._errors)[0] : null;
+    const errorMessage = firstErrorKey && formErrorMessages[firstErrorKey] ? formErrorMessages[firstErrorKey] : '';
 
-    if (errors.includes('pattern')) {
-      this.htmlElement.nativeElement.innerText = 'Correo electrónico inválido';
-      return;
-    };
+    this.htmlElement.nativeElement.innerText = errorMessage;
 
-    if (errors.includes('notEqual')) {
-      this.htmlElement.nativeElement.innerText = 'Las contraseñas no coinciden';
-      return;
-    };
   }
 
 }

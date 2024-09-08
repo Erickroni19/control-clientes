@@ -34,9 +34,6 @@ export class AuthService {
     )
   }
 
-  logout(){
-    this.authService.signOut();
-  }
 
   registerUser(user: User){
 
@@ -47,12 +44,11 @@ export class AuthService {
       if( password ) {
 
         this.authService.createUserWithEmailAndPassword(email, password)
-          .then(data => {
-            this.addUser({username, email});
-            resolve(data);
-          })
-          .catch( (error) => reject(error));
-
+        .then(data => {
+          this.addUser({username, email});
+          resolve(data);
+        })
+        .catch( (error) => reject(error.code) );
       }
     })
   }
@@ -60,21 +56,25 @@ export class AuthService {
   changePassword(email: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.authService.sendPasswordResetEmail(email)
-        .then(() => resolve())
-        .catch((error) => reject(error));
+      .then(() => resolve())
+      .catch((error) => reject(error));
     });
   }
 
   private addUser(user: User): Promise<string> {
 
     return this.usersCollection.add(user)
-      .then((docRef) => {
-        console.log('Usuario agregado con Id: ', docRef.id);
-        return docRef.id;
-      })
-      .catch((error) => {
-        console.error('Error al agregar usuario:', error);
-        throw error;
-      })
+    .then((docRef) => {
+      console.log('Usuario agregado con Id: ', docRef.id);
+      return docRef.id;
+    })
+    .catch((error) => {
+      console.error('Error al agregar usuario:', error);
+      throw error;
+    })
+  }
+
+  logout(){
+    this.authService.signOut();
   }
 }

@@ -53,39 +53,32 @@
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
+.registro .button-ingresar button:hover {
+  background-color: #125ab1;
+}
+
 .registro .button-registrar button:disabled {
     background-color: #d8d9da;
     color: white;
     box-shadow: 2px 3px 5px rgba(104, 104, 104, 0.644)
 }
 
-.registro a {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-}
-
-.registro .registrarse {
-    margin-top: 20px;
+.registro .login {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+    margin-top: 8px;
 }
 
-.registro .registrarse a {
-    margin-top: 15px;
+.registro .login > a {
+    color: #0f4d99;
 }
 
-.registro .errorMessage {
-    display: flex;
-    justify-content: center;
-    color: red;
-    background-color: rgba(252, 163, 163, 0.308);
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+.registro .login > a:hover {
+    color: #1775e7;
 }
-
 
 /*----Clases SnackBar----*/
 
@@ -103,23 +96,6 @@
     color: white;
     --mat-mdc-snack-bar-button-color: #f5f5f5;
 }
-
-
-/*------------------------------------------*/
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* margin-top: -15px; */
-  margin-bottom: 15px;
-}
-
-.login a {
-    margin-top: 15px;
-    color: #1a1ace;
-}
-
 
 /*-----------------------------------------------*/
 @media (max-width: 414px) {
