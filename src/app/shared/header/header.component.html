@@ -1,8 +1,7 @@
 <div class="header">
     <mat-toolbar class="toolbar">
         <mat-toolbar-row id="rowOne">
-            <a class="main-logo" mat-button routerLink="/">
-              <!-- <img src="../../../assets/img/client.png" alt="logo" width="40px"> -->
+            <a mat-button routerLink="/home">
                 Control Clientes
             </a>
             <div class="buttonMenu">
@@ -11,7 +10,7 @@
                 </button>
 
                 <div class="containerButtonsHome" [ngClass]="{'ocultar': isHeaderResponsive }">
-                    <a mat-button routerLink="/">
+                    <a mat-button routerLink="/home">
                         <mat-icon matListItemIcon>home</mat-icon>
                         Inicio
                     </a>
