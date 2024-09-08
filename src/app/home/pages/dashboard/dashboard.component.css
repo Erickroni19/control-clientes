@@ -1,23 +1,22 @@
 .container-header {
     display: flex;
-    background-color: #c2b79b;
-    height: 10vh;
+    background-color: #8c9fb2;
+    height: 8vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .container-header .text-client {
     font-size: 20px;
     font-weight: bold;
     color: #243757;
-    /* margin-left: 15%; */
 }
 
 .text-client mat-icon {
     font-size: 25px;
-    /* width: 40px; */
-    /* height: 30px; */
     font-weight: bold;
     margin-right: 5px;
 }

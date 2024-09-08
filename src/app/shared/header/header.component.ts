@@ -1,7 +1,7 @@
 import { Component,HostListener} from '@angular/core';
 import { Router } from '@angular/router';
 import { OnInit} from '@angular/core';
-import { LoginService } from 'src/app/core/services/login.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 
@@ -20,13 +20,13 @@ export class HeaderComponent implements OnInit{
   hasClicked: boolean = false;
   userStatus: string = '';
 
-  constructor(private loginService: LoginService,
+  constructor(private authService: AuthService,
               private router: Router
   ) {}
 
   ngOnInit() {
 
-    this.loginService.getAuthenticatedUser().subscribe( auth => {
+    this.authService.getAuthenticatedUser().subscribe( auth => {
       if(auth){
         this.isLoggedIn = true;
         this.userStatus = 'Bienvenido';
@@ -61,10 +61,10 @@ export class HeaderComponent implements OnInit{
 
   logout(){
 
-    this.loginService.logout();
+    this.authService.logout();
 
     this.isLoggedIn = false;
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 }

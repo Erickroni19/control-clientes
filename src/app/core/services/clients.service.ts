@@ -1,26 +1,26 @@
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
-import { Client } from '../../core/interfaces/client.interface';
+import { Client } from '../interfaces/client.interface';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/core/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientsServices {
 
-  clientsCollection: AngularFirestoreCollection<Client>;
-  clientDocument!: AngularFirestoreDocument<Client | null>;
-  clients!: Observable<Client[]>;
-  client!: Observable<Client | null>;
+  //TODO: Revisar que es private y que es public
+  public clientsCollection: AngularFirestoreCollection<Client>;
+  public clientDocument!: AngularFirestoreDocument<Client | null>;
+  public clients!: Observable<Client[]>;
+  public client!: Observable<Client | null>;
 
   constructor(private firebaseDb: AngularFirestore) {
-    //Se hace la petición a la firebase para que retorne los nombres en orden ascendente
     this.clientsCollection = firebaseDb.collection('clientes', ref => ref.orderBy('nombre', 'asc'))
   }
 
   getClients(): Observable<Client[]>{
-      //Obtenemos los clientes
       this.clients = this.clientsCollection.snapshotChanges().pipe(
         map( changes => {
           return changes.map( action => {
@@ -35,14 +35,14 @@ export class ClientsServices {
 
   addClient(client: Client): Promise<string>{
     return this.clientsCollection.add(client)
-    .then((docRef) => {
-      console.log('Cliente agregado con Id: ', docRef.id);
-      return docRef.id;
-    })
-    .catch((error) => {
-      console.error('Error al agregar cliente:', error);
-      throw error;
-    })
+      .then((docRef) => {
+        console.log('Cliente agregado con Id: ', docRef.id);
+        return docRef.id;
+      })
+      .catch((error) => {
+        console.error('Error al agregar cliente:', error);
+        throw error;
+      })
   }
 
   getClientById(id:string){
@@ -63,7 +63,7 @@ export class ClientsServices {
   }
 
   editClient(client: Client, id: string): Promise<void>{
-  this.clientDocument = this.firebaseDb.doc(`clientes/${id}`);
+    this.clientDocument = this.firebaseDb.doc(`clientes/${id}`);
 
     return this.clientDocument.update(client).then((docRef) =>{
       return docRef

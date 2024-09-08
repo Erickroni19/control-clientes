@@ -1,9 +1,8 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnackBarService } from 'src/app/core/services/snackBar.service';
-import { ErrorType } from 'src/app/core/interfaces/error-type.interface';
 import { Component, OnInit } from '@angular/core';
+import { ErrorType } from 'src/app/core/interfaces';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AuthService, SnackBarService } from 'src/app/core/services';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -13,17 +12,13 @@ import { LoginService } from 'src/app/core/services/login.service';
 
 export class RegisterComponent implements OnInit{
 
-  hasRegisterError: boolean = false;
-  errorMessage = "";
-  isHidden = true;
+  public hasRegisterError: boolean = false;
+  public errorMessage = "";
+  public isHidden = true;
 
-  registerForm!: FormGroup;
+  public registerForm!: FormGroup;
 
-  errorTranslations: ErrorType= {
-      'Firebase: The email address is already in use by another account. (auth/email-already-in-use).': 'El email ya esta en uso',
-  };
-
-  constructor(private loginService: LoginService,
+  constructor(private authService: AuthService,
               private fb: FormBuilder,
               private router: Router,
               private snackBarService: SnackBarService){}
@@ -32,8 +27,7 @@ export class RegisterComponent implements OnInit{
 
     this.createForm();
 
-    /**Si el usuario esta logeado redirecciona a la ventana de inicio */
-    this.loginService.getAuthenticatedUser().subscribe( userLoggedIn => {
+    this.authService.getAuthenticatedUser().subscribe( userLoggedIn => {
 
       if(userLoggedIn) this.router.navigate(['/'])
 
@@ -42,70 +36,53 @@ export class RegisterComponent implements OnInit{
 
   private createForm(){
     this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/)]],
-      password: ['', [Validators.required,Validators.minLength(10)]]
+      password: ['', [Validators.required, Validators.minLength(10)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(10)]]
+    }, {
+      validators: [ this.isFieldOneEqualFieldTwo('password', 'confirmPassword') ]
     });
-  }
-
-  getFormData(fieldName: String){
-    let fieldInput = '';
-    fieldInput = this.registerForm.get(`${fieldName}`)?.value
-
-    return fieldInput
-  }
-
-  validateForm(){
-
-    let isButtonDisabled: boolean;
-
-    this.registerForm.valid ? isButtonDisabled = false : isButtonDisabled = true;
-
-    return isButtonDisabled;
-
-  }
-
-  validatePassword(){
-    const password = this.getFormData('password');
-
-    if(password.length < 10) return true;
-
-    return false
   }
 
   sendRegisterData() {
-    // Obtener los valores del formulario
-    let emailValue = this.getFormData('email');
-    let passwordValue = this.getFormData('password');
 
-    this.loginService.registerUser(emailValue, passwordValue)
-    .then( resp => {
-      if(resp){
-        this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
-        this.router.navigate(['/']);
-      }
-    })
-    .catch(error => {
+    this.authService.registerUser(this.registerForm.value)
+      .then( resp => {
+        if(resp){
+          this.snackBarService.snackBarMessages('Registro Exitoso', 'Ok', 'green-snackbar', 'bottom');
+          this.router.navigate(['/']);
+        }
+      })
+      .catch(error => {
 
-      if(error){
-        this.hasRegisterError = true;
-        this.errorMessage = this.errorTranslations[error.message] || 'Error Desconocido';
-        setTimeout(() => {
-          this.hasRegisterError = false;
-        },3000)
+        if(error){
+          this.hasRegisterError = true;
+          this.errorMessage = error;
+          setTimeout(() => {
+            this.hasRegisterError = false;
+          },4000)
 
-      }
-    });
+        }
+      });
+
   }
 
-  getErrorMessage(fieldInput: string){
+  isFieldOneEqualFieldTwo( formControlName1: string, formControlName2: string ) {
 
-    if(this.registerForm.get(`${fieldInput}`)?.hasError('required')) return 'Campo requerido';
+    return ( formGroup: AbstractControl ): ValidationErrors | null => {
 
-    if(fieldInput ==='email' && this.registerForm.get('email')?.hasError('pattern')) return 'El email no es valido';
+      const fieldValue1 = formGroup.get(formControlName1)?.value;
+      const fieldValue2 = formGroup.get(formControlName2)?.value;
 
-    if(fieldInput ==='password' && this.validatePassword()) return 'La contraseña debe tener min 10 caracteres';
+      if ( fieldValue1 !== fieldValue2 ) {
+        formGroup.get(formControlName2)?.setErrors({ notEqual: true });
+        return { notEqual: true }
+      }
 
-    return '';
+      formGroup.get(formControlName2)?.setErrors(null);
+      return null;
+    }
   }
 
 }

@@ -1,31 +1,50 @@
 <div class="registro">
     <h1>Registrate</h1>
     <form class="form" [formGroup]="registerForm">
-        <!-- <span>Email*</span> -->
+      <app-error-message [errorMessage]="errorMessage" *ngIf="hasRegisterError"></app-error-message>
+        <div class="email">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="juanito123" type="text" formControlName="username" required>
+                <mat-error CustomLabel [formErrors]="registerForm.get('username')?.errors"></mat-error>
+            </mat-form-field>
+        </div>
+
         <div class="email">
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="email@example.com" type="email" formControlName="email" required>
-                <mat-error *ngIf="(this.registerForm.get('email')?.invalid)">{{getErrorMessage('email')}}</mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('email')?.errors"></mat-error>
             </mat-form-field>
         </div>
-        <!-- <span>Password*</span> -->
         <div class="contraseña">
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" (input)="getFormData('password')" [type]="isHidden ? 'password' : 'text'" required>
+                <input matInput formControlName="password" [type]="isHidden ? 'password' : 'text'" required>
                 <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
                     <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="(this.registerForm.get('password')?.invalid)">{{getErrorMessage('password')}}</mat-error>
+                <mat-error CustomLabel [formErrors]="registerForm.get('password')?.errors"></mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="contraseña">
+            <mat-form-field appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmPassword" [type]="isHidden ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
+                    <mat-icon>{{isHidden ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+                <mat-error CustomLabel [formErrors]="registerForm.get('confirmPassword')?.errors"></mat-error>
             </mat-form-field>
         </div>
         <div class="button-registrar">
-            <button mat-raised-button color="primary" (click)="sendRegisterData()" [disabled]="validateForm()">Registrarse</button>
+            <button mat-raised-button color="primary" (click)="sendRegisterData()" [disabled]="registerForm.invalid">Registrarse</button>
         </div>
-        <div class="errorMessage" *ngIf="hasRegisterError">
-            {{errorMessage}}
-        </div>
+        <div class="login">
+          <span>¿Ya tienes una cuenta? -</span>
+          <a mat-button routerLink="/auth/login">Iniciar Sesión</a>
+      </div>
     </form>
 </div>
 

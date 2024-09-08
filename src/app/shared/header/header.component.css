@@ -6,6 +6,7 @@
     background: linear-gradient(150deg, #0a366d, #2c578d);
     display: flex;
     justify-content: space-between;
+    padding: 0 13%;
 }
 
 .toolbar a {
@@ -21,6 +22,12 @@
 
 
 /*-------Menu Button--------*/
+
+.main-logo {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
 
 .buttonMenu mat-icon-button {
     flex: end;

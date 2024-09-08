@@ -12,7 +12,7 @@ export class ConfigurationService {
   configuration!: Observable<Configuration>;
 
   //unique id of collection
-  id = "1";
+  private readonly id: string = "1";
 
 
   constructor(private fireStoreDb: AngularFirestore) { }

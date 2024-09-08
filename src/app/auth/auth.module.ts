@@ -11,6 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-send-email.component';
+import { RouterModule } from '@angular/router';
+import { CustomLabelDirective } from '../core/directives/custom-label.directive';
+import { ErrorMessageComponent } from '../shared/error-message/error-message.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -25,11 +29,14 @@ import { DialogSendEmailComponent } from './components/dialog-send-email/dialog-
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
+    SharedModule,
 
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    CustomLabelDirective
   ]
 })
 export class AuthModule { }
